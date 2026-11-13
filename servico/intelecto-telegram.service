@@ -1,0 +1,16 @@
+# Linux (systemd do usuário): liga o bot sozinho e reinicia se cair.
+#   cp servico/intelecto-telegram.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now intelecto-telegram
+#   journalctl --user -u intelecto-telegram -f
+[Unit]
+Description=INTELECTO v2 no Telegram
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/intelecto-v2
+ExecStart=/usr/bin/python3 -m intelecto telegram
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

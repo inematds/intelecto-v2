@@ -1,0 +1,20 @@
+[project]
+name = "intelecto"
+version = "2.0.0"
+description = "Assistente pessoal de IA em Python puro: terminal e Telegram, Ollama local ou OpenRouter, memória, ferramentas com trava, cofre e caixa."
+requires-python = ">=3.10"
+dependencies = []
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+cofre = ["cryptography>=41"]
+testes = ["pytest>=8"]
+
+[project.scripts]
+intelecto = "intelecto.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["intelecto*"]
+
+[tool.setuptools.package-data]
+intelecto = ["identidade/*.md"]
