@@ -38,6 +38,27 @@ python3 -m intelecto               # conversa en la terminal
 | 7 | Bloqueo, aprobación y bóveda | `seguranca/` | Los comandos de solo lectura se ejecutan; el resto pide aprobación; los destructivos se rechazan. Secretos cifrados. Todo queda registrado en la auditoría. |
 | 8 | Caja | `seguranca/executor.py` | Ejecuta comandos en un contenedor Docker sin red y solo con acceso a la carpeta de trabajo. |
 
+## Arma el tuyo: el almacén y 5 ejemplos listos
+
+INTELECTO v2 es la base que ya funciona. Para ir más allá, el **almacén** (https://inematds.github.io/intelecto-v2/guia/mercearia/es/)
+tiene 144 ingredientes de 12 proyectos de agentes. Tú eliges, ella genera **`meu-assistente.md`**, y Claude Code o
+Codex construye sobre INTELECTO. Cada elemento está marcado: ✅ ya existe en v2 (con el archivo), 🟡 parcial, ➕ por agregar
+(con la pieza donde encaja), y el archivo termina con las reglas para el agente (un elemento a la vez, con prueba).
+
+| Ejemplo listo | Diagrama | Archivo |
+|---|---|---|
+| Jarvis personal en Telegram | [ver](exemplos/01-jarvis-telegram.jpg) | [exemplos/01-jarvis-telegram.md](exemplos/01-jarvis-telegram.md) |
+| Asistente del pequeño negocio | [ver](exemplos/02-atendente-negocio.jpg) | [exemplos/02-atendente-negocio.md](exemplos/02-atendente-negocio.md) |
+| Programador seguro | [ver](exemplos/03-programador-seguro.jpg) | [exemplos/03-programador-seguro.md](exemplos/03-programador-seguro.md) |
+| 100 % local y privado | [ver](exemplos/04-local-privado.jpg) | [exemplos/04-local-privado.md](exemplos/04-local-privado.md) |
+| Casa inteligente con voz | [ver](exemplos/05-casa-voz.jpg) | [exemplos/05-casa-voz.md](exemplos/05-casa-voz.md) |
+
+```bash
+cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
+# en Claude Code o en Codex, abierto en esta carpeta:
+# "Lee meu-assistente.md e implementa los elementos por agregar y los parciales, uno a la vez, siguiendo las Reglas para el agente."
+```
+
 ## El proceso, de principio a fin
 
 | # | Paso | Comando | Quién |

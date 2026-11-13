@@ -38,6 +38,27 @@ python3 -m intelecto               # chat in the terminal
 | 7 | Lock, approval, and vault | `seguranca/` | Read-only commands run; everything else requires approval; destructive commands are refused. Secrets are encrypted. Everything is logged for auditing. |
 | 8 | Box | `seguranca/executor.py` | Runs commands in a Docker container without network access, with only the workspace folder. |
 
+## Build your own: the grocery store and 5 ready-made examples
+
+INTELECTO v2 is the foundation that already works. To go further, the **grocery store** (https://inematds.github.io/intelecto-v2/guia/mercearia/en/)
+has 144 ingredients from 12 agent projects. You choose, it generates **`meu-assistente.md`**, and Claude Code or
+Codex builds on top of INTELECTO. Each item is marked: ✅ already exists in v2 (with the file), 🟡 partial, ➕ to add
+(with the part it fits into), and the file ends with the rules for the agent (one item at a time, with a test).
+
+| Ready-made example | Diagram | File |
+|---|---|---|
+| Personal Jarvis on Telegram | [view](exemplos/01-jarvis-telegram.jpg) | [exemplos/01-jarvis-telegram.md](exemplos/01-jarvis-telegram.md) |
+| Small business assistant | [view](exemplos/02-atendente-negocio.jpg) | [exemplos/02-atendente-negocio.md](exemplos/02-atendente-negocio.md) |
+| Secure programmer | [view](exemplos/03-programador-seguro.jpg) | [exemplos/03-programador-seguro.md](exemplos/03-programador-seguro.md) |
+| 100% local and private | [view](exemplos/04-local-privado.jpg) | [exemplos/04-local-privado.md](exemplos/04-local-privado.md) |
+| Voice-controlled smart home | [view](exemplos/05-casa-voz.jpg) | [exemplos/05-casa-voz.md](exemplos/05-casa-voz.md) |
+
+```bash
+cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
+# in Claude Code or Codex, open in this folder:
+# "Read meu-assistente.md and implement the items to add and the partial ones, one at a time, following the Rules for the agent."
+```
+
 ## The process, from start to finish
 
 | # | Step | Command | Who |

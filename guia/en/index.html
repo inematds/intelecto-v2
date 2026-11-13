@@ -58,7 +58,9 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1060px){nav .links a.sec[href="#mercearia"]{display:none}}
+  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
   @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
@@ -266,6 +268,8 @@
     <a class="sec" href="#problema">Why</a>
     <a class="sec" href="#pecas">The 8 parts</a>
     <a class="sec" href="#decide">How it decides</a>
+    <a class="sec" href="#funciona">Inside</a>
+    <a class="sec" href="#mercearia">Grocery store</a>
     <a class="sec" href="#testado">Tested</a>
     <a class="sec" href="#tecnico">Kit (technical)</a>
     <a class="sec" href="#caixa">Sandbox</a>
@@ -334,6 +338,57 @@
     <div class="card"><h3><span class="cls no">refuse</span></h3><p>Destructive actions: erase the disk or your home folder, format a drive, shut down the computer, or download and run a script. Even with your approval.</p></div>
   </div>
   <p>v1 only had a list of forbidden words: <strong>"rm -rf /"</strong> was blocked, but <strong>"rm -r -f /"</strong> got through. v2 understands both forms and 19 other tested variations, and anything outside the read-only list requires your approval. The list isn’t the only protection: use the sandbox for commands you don’t know.</p>
+</div></section>
+
+<section id="funciona"><div class="wrap">
+  <span class="chip">How it works behind the scenes</span>
+  <h2>The path of a message, <span class="amb">from your phone to the reply</span></h2>
+  <p class="sub">Real example: you send "lembre que meu nome é Ana" (remember that my name is Ana) and, the next day, "qual meu nome?" (what's my name?). Here's what happens inside INTELECTO.</p>
+  <div class="step"><div class="b">1</div><div>
+    <h3>It arrives through a channel</h3>
+    <p>The message comes in through the terminal or Telegram. On Telegram, it checks whether you sent it (owner list); messages from anyone else are ignored and logged.</p>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>"Lembre que…" (Remember that…) goes straight to memory</h3>
+    <p>Any phrase that starts with "lembre que" (remember that), "guarde" (save) or "anote" (note down) is stored immediately, without relying on the AI to decide. That's why even a small model remembers. A question (with "?") never becomes a memory.</p>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>It builds the context</h3>
+    <p>It brings together identity files (who it is, how it works, who you are), memories relevant to the question ("nome" finds "meu nome é Ana") and recent conversations.</p>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>The brain thinks</h3>
+    <p>All of this goes to the AI (on your computer or in the cloud). It answers or requests a tool: save, search, read a file, run a command.</p>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>The tool goes through the gate</h3>
+    <p>If it's a command, the gate decides: run it, ask you, or refuse. Once approved, it runs in the working folder, or in the offline sandbox if you turned it on. The result goes back to the AI, for up to 5 rounds.</p>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>It replies and logs</h3>
+    <p>You receive the answer, and everything it did (command, tool, memory, error) is recorded in an audit log line so you can check it later.</p>
+  </div></div>
+</div></section>
+
+<section id="mercearia"><div class="wrap">
+  <span class="chip">Build your own</span>
+  <h2>The grocery store: <span class="amb">choose the ingredients and get a ready-made plan</span></h2>
+  <p class="sub">INTELECTO v2 is the foundation that already works. To go further (WhatsApp, calendar, smart home, voice…), open the grocery store: 144 ingredients from 12 agent projects, in 8 aisles. Choose what you want, and it generates the <strong>meu-assistente.md</strong> file; Claude Code or Codex then builds on INTELECTO by following that file.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🛒 1. Choose</h3><p>Click ingredients in the aisles, or load one of the 5 ready-made examples below.</p></div>
+    <div class="card"><h3>📄 2. Download the .md</h3><p>Each item is marked: ✅ already in INTELECTO, 🟡 partly there, ➕ missing (and which component it fits into). At the end, you'll find the rules for the agent: one item at a time, with a test.</p></div>
+    <div class="card"><h3>🤖 3. Give it to the agent</h3><p>Copy the file into the INTELECTO folder, open Claude Code or Codex there, and ask it to implement it. Safer option: inside caixa-do-agente.</p></div>
+  </div>
+  <p style="margin:22px 0 10px"><a class="btn" href="../mercearia/en/">Open the grocery store</a></p>
+  <h3 style="margin-top:26px">5 ready-made examples</h3>
+  <div class="ex">
+    <figure><a href="../mercearia/en/#exemplos"><img src="../mercearia/img/exemplo-1.jpg" alt="Diagram: personal Jarvis on Telegram" loading="lazy"></a><figcaption><strong>Personal Jarvis on Telegram</strong>: memory, calendar and reminders, email, vault, asks for your OK. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/01-jarvis-telegram.md" target="_blank" rel="noopener">view the .md</a></figcaption></figure>
+    <figure><a href="../mercearia/en/#exemplos"><img src="../mercearia/img/exemplo-2.jpg" alt="Diagram: small business assistant" loading="lazy"></a><figcaption><strong>Small business assistant</strong>: WhatsApp, answers using your documents, blocks malicious messages. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/02-atendente-negocio.md" target="_blank" rel="noopener">view the .md</a></figcaption></figure>
+    <figure><a href="../mercearia/en/#exemplos"><img src="../mercearia/img/exemplo-3.jpg" alt="Diagram: secure programmer" loading="lazy"></a><figcaption><strong>Secure programmer</strong>: Git and GitHub, offline sandbox, tests before saying it's ready. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/03-programador-seguro.md" target="_blank" rel="noopener">view the .md</a></figcaption></figure>
+    <figure><a href="../mercearia/en/#exemplos"><img src="../mercearia/img/exemplo-4.jpg" alt="Diagram: 100% local and private" loading="lazy"></a><figcaption><strong>100% local and private</strong>: AI and voice on your PC, private search, your notes, nothing leaves the machine. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/04-local-privado.md" target="_blank" rel="noopener">view the .md</a></figcaption></figure>
+    <figure><a href="../mercearia/en/#exemplos"><img src="../mercearia/img/exemplo-5.jpg" alt="Diagram: voice-controlled smart home" loading="lazy"></a><figcaption><strong>Voice-controlled smart home</strong>: wake word, lights, sound, cameras and routines. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/05-casa-voz.md" target="_blank" rel="noopener">view the .md</a></figcaption></figure>
+  </div>
+  <p class="sub" style="margin-top:14px">Items marked ➕ don't exist in INTELECTO yet: the agent builds them by following the file. Check whatever it builds with the tests before using it.</p>
 </div></section>
 
 <section id="testado"><div class="wrap">

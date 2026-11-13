@@ -58,7 +58,9 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1060px){nav .links a.sec[href="#mercearia"]{display:none}}
+  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
   @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
@@ -266,6 +268,8 @@
     <a class="sec" href="#problema">Por qué</a>
     <a class="sec" href="#pecas">Las 8 piezas</a>
     <a class="sec" href="#decide">Cómo decide</a>
+    <a class="sec" href="#funciona">Por dentro</a>
+    <a class="sec" href="#mercearia">Almacén</a>
     <a class="sec" href="#testado">Probado</a>
     <a class="sec" href="#tecnico">Kit (técnico)</a>
     <a class="sec" href="#caixa">Caja</a>
@@ -334,6 +338,57 @@
     <div class="card"><h3><span class="cls no">rechaza</span></h3><p>Lo que destruye: borrar el disco o tu carpeta personal, formatear, apagar la máquina, descargar y ejecutar un script. Ni siquiera con tu aprobación.</p></div>
   </div>
   <p>La v1 solo tenía una lista de palabras prohibidas: <strong>"rm -rf /"</strong> se bloqueaba, pero <strong>"rm -r -f /"</strong> pasaba. La v2 entiende ambas formas y otras 19 variantes probadas, y cualquier comando que no esté en la lista de lectura necesita tu aprobación. La lista no es la única protección: activa la caja para ejecutar un comando que no conoces.</p>
+</div></section>
+
+<section id="funciona"><div class="wrap">
+  <span class="chip">Cómo funciona por dentro</span>
+  <h2>El recorrido de un mensaje, <span class="amb">del celular a la respuesta</span></h2>
+  <p class="sub">Ejemplo real: le mandas "lembre que meu nome é Ana" (recuerda que mi nombre es Ana) y, al día siguiente, "qual meu nome?" (¿cómo me llamo?). Esto es lo que sucede dentro de INTELECTO.</p>
+  <div class="step"><div class="b">1</div><div>
+    <h3>Llega por el canal</h3>
+    <p>El mensaje entra por la terminal o por Telegram. En Telegram, comprueba que quien lo envió eres tú (lista de propietarios); los mensajes de otras personas se ignoran y se registran.</p>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>"Lembre que…" (recuerda que…) va directo a la memoria</h3>
+    <p>Las frases que empiezan con "lembre que" (recuerda que), "guarde" (guarda) o "anote" (anota) se guardan de inmediato, sin depender de que la IA lo decida. Por eso, hasta un modelo pequeño las recuerda. Una pregunta (con "?") nunca se convierte en memoria.</p>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>Arma el contexto</h3>
+    <p>Reúne los archivos de identidad (quién es, cómo trabaja, quién eres tú), los recuerdos relacionados con la pregunta ("nome" (nombre) encuentra "meu nome é Ana" (mi nombre es Ana)) y las conversaciones más recientes.</p>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>El cerebro piensa</h3>
+    <p>Todo esto va a la IA (en tu computadora o en la nube). Responde o solicita una herramienta: guardar, buscar, leer un archivo, ejecutar un comando.</p>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>La herramienta pasa por el control</h3>
+    <p>Si es un comando, el control decide: lo ejecuta, te pregunta o lo rechaza. Una vez aprobado, se ejecuta en la carpeta de trabajo o en la caja sin internet, si la activaste. El resultado vuelve a la IA, hasta un máximo de 5 vueltas.</p>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>Responde y registra</h3>
+    <p>Recibes la respuesta, y todo lo que hizo (comando, herramienta, memoria, error) queda registrado en una línea de auditoría para que puedas revisarlo después.</p>
+  </div></div>
+</div></section>
+
+<section id="mercearia"><div class="wrap">
+  <span class="chip">Arma el tuyo</span>
+  <h2>El almacén: <span class="amb">elige los ingredientes y recibe el plan listo</span></h2>
+  <p class="sub">INTELECTO v2 es la base que ya funciona. Para ir más allá (WhatsApp, calendario, casa inteligente, voz…), abre el almacén: son 144 ingredientes de 12 proyectos de agentes, en 8 pasillos. Eliges, y se genera el archivo <strong>meu-assistente.md</strong>; Claude Code o Codex construye sobre INTELECTO siguiendo ese archivo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🛒 1. Elige</h3><p>Haz clic en los ingredientes de los pasillos o carga uno de los 5 ejemplos listos que aparecen abajo.</p></div>
+    <div class="card"><h3>📄 2. Descarga el .md</h3><p>Cada elemento viene marcado: ✅ ya existe en INTELECTO, 🟡 existe en parte, ➕ falta (y en qué pieza encaja). Al final están las reglas para el agente: un elemento a la vez, con una prueba.</p></div>
+    <div class="card"><h3>🤖 3. Dáselo al agente</h3><p>Copia el archivo en la carpeta de INTELECTO, abre Claude Code o Codex allí y pídele que lo implemente. Para más seguridad: dentro de la caixa-do-agente.</p></div>
+  </div>
+  <p style="margin:22px 0 10px"><a class="btn" href="../mercearia/es/">Abrir el almacén</a></p>
+  <h3 style="margin-top:26px">5 ejemplos listos</h3>
+  <div class="ex">
+    <figure><a href="../mercearia/es/#exemplos"><img src="../mercearia/img/exemplo-1.jpg" alt="Diagrama: Jarvis personal en Telegram" loading="lazy"></a><figcaption><strong>Jarvis personal en Telegram</strong>: memoria, calendario y recordatorios, correo electrónico, bóveda, pide tu OK. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/01-jarvis-telegram.md" target="_blank" rel="noopener">ver el .md</a></figcaption></figure>
+    <figure><a href="../mercearia/es/#exemplos"><img src="../mercearia/img/exemplo-2.jpg" alt="Diagrama: asistente para pequeño negocio" loading="lazy"></a><figcaption><strong>Asistente para pequeño negocio</strong>: WhatsApp, responde con tus documentos, bloquea mensajes maliciosos. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/02-atendente-negocio.md" target="_blank" rel="noopener">ver el .md</a></figcaption></figure>
+    <figure><a href="../mercearia/es/#exemplos"><img src="../mercearia/img/exemplo-3.jpg" alt="Diagrama: programador seguro" loading="lazy"></a><figcaption><strong>Programador seguro</strong>: Git y GitHub, caja sin internet, pruebas antes de darlo por listo. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/03-programador-seguro.md" target="_blank" rel="noopener">ver el .md</a></figcaption></figure>
+    <figure><a href="../mercearia/es/#exemplos"><img src="../mercearia/img/exemplo-4.jpg" alt="Diagrama: 100% local y privado" loading="lazy"></a><figcaption><strong>100% local y privado</strong>: IA y voz en tu PC, búsqueda privada, tus notas, nada sale de la máquina. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/04-local-privado.md" target="_blank" rel="noopener">ver el .md</a></figcaption></figure>
+    <figure><a href="../mercearia/es/#exemplos"><img src="../mercearia/img/exemplo-5.jpg" alt="Diagrama: casa inteligente con voz" loading="lazy"></a><figcaption><strong>Casa inteligente con voz</strong>: palabra de activación, luces, sonido, cámaras y rutinas. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/05-casa-voz.md" target="_blank" rel="noopener">ver el .md</a></figcaption></figure>
+  </div>
+  <p class="sub" style="margin-top:14px">Los ingredientes marcados con ➕ todavía no existen en INTELECTO: el agente los construye siguiendo el archivo. Antes de usar lo que haga, compruébalo con las pruebas.</p>
 </div></section>
 
 <section id="testado"><div class="wrap">

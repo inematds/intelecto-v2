@@ -215,6 +215,9 @@
   .v2bar{position:sticky;top:0;z-index:60;display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:10px 18px;background:#0c0c10;border-bottom:2px solid #FACC15;font:500 .9rem Inter,system-ui,sans-serif}
   .v2bar a{color:#FACC15;text-decoration:none;font-weight:700}
   .v2bar span{color:#cbd5e1}
+  .v2bar .v2lang{display:inline-flex;gap:6px;align-items:center;color:#64748b}
+  .v2bar .v2lang a{color:#94a3b8;font-weight:600}
+  .v2bar .v2lang a[aria-current]{color:#FACC15;text-decoration:underline;text-underline-offset:3px}
   .v2sec h2{margin-bottom:.4rem}
   .v2passos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0}
   .v2passos div{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px}
@@ -237,7 +240,7 @@
 </head>
 <body>
 
-<div class="v2bar"><a href="../">← INTELECTO v2 · guia</a><span>Mercearia: escolha os ingredientes, baixe o seu <code>meu-assistente.md</code> e entregue ao Claude Code ou ao Codex dentro da pasta do intelecto-v2.</span><a href="https://inema.club" target="_blank" rel="noopener" style="color:#38bdf8;margin-left:auto">INEMA.CLUB</a></div>
+<div class="v2bar"><span class="v2lang"><a href="./" aria-current="page" lang="pt-BR">PT</a>·<a href="en/" lang="en">EN</a>·<a href="es/" lang="es">ES</a></span><a href="../">← INTELECTO v2 · guia</a><span>Mercearia: escolha os ingredientes, baixe o seu <code>meu-assistente.md</code> e entregue ao Claude Code ou ao Codex dentro da pasta do intelecto-v2.</span><a href="https://inema.club" target="_blank" rel="noopener" style="color:#38bdf8;margin-left:auto">INEMA.CLUB</a></div>
 
 
 <!-- HERO -->
