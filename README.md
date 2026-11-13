@@ -81,7 +81,7 @@ Tudo do assistente fica em `~/.intelecto2/` (troque com `INTELECTO_HOME`): `conf
 | Item | Como foi testado (12/11/2026) |
 |---|---|
 | Loop, memória, ferramentas, trava, aprovação, cofre, auditoria | 68 testes automáticos (`python3 -m pytest -q`) |
-| Ollama local | ao vivo com `qwen3.6:35b-a3b`: guardou "meu nome é Nei e moro em Porto Alegre" e lembrou numa execução seguinte. Com `llama3.2` (3B) conversa, mas quase nunca usa as ferramentas. |
+| Ollama local | ao vivo com `qwen3.6:35b-a3b`: guardou "meu nome é Nei e moro em Porto Alegre" e lembrou numa execução seguinte. Com `llama3.2` (3B) quase não usa as ferramentas sozinho; desde a v2.0.1, "lembre que …" é guardado direto pelo assistente, e o llama3.2 também lembrou (13/11/2026). |
 | Executor caixa | ao vivo, Docker 28: vê só a pasta de trabalho, não vê as variáveis do seu terminal, sem internet |
 | OpenRouter e Telegram | contra servidores falsos locais (formato dos pedidos, chave no cabeçalho, filtro de dono, aprovação por /sim). **Não testados ao vivo**: dependem da sua chave e do seu bot. |
 | macOS | não testado (o serviço launchd e o id da máquina pelo `ioreg` estão no código) |

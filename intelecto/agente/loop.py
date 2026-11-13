@@ -4,8 +4,12 @@ Contexto de cada mensagem = SOUL + AGENTS + USER (identidade) + memórias que ca
 com a pergunta + as últimas conversas do mesmo chat.
 """
 import os
+import re
 
 from ..provedores.base import ErroProvedor, Mensagem
+
+# "lembre que…", "guarde que…", "anote que…" (e em inglês/espanhol) no começo da mensagem
+LEMBRETE = re.compile(r"(?i)^(lembre|lembra|lembre-se|guarde|anote|remember|recuerda|recuérdame|guarda)( de)?( que| that)?[\s,:]+(?P<fato>.+)$", re.S)
 
 
 class Contexto:
@@ -42,9 +46,28 @@ class Agente:
         self.auditoria = auditoria
         self.historico = {}
 
+    def lembrete_direto(self, pergunta: str):
+        """"lembre que X" é guardado aqui mesmo, sem depender do modelo chamar a ferramenta
+        (modelos pequenos, como o llama3.2, quase não chamam). Devolve (id, fato) ou None."""
+        texto = pergunta.strip()
+        m = LEMBRETE.match(texto)
+        if not m or texto.endswith("?"):   # "lembra quando…?" é pergunta, não pedido
+            return None
+        fato = m.group("fato").strip().rstrip(".!")
+        if len(fato) < 3:
+            return None
+        id_ = self.contexto.memorias.salvar(fato[0].upper() + fato[1:], "fato")
+        if self.auditoria:
+            self.auditoria.registrar("memoria_direta", id=id_, conteudo=fato)
+        return id_, fato
+
     async def responder(self, chat: str, pergunta: str) -> str:
         hist = self.historico.setdefault(chat, [])
         msgs = self.contexto.montar(hist, pergunta)
+        guardado = self.lembrete_direto(pergunta)
+        if guardado:
+            msgs.insert(-1, Mensagem("system", f"Este fato JÁ foi guardado na memória (#{guardado[0]}): {guardado[1]}. "
+                                               "Confirme ao dono em uma frase curta; não precisa chamar salvar_memoria."))
         defs = self.registro.definicoes() if self.registro else None
         final = ""
         try:

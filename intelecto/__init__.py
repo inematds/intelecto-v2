@@ -3,4 +3,4 @@
 As 8 peças: canal, loop com freio, identidade, cérebro (provedor), memória,
 ferramentas, cofre e caixa. Cada peça mora numa pasta deste pacote.
 """
-VERSAO = "2.0.0"
+VERSAO = "2.0.1"

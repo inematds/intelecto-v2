@@ -343,7 +343,7 @@
   <div class="tabwrap"><table class="tab">
     <tr><th>Parte</th><th>Cómo se probó</th></tr>
     <tr><td>Ciclo, memoria, herramientas, bloqueo, aprobación, bóveda y auditoría</td><td>68 pruebas automáticas; todas pasan</td></tr>
-    <tr><td>IA local (Ollama)</td><td>En vivo con el modelo qwen3.6: guardó "mi nombre es Nei y vivo en Porto Alegre" y, en una conversación nueva, respondió "Tu nombre es Nei y vives en Porto Alegre". Con llama3.2 (modelo pequeño) conversa, pero casi nunca usa las herramientas.</td></tr>
+    <tr><td>IA local (Ollama)</td><td>En vivo con el modelo qwen3.6: guardó "mi nombre es Nei y vivo en Porto Alegre" y, en una conversación nueva, respondió "Tu nombre es Nei y vives en Porto Alegre". Con llama3.2 (modelo pequeño) casi no usa las herramientas por sí solo, pero desde la versión 2.0.1 todo lo que empieza con "lembre que" (recuerda que) se guarda directamente, y también recordó el nombre y la ciudad.</td></tr>
     <tr><td>Caja (comando en un contenedor)</td><td>En vivo: solo ve la carpeta de trabajo, no ve las variables de tu terminal y no tiene internet</td></tr>
     <tr><td>OpenRouter y Telegram</td><td>Contra servidores de prueba en la misma computadora (formato, clave, filtro de propietario, aprobación por /sim). <strong>No se probaron en vivo</strong>: dependen de tu clave y de tu bot.</td></tr>
     <tr><td>macOS</td><td>No se probó. El servicio de macOS y la clave de la bóveda basada en el número de la máquina están en el código.</td></tr>
@@ -388,7 +388,7 @@
     <div class="card"><h3>Python 3.10+ y git</h3><p>Python ya viene en Linux y en macOS reciente. git (el programa que descarga el proyecto) puede faltar en una máquina nueva.</p><pre><span class="k">python3 --version &amp;&amp; git --version</span>
 <span class="k">sudo apt install -y git</span>   <span class="c"># Ubuntu, si falta git</span>
 <span class="k">xcode-select --install</span>    <span class="c"># macOS, si falta git</span></pre></div>
-    <div class="card"><h3>Ollama (cerebro local)</h3><p>Gratis, en <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. El modelo probado requiere una buena tarjeta gráfica; llama3.2 funciona en una máquina sencilla, pero casi no usa las herramientas.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
+    <div class="card"><h3>Ollama (cerebro local)</h3><p>Gratis, en <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. El modelo probado requiere una buena tarjeta gráfica; llama3.2 funciona en una máquina sencilla: casi no usa las herramientas, pero recuerda lo que pides con "lembre que…" (recuerda que…).</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
 <span class="k">ollama pull llama3.2</span>  <span class="c"># más ligero</span></pre></div>
     <div class="card"><h3>Docker (solo para la caja)</h3><p>Opcional. Solo si quieres ejecutar los comandos en una caja sin internet.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
   </div>

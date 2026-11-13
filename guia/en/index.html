@@ -343,7 +343,7 @@
   <div class="tabwrap"><table class="tab">
     <tr><th>Part</th><th>How it was tested</th></tr>
     <tr><td>Loop, memory, tools, guardrail, approval, vault, and audit log</td><td>68 automated tests, all passing</td></tr>
-    <tr><td>Local AI (Ollama)</td><td>Live with the qwen3.6 model: it saved “my name is Nei and I live in Porto Alegre” and, in a new conversation, replied “Your name is Nei and you live in Porto Alegre.” With llama3.2 (a small model), it can chat, but rarely uses the tools.</td></tr>
+    <tr><td>Local AI (Ollama)</td><td>Live with the qwen3.6 model: it saved “my name is Nei and I live in Porto Alegre” and, in a new conversation, replied “Your name is Nei and you live in Porto Alegre.” With llama3.2 (a small model), it rarely uses the tools on its own, but since version 2.0.1 anything starting with "lembre que" (remember that) is saved directly, and it also remembered the name and city.</td></tr>
     <tr><td>Sandbox (command in a container)</td><td>Live: it can only see the workspace folder, can’t see your terminal’s environment variables, and has no internet access</td></tr>
     <tr><td>OpenRouter and Telegram</td><td>Against test servers on the same computer (format, key, owner filter, approval with /yes). <strong>Not tested live</strong>: they require your key and bot.</td></tr>
     <tr><td>macOS</td><td>Not tested. The macOS service and the vault key based on the machine’s number are in the code.</td></tr>
@@ -388,7 +388,7 @@
     <div class="card"><h3>Python 3.10+ and git</h3><p>Python already comes with Linux and recent macOS. git (the program that downloads the project) may be missing on a new machine.</p><pre><span class="k">python3 --version &amp;&amp; git --version</span>
 <span class="k">sudo apt install -y git</span>   <span class="c"># Ubuntu, if git is missing</span>
 <span class="k">xcode-select --install</span>    <span class="c"># macOS, if git is missing</span></pre></div>
-    <div class="card"><h3>Ollama (local brain)</h3><p>Free at <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. The tested model needs a good graphics card; llama3.2 runs on a basic computer, but makes little use of the tools.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
+    <div class="card"><h3>Ollama (local brain)</h3><p>Free at <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. The tested model needs a good graphics card; llama3.2 runs on a basic computer: it makes little use of the tools, but remembers what you ask with "lembre que…" (remember that…).</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
 <span class="k">ollama pull llama3.2</span>  <span class="c"># lighter</span></pre></div>
     <div class="card"><h3>Docker (sandbox only)</h3><p>Optional. Only needed if you want to run commands in an offline sandbox.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
   </div>

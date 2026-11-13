@@ -76,7 +76,7 @@ All assistant data is stored in `~/.intelecto2/` (change it with `INTELECTO_HOME
 | Item | How it was tested (12/11/2026) |
 |---|---|
 | Loop, memory, tools, lock, approval, vault, audit | 68 automated tests (`python3 -m pytest -q`) |
-| Local Ollama | live with `qwen3.6:35b-a3b`: stored “my name is Nei and I live in Porto Alegre” and recalled it in a later run. With `llama3.2` (3B), it chats, but rarely uses the tools. |
+| Local Ollama | live with `qwen3.6:35b-a3b`: stored “my name is Nei and I live in Porto Alegre” and recalled it in a later run. `llama3.2` (3B) rarely uses the tools on its own; since v2.0.1, "lembre que …" (remember that…) is saved directly by the assistant, and llama3.2 remembered too (13/11/2026). |
 | Box executor | live, Docker 28: sees only the workspace folder, can’t see your terminal’s environment variables, no internet |
 | OpenRouter and Telegram | against local fake servers (request format, key in header, owner filter, approval via /sim). **Not tested live**: they depend on your key and bot. |
 | macOS | not tested (the launchd service and machine ID via `ioreg` are in the code) |

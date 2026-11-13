@@ -76,7 +76,7 @@ Todo lo del asistente queda en `~/.intelecto2/` (cámbialo con `INTELECTO_HOME`)
 | Elemento | Cómo se probó (12/11/2026) |
 |---|---|
 | Bucle, memoria, herramientas, bloqueo, aprobación, bóveda, auditoría | 68 pruebas automáticas (`python3 -m pytest -q`) |
-| Ollama local | en vivo con `qwen3.6:35b-a3b`: guardó «mi nombre es Nei y vivo en Porto Alegre» y lo recordó en una ejecución posterior. Con `llama3.2` (3B) conversa, pero casi nunca usa las herramientas. |
+| Ollama local | en vivo con `qwen3.6:35b-a3b`: guardó «mi nombre es Nei y vivo en Porto Alegre» y lo recordó en una ejecución posterior. `llama3.2` (3B) casi no usa las herramientas por sí solo; desde la v2.0.1, "lembre que …" (recuerda que…) lo guarda directamente el asistente, y llama3.2 también recordó (13/11/2026). |
 | Ejecutor en caja | en vivo, Docker 28: solo ve la carpeta de trabajo, no ve las variables de tu terminal y no tiene internet |
 | OpenRouter y Telegram | contra servidores falsos locales (formato de las solicitudes, clave en el encabezado, filtro de propietario, aprobación mediante /sim). **No se probaron en vivo**: dependen de tu clave y de tu bot. |
 | macOS | no probado (el servicio launchd y el ID de la máquina obtenido mediante `ioreg` están en el código) |

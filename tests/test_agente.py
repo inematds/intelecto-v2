@@ -95,3 +95,25 @@ def test_config_valida_e_salva(home):
     c = cfg.Config()
     cfg.salvar(c)
     assert cfg.existe() and cfg.carregar().modelo == c.modelo
+
+
+class Calado(Provedor):
+    """Cérebro que nunca chama ferramenta (como um modelo pequeno): só ecoa o que recebeu de contexto."""
+    nome = "calado"
+
+    async def conversar(self, msgs, ferramentas=None):
+        return Resposta(" | ".join(m.texto for m in msgs if m.papel == "system")[-300:])
+
+
+def test_lembre_que_guarda_sem_o_modelo_chamar_ferramenta(home):
+    p = _pecas(home)
+    p.agente.provedor = Calado()
+    asyncio.run(p.agente.responder("t", "Lembre que meu cachorro se chama Thor."))
+    assert [m.conteudo for m in p.memorias.buscar("cachorro")] == ["Meu cachorro se chama Thor"]
+    resposta = asyncio.run(p.agente.responder("t", "qual o nome do meu cachorro?"))
+    assert "Thor" in resposta          # a memória chega no contexto da pergunta seguinte
+    antes = p.memorias.total()
+    asyncio.run(p.agente.responder("t", "lembra quando fomos à praia?"))   # pergunta: não guarda
+    assert p.memorias.total() == antes
+    assert p.agente.lembrete_direto("guarde: a reunião é às 15h")[1] == "a reunião é às 15h"
+    assert p.agente.lembrete_direto("como você lembra das coisas?") is None
