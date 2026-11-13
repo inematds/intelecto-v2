@@ -117,3 +117,13 @@ def test_lembre_que_guarda_sem_o_modelo_chamar_ferramenta(home):
     assert p.memorias.total() == antes
     assert p.agente.lembrete_direto("guarde: a reunião é às 15h")[1] == "a reunião é às 15h"
     assert p.agente.lembrete_direto("como você lembra das coisas?") is None
+
+
+def test_mock_entende_en_e_es(home):
+    p = _pecas(home)
+    assert "[local, saída 0]" in asyncio.run(p.agente.responder("t", "run: ls"))
+    assert "[local, saída 0]" in asyncio.run(p.agente.responder("t", "ejecuta: pwd"))
+    asyncio.run(p.agente.responder("t", "remember that my dog is Rex"))
+    assert "Rex" in asyncio.run(p.agente.responder("t", "what is my dog?"))
+    asyncio.run(p.agente.responder("t", "recuerda que mi gato es Tom"))
+    assert "Tom" in asyncio.run(p.agente.responder("t", "¿cómo se llama mi gato?"))

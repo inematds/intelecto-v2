@@ -3,7 +3,7 @@
 Segue um roteiro simples e previsível que exercita o loop inteiro:
   "lembre que X"      → pede salvar_memoria(X)
   "… meu/minha …?"    → pede buscar_memoria
-  "rode: CMD"         → pede rodar_comando(CMD)
+  "rode: CMD"         → pede rodar_comando(CMD)   (também "run:" e "ejecuta:")
   "leia ARQ"          → pede ler_arquivo(ARQ)
 Depois que a ferramenta responde, devolve um texto com o resultado.
 """
@@ -29,17 +29,17 @@ class Mock(Provedor):
         baixo = texto.lower()
         if not ferramentas:
             return Resposta(f"Você disse: {texto}")
-        m = re.match(r"(lembre|lembra|guarde)( que)?\s+(.+)", baixo)
+        m = re.match(r"(lembre|lembra|guarde|remember|recuerda|guarda)( que| that)?\s+(.+)", baixo)
         if m:
             fato = texto[len(texto) - len(m.group(3)):].strip()
             return Resposta("", [{"id": "c1", "nome": "salvar_memoria", "args": {"conteudo": fato}}])
-        if baixo.endswith("?") and re.search(r"\b(meu|minha|meus|minhas)\b", baixo):
+        if baixo.endswith("?") and re.search(r"\b(meu|minha|meus|minhas|my|mi|mis)\b", baixo):
             termo = re.sub(r"[^\w ]", " ", baixo).split()[-1]
             return Resposta("", [{"id": "c2", "nome": "buscar_memoria", "args": {"busca": termo}}])
-        m = re.match(r"(rode|execute|roda)\s*:?\s*(.+)", texto, re.I)
+        m = re.match(r"(rode|execute|roda|run|ejecuta|ejecutar)\s*:\s*(.+)", texto, re.I)
         if m:
             return Resposta("", [{"id": "c3", "nome": "rodar_comando", "args": {"comando": m.group(2)}}])
-        m = re.match(r"(leia|abra)\s+(.+)", texto, re.I)
+        m = re.match(r"(leia|abra|read|open|lee|abre)\s+(.+)", texto, re.I)
         if m:
             return Resposta("", [{"id": "c4", "nome": "ler_arquivo", "args": {"caminho": m.group(2).strip()}}])
         return Resposta(f"Você disse: {texto}")
