@@ -1,15 +1,25 @@
 # INTELECTO v2
 
-**🇧🇷 Português · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+[![INTELECTO v2 — Seu Jarvis seguro](guia/assets/banner.jpg)](https://inematds.github.io/intelecto-v2/guia/)
 
-**O seu próprio Jarvis, que roda no seu computador, lembra de você e não mexe no que não deve.**
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
-Assistente pessoal de IA em Python puro: **nenhum pacote para instalar**, 1.500 linhas que dá para ler numa tarde.
-Fala com você no terminal ou no Telegram, pensa com um modelo **local** (Ollama, custo zero) ou na nuvem
-(OpenRouter), guarda memórias num SQLite e só roda comando de terminal depois de passar por uma trava e, se
-precisar, pela sua aprovação. Com `executor = caixa`, cada comando roda num container descartável sem internet.
+**Seu próprio Jarvis, que lembra de você e não mexe no que não deve.**
 
-📖 Guia completo: **https://inematds.github.io/intelecto-v2/guia/**
+## O que é
+
+Você quer um assistente de IA só seu, que lembre das suas coisas, mas não quer entregar seus dados nem deixar uma
+IA solta no computador. O INTELECTO v2 é um assistente pessoal gratuito que você instala no seu computador e
+conversa com ele pelo terminal ou pelo Telegram. Ele pensa com uma IA que roda na sua máquina (Ollama, sem custo)
+ou na nuvem (OpenRouter), guarda memórias, mexe só numa pasta de trabalho e pede a sua aprovação antes de qualquer
+comando que não seja só de leitura. Você precisa de Python 3.10 ou mais novo; nada mais é obrigatório.
+
+Python puro: **nenhum pacote para instalar**, 1.500 linhas que dá para ler numa tarde. Com `executor = caixa`,
+cada comando roda num container descartável sem internet.
+
+## 📖 Guia de uso
+
+Guia completo (landing + passo a passo): **https://inematds.github.io/intelecto-v2/guia/**
 
 ## Em 1 minuto
 

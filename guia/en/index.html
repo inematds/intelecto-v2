@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!-- TEMPLATE projetos-landing-guia. Troque placeholders e o conteudo. NAO reescreva o CSS.
+     TRILINGUE: este arquivo e a versao PT (guia/index.html). As versoes guia/en/index.html e
+     guia/es/index.html sao copias traduzidas: lang="en"/"es", seletor com a.on no idioma,
+     hrefs do seletor ../ e ../es/ (ou ../en/), e imagens assets/ -> ../assets/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INTELECTO v2 — Your own Jarvis, who remembers you and doesn’t touch what it shouldn’t</title>
+<meta name="description" content="Free personal AI assistant in pure Python: runs on your computer, thinks with local AI (Ollama), remembers you, talks through the terminal and Telegram, and only does dangerous things after your approval. With command lock, vault, and offline sandbox.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/intelecto-v2/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/intelecto-v2/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/intelecto-v2/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  nav .links a.sec{white-space:nowrap}
+  @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
+  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"]{display:none}}
+  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  table.n{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:10px}
+  table.n th,table.n td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
+  table.n th{color:var(--amb);font-family:Sora}
+  /* gráficos comparativos (âmbar = agora/realidade, azul = antes/cenário, hachura = projeção) */
+  :root{--c-now:#BF8224;--c-old:#4D8FE0}
+  body.light{--c-now:#B9791D;--c-old:#2F6FC4}
+  .charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  @media(max-width:820px){.charts{grid-template-columns:1fr}}
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px}
+  .chart h3{margin:0 0 4px;font-family:Sora;font-size:1.02rem}
+  .chart .cap{color:var(--mut);font-size:.84rem;margin:0 0 14px}
+  .leg{display:flex;flex-wrap:wrap;gap:14px;font-size:.78rem;color:var(--mut);margin-top:10px}
+  .leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .sw-now{background:var(--c-now)} .sw-old{background:var(--c-old)}
+  .sw-proj{background:repeating-linear-gradient(45deg,var(--c-now) 0 3px,transparent 3px 7px);border:1px solid var(--c-now)}
+  .hb{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .hb .g{font-size:.78rem;color:var(--mut);margin-top:6px}
+  .hb .row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:center;font-size:.82rem}
+  .hb .row>span:first-child{color:var(--mut);line-height:1.25}
+  .hb .trk{position:relative;height:22px}
+  .bar{height:100%;border-radius:0 4px 4px 0;min-width:4px;display:flex;align-items:center}
+  .bar.now{background:var(--c-now)} .bar.old{background:var(--c-old)}
+  .bar.proj{background:repeating-linear-gradient(45deg,var(--c-now) 0 3px,transparent 3px 7px);border:1px solid var(--c-now)}
+  .bar b{position:absolute;left:calc(var(--w) + 8px);font-weight:600;font-size:.8rem;color:var(--txt);white-space:nowrap}
+  .vb{display:flex;align-items:flex-end;gap:6px;height:190px;border-bottom:1px solid var(--line);padding-top:22px}
+  .vb .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+  .vb .col .v{font-size:.74rem;font-weight:600;color:var(--txt);margin-bottom:3px}
+  .vb .col .b{width:100%;max-width:38px;border-radius:4px 4px 0 0;min-height:2px}
+  .vb .col .b.now{background:var(--c-now)} .vb .col .b.old{background:var(--c-old)}
+  .vb .col .b.proj{background:repeating-linear-gradient(45deg,var(--c-now) 0 3px,transparent 3px 7px);border:1px solid var(--c-now);border-bottom:none}
+  .vb .gap{flex:0 0 14px;align-self:center;color:var(--mut);text-align:center}
+  .vx{display:flex;gap:6px;font-size:.72rem;color:var(--mut);margin-top:6px}
+  .vx span{flex:1;text-align:center} .vx .gap{flex:0 0 14px}
+  /* relatórios originais + gráficos originais + ajuste */
+  .reps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:46px}
+  .rep{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;color:var(--txt)}
+  .rep:hover{border-color:var(--amb)}
+  .rep .tag{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amb);font-family:Sora;font-weight:600}
+  .rep strong{font-family:Sora;font-size:1.25rem}
+  .rep span{color:var(--mut);font-size:.93rem}
+  .rep em{font-style:normal;color:var(--amb);font-weight:600;font-size:.88rem;margin-top:auto}
+  .h3o{font-family:Sora;font-size:1.35rem;margin:0 0 .2em}
+  .origs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .orig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .orig img{display:block;width:100%;height:auto;background:#fff}
+  .orig figcaption{padding:16px 18px;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+  .orig figcaption b{font-family:Sora;font-size:1.02rem}
+  .orig figcaption span{color:var(--mut)} .orig figcaption i{font-style:normal;color:var(--amb);font-weight:600}
+  .ajuste{margin-top:52px}
+  .aj{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .ajrow{display:grid;grid-template-columns:1.5fr 1fr 1fr .9fr;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:center;font-size:.92rem}
+  .ajrow:last-child{border-bottom:none}
+  .ajrow small{display:block;color:var(--mut);font-size:.78rem;font-weight:400}
+  .ajhead{background:var(--bg2);font-family:Sora;font-weight:600;color:var(--amb);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .ajrow .old{color:var(--c-old);font-weight:600} .ajrow .now{color:var(--c-now);font-weight:700}
+  .ajrow .dif{font-family:Sora;font-weight:800;color:var(--amb)}
+  .aj-em{margin-top:18px;background:rgba(226,162,59,.08);border:1px solid rgba(226,162,59,.35);border-radius:14px;padding:18px 20px}
+  .aj-em small{display:block;color:var(--mut);margin-top:10px;font-size:.82rem}
+  @media(max-width:820px){.reps,.origs{grid-template-columns:1fr}
+    .ajhead{display:none}
+    .ajrow{grid-template-columns:1fr 1fr;gap:8px 14px}
+    .ajrow>span:first-child{grid-column:1/-1}
+    .ajrow .dif{grid-column:1/-1}}
+  /* cenário original com projeções por cima + explicações */
+  .cen{margin-bottom:52px}
+  .kbox{display:flex;flex-direction:column;gap:7px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:12px;padding:16px 18px;margin:0 0 22px;font-size:.9rem}
+  .kbox span{color:var(--mut)} .kbox i:not(.sw){font-style:normal;color:var(--txt);font-weight:600}
+  .kbox .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+  .ov{position:relative;background:#fff}
+  .ov .pa{position:absolute;left:0;right:0;pointer-events:none}
+  .ov .vl{position:absolute;top:0;bottom:0;border-left:3px dashed #16a34a}
+  .ov .vl.old{border-left-color:#2563eb}
+  .ov .band{position:absolute;top:0;bottom:0;background:rgba(226,162,59,.32);border-left:2px solid #d97706;border-right:2px solid #d97706}
+  .ov .band.ted{background:repeating-linear-gradient(45deg,rgba(147,51,234,.22) 0 6px,rgba(147,51,234,.08) 6px 12px);border-color:#9333ea}
+  .ov em,.mk em{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font:800 .75rem Sora,sans-serif;color:#fff;background:#16a34a}
+  .ov em{position:absolute;top:-4px;left:50%;transform:translateX(-50%);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .ov .vl em{left:-1.5px}
+  .ov .vl.old em,.mk em.old{background:#2563eb}
+  .ov .band em,.mk em.band{background:#d97706} .ov .band.ted em,.mk em.ted{background:#9333ea}
+  .mk{list-style:none;margin:2px 0;padding:0;display:flex;flex-direction:column;gap:6px;color:var(--mut)}
+  .mk li{position:relative;padding-left:30px;min-height:22px} .mk li>em{position:absolute;left:0;top:1px}
+  .ov .band em{top:auto;bottom:6px}
+  .exp{color:var(--mut);font-size:.86rem;margin:12px 0 0;padding-top:12px;border-top:1px dashed var(--line)}
+  .exp b{color:var(--amb)}
+  /* plano de ação + animação da janela */
+  .anim{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:34px}
+  .an-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:26px}
+  .clk{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--mut)} .clk b{color:var(--amb)}
+  .dial{position:relative;width:42px;height:42px;border-radius:50%;border:3px solid var(--c-old)}
+  .dial.now{border-color:var(--c-now)}
+  .hand{position:absolute;left:50%;bottom:50%;width:3px;height:15px;margin-left:-1.5px;border-radius:2px;background:var(--txt);transform-origin:50% 100%}
+  .anim.run .hand.slow{animation:spin 3s linear infinite} .anim.run .hand.fast{animation:spin 1.765s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .replay{margin-left:auto;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:.45em .9em;cursor:pointer;font:600 .85rem Sora,sans-serif}
+  .replay:hover{border-color:var(--amb)}
+  .an-axis{position:relative;height:34px;margin:0 8% 6px 150px;border-bottom:1px solid var(--line);font-size:.74rem;color:var(--mut)}
+  .an-axis span{position:absolute;bottom:4px;transform:translateX(-50%);text-align:center;line-height:1.15;white-space:nowrap}
+  .an-axis span:first-child{transform:none}
+  .trk2{display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px;align-items:center;margin:18px 8% 0 0}
+  .trk2 .lbl{font:600 .82rem Sora,sans-serif;color:var(--mut)}
+  .lane{position:relative;height:30px;background:var(--bg2);border-radius:8px;margin-bottom:46px}
+  .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:8px}
+  .fill.old{background:var(--c-old)} .fill.now{background:var(--c-now)}
+  .zone{position:absolute;top:-4px;bottom:-4px;background:repeating-linear-gradient(45deg,rgba(226,162,59,.35) 0 5px,transparent 5px 10px);border:1px dashed var(--c-now);border-radius:6px}
+  .pin{position:absolute;top:-6px;bottom:-6px;border-left:3px solid var(--c-old);opacity:.25;transition:opacity .4s}
+  .pin.now{border-color:var(--c-now)} .pin.on{opacity:1}
+  .pin em{position:absolute;top:100%;margin-top:4px;font-style:normal;font-size:.72rem;font-weight:600;white-space:nowrap;transform:translateX(-100%);color:var(--txt)}
+  .pin.now em{transform:none;left:4px}
+  .pin small{position:absolute;bottom:100%;margin-bottom:2px;font-size:.72rem;color:var(--mut);white-space:nowrap;transform:translateX(-50%)}
+  .cnt{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.8rem;color:#fff;font-weight:600;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .cnt b{font:800 1.05rem Sora,sans-serif}
+  .an-cap{color:var(--mut);font-size:.9rem;margin:0}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .vcol{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .vcol.old{border-top:4px solid var(--c-old)} .vcol.now{border-top:4px solid var(--c-now)}
+  .vcol .tag{font:600 .74rem Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .vcol h3{font-family:Sora;margin:.4em 0 .7em;font-size:1.1rem}
+  .vcol ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;color:var(--mut);font-size:.9rem}
+  .vcol li b{color:var(--txt)}
+  .steps2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+  .st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;font-size:.86rem}
+  .st .when{font:800 .78rem Sora,sans-serif;color:var(--amb);text-transform:uppercase;letter-spacing:.05em}
+  .st b{font-family:Sora;font-size:.98rem} .st>span:last-child{color:var(--mut)}
+  .st code{font-size:.8rem;color:var(--amb2)}
+  @media(max-width:1000px){.steps2{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.vs,.steps2{grid-template-columns:1fr}
+    .an-axis{margin-left:0;margin-right:12%} .trk2{grid-template-columns:1fr;gap:24px;margin-right:12%}}
+  /* parte técnica isolada embaixo */
+  .techhead{background:var(--bg2);border-top:3px solid var(--amb);padding:58px 0 8px}
+  .techhead h2{font-family:Sora;margin:.3em 0 0}
+  .techzone{background:var(--bg2)}
+  .caso-cta{display:flex;flex-direction:column;gap:6px;margin-top:26px;background:var(--card);border:1px solid var(--amb);border-radius:16px;padding:20px 22px;color:var(--txt)}
+  .caso-cta:hover{background:var(--bg2)} .caso-cta b{font:800 1.2rem Sora,sans-serif} .caso-cta>span:last-child{color:var(--mut)}
+  /* intelecto-v2 */
+  .tab{width:100%;border-collapse:collapse;margin:8px 0 6px;font-size:.95rem}
+  .tab th,.tab td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  .tab th{font-family:Sora;color:var(--amb);font-weight:600}
+  .tabwrap{overflow-x:auto}
+  .cls{display:inline-block;padding:2px 10px;border-radius:999px;font:600 .8rem Inter,sans-serif;border:1px solid var(--line)}
+  .cls.ok{color:#22c55e;border-color:#22c55e55} .cls.ask{color:var(--amb);border-color:var(--amb)} .cls.no{color:#ef4444;border-color:#ef444455}
+  .nota{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:14px 0}
+  .nota b{font:800 2.6rem Sora,sans-serif} .nota .de{color:#ef4444} .nota .para{color:#22c55e} .nota .arr{color:var(--mut);font-size:1.6rem}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🧠</span> INTELECTO v2</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#problema">Why</a>
+    <a class="sec" href="#pecas">The 8 parts</a>
+    <a class="sec" href="#decide">How it decides</a>
+    <a class="sec" href="#testado">Tested</a>
+    <a class="sec" href="#tecnico">Toolkit (technical)</a>
+    <a class="sec" href="#caixa">Sandbox</a>
+    <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <a class="btn" href="https://github.com/inematds/intelecto-v2" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">INTELECTO v2 · free · pure Python · runs on your computer</span>
+      <h1>Your own Jarvis, who remembers you and <span class="amb">doesn’t touch what it shouldn’t</span></h1>
+      <p class="lead">Ready-made assistants store your life on someone else’s server, while agents that control your computer can read your passwords and delete files. INTELECTO v2 runs on your machine, thinks with free local AI, remembers what you’ve told it, and only does anything dangerous after you approve it.</p>
+      <div class="cta">
+        <a class="btn" href="#problema">Understand it in 5 minutes</a>
+        <a class="btn ghost" href="https://github.com/inematds/intelecto-v2" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-en.jpg" alt="INTELECTO v2 — Your safe Jarvis: remembers you, runs on your computer, and only does what you approve"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">In short</span>
+  <p>You want a personal AI assistant that remembers your details, but you don’t want to hand over your data or let an AI run loose on your computer. <strong>INTELECTO v2</strong> is a free personal assistant that you install on your computer and talk to through the terminal or Telegram. It thinks with AI that runs on your machine (Ollama, at no cost) or in the cloud, stores memories, works only in a designated folder, and asks for your approval before any command that does more than read. You need Python 3.10 or newer; nothing else is required.</p>
+  <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="INTELECTO v2: talks through the terminal and Telegram, thinks with free local AI, remembers what you told it, asks before doing anything dangerous, stores encrypted passwords, runs commands in an offline sandbox" loading="lazy" style="width:100%;display:block"></figure>
+</div></section>
+
+<section id="problema"><div class="wrap">
+  <span class="chip">Why have your own Jarvis</span>
+  <h2>The problem with today’s assistants</h2>
+  <p class="sub">You can have both: an assistant that truly helps and keeps you safe.</p>
+  <div class="grid g3">
+    <div class="card"><h3>☁️ Your life on someone else’s server</h3><p>With ready-made assistants, everything you tell them is stored by the company. INTELECTO keeps its memory in a file on your computer, and with local AI nothing leaves your machine.</p></div>
+    <div class="card"><h3>🔓 An agent with the keys to your house</h3><p>An agent that runs commands on its own can access your passwords, the internet, and your files. One mistake or a malicious piece of text hidden on a website is all it takes.</p></div>
+    <div class="card"><h3>🧱 Code nobody understands</h3><p>Agent frameworks have thousands of files. INTELECTO has 1,500 lines, split into 8 parts that you can read in an afternoon.</p></div>
+  </div>
+</div></section>
+
+<section id="pecas"><div class="wrap">
+  <span class="chip">The 8 parts</span>
+  <h2>Everything an agent has, <span class="amb">in plain language</span></h2>
+  <p class="sub">Each part lives in its own folder. You can understand the whole thing without programming.</p>
+  <div class="grid g4">
+    <div class="card"><h3>💬 1. Channel</h3><p>How you talk to it: through the terminal or Telegram. On Telegram, it only replies to you.</p></div>
+    <div class="card"><h3>🔁 2. Loop with a brake</h3><p>It thinks, uses a tool, checks the result, and replies. At most 5 rounds, so it can’t run forever.</p></div>
+    <div class="card"><h3>🪪 3. Identity</h3><p>Four text files: who it is, how it works, who you are, and what it already knows. You change them by writing.</p></div>
+    <div class="card"><h3>🧠 4. Brain</h3><p>The AI that thinks: one on your computer (Ollama, free) or one in the cloud (OpenRouter).</p></div>
+    <div class="card"><h3>📚 5. Memory</h3><p>It stores what you tell it and finds it again by keyword, even without accents. It’ll still be there tomorrow.</p></div>
+    <div class="card"><h3>🧰 6. Tools</h3><p>Store and search memories, read, write, and list files (only in its folder), and run commands.</p></div>
+    <div class="card"><h3>🔐 7. Lock and vault</h3><p>It decides whether a command can run and stores encrypted passwords. Everything it does is logged.</p></div>
+    <div class="card"><h3>📦 8. Sandbox</h3><p>If you enable it, each command runs in a disposable sandbox, without internet access or your passwords.</p></div>
+  </div>
+</div></section>
+
+<section id="decide"><div class="wrap">
+  <span class="chip">How it decides</span>
+  <h2>Three responses to every command: <span class="amb">runs, asks, or refuses</span></h2>
+  <p class="sub">Before running any command, the lock checks what it does. The default is to ask: only read-only commands go straight through.</p>
+  <div class="grid g3">
+    <div class="card"><h3><span class="cls ok">runs</span></h3><p>Commands that only look: list files, read text, check the date, check disk space.</p></div>
+    <div class="card"><h3><span class="cls ask">asks</span></h3><p>Anything else: write, move, or delete a file, install something, access the internet. It asks in the terminal or sends "/sim or /nao" on your Telegram.</p></div>
+    <div class="card"><h3><span class="cls no">refuses</span></h3><p>Destructive actions: erase the disk or your home folder, format, shut down the machine, download and run a script. Not even with your OK.</p></div>
+  </div>
+  <p>v1 had only a list of forbidden words: <strong>"rm -rf /"</strong> was blocked, but <strong>"rm -r -f /"</strong> got through. v2 understands both forms and 19 more tested variations, and anything not on the read-only list needs your approval. The list isn’t the only safeguard: for commands you don’t know, enable the sandbox.</p>
+</div></section>
+
+<section id="testado"><div class="wrap">
+  <span class="chip">What was actually tested</span>
+  <h2>No promises in the dark</h2>
+  <p class="sub">Tested on 11/12/2026 on a Linux computer. Anything that wasn’t tested live is stated here.</p>
+  <div class="tabwrap"><table class="tab">
+    <tr><th>Part</th><th>How it was tested</th></tr>
+    <tr><td>Loop, memory, tools, lock, approval, vault, and audit</td><td>67 automated tests, all passing</td></tr>
+    <tr><td>Local AI (Ollama)</td><td>Live with the qwen3.6 model: it stored "my name is Nei and I live in Porto Alegre" and, in a new conversation, replied "Your name is Nei and you live in Porto Alegre". With llama3.2 (a small model), it can chat but rarely uses the tools.</td></tr>
+    <tr><td>Sandbox (command in a container)</td><td>Live: it only sees the work folder, can’t see your terminal’s environment variables, and has no internet access</td></tr>
+    <tr><td>OpenRouter and Telegram</td><td>Against test servers on the same computer (format, key, owner filter, approval with /sim). <strong>Not tested live</strong>: they depend on your key and your bot.</td></tr>
+    <tr><td>macOS</td><td>Not tested. The macOS service and the vault key derived from the machine ID are in the code.</td></tr>
+  </table></div>
+</div></section>
+
+<div id="tecnico" class="techhead"><div class="wrap">
+  <span class="chip">Technical section</span>
+  <h2>The toolkit: <span class="amb">for those who want to install and use it</span></h2>
+  <p class="sub">From here on, this is the technical section: installing, configuring, and running it. You <strong>don’t need</strong> this section to understand what came before.</p>
+</div></div>
+
+<div class="techzone">
+<section id="oque"><div class="wrap">
+  <span class="chip">What it is</span>
+  <h2>A Python package, <span class="amb">with no dependencies</span></h2>
+  <p class="sub">Only the Python standard library. The <code>cryptography</code> package is optional (vault with Fernet).</p>
+  <div class="grid g3">
+    <div class="card"><h3>🐍 python3 -m intelecto</h3><p>A command line with 8 subcommands: chat, demo, telegram, configure, vault, memory, audit, and verify.</p></div>
+    <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Everything for the assistant lives in one folder: config, memory, identity, work folder, audit, and vault. Change it with <code>INTELECTO_HOME</code>.</p></div>
+    <div class="card"><h3>✅ 67 tests</h3><p><code>python3 -m pytest -q</code>. No test calls a real API.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">How it works</span>
+  <h2>The path a message takes</h2>
+  <div class="flow">
+    <span>You (terminal or Telegram)</span><span class="arr">→</span>
+    <span>Identity + matching memories</span><span class="arr">→</span>
+    <span>Brain decides</span><span class="arr">→</span>
+    <span>Tool → lock → approval</span><span class="arr">→</span>
+    <span>Local executor or sandbox</span><span class="arr">→</span>
+    <span>Reply + audit log</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requirements</span>
+  <h2>What you need</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3.10+</h3><p>Already included with Linux and recent versions of macOS.</p><pre><span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Ollama (local brain)</h3><p>Free at <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. The tested model needs a good graphics card; llama3.2 runs on a basic computer but makes little use of the tools.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
+<span class="k">ollama pull llama3.2</span>  <span class="c"># lighter</span></pre></div>
+    <div class="card"><h3>Docker (sandbox only)</h3><p>Optional. Only if you want to run commands in an offline sandbox.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">User guide · step by step</span>
+  <h2>From zero to your Jarvis <span class="amb">in 10 minutes</span></h2>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Download it and see it work</h3>
+    <p>The demo uses a pretend brain: it runs without internet or a model.</p>
+<pre><span class="k">git clone https://github.com/inematds/intelecto-v2 &amp;&amp; cd intelecto-v2</span>
+<span class="k">python3 -m intelecto demo</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Configure it</h3>
+    <p>It asks for a name, personality, brain, where to run commands (locally or in the sandbox), and the approval policy. Press Enter to keep the suggested value.</p>
+<pre><span class="k">python3 -m intelecto configurar</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Make it yours</h3>
+    <p>Edit the 4 identity files. Each line in <code>MEMORY.md</code> that starts with "- " becomes a memory the first time.</p>
+<pre><span class="k">nano ~/.intelecto2/identidade/USER.md</span>     <span class="c"># who you are</span>
+<span class="k">nano ~/.intelecto2/identidade/SOUL.md</span>     <span class="c"># personality</span>
+<span class="k">nano ~/.intelecto2/identidade/MEMORY.md</span>   <span class="c"># initial facts</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Check it and start chatting</h3>
+<pre><span class="k">python3 -m intelecto verificar</span>   <span class="c"># → all good</span>
+<span class="k">python3 -m intelecto</span>             <span class="c"># chat in the terminal; type 'sair' to quit</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Telegram (optional)</h3>
+    <p>Create the bot with @BotFather and store the token in the vault. Start the bot, send it <code>/id</code>, and enter the number it replies with in <code>configurar</code> (the Telegram IDs question). Without an owner configured, it only replies to <code>/id</code>.</p>
+<pre><span class="k">python3 -m intelecto cofre guardar telegram</span>   <span class="c"># paste the token; it won’t appear on screen</span>
+<span class="k">python3 -m intelecto telegram</span>                 <span class="c"># send /id to the bot, then press Ctrl+C</span>
+<span class="k">python3 -m intelecto configurar</span>               <span class="c"># enter your ID</span>
+<span class="k">python3 -m intelecto telegram</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Start automatically when your computer starts (optional)</h3>
+<pre><span class="c"># Linux (user systemd; adjust the folder in the file if you didn’t clone into ~/intelecto-v2)</span>
+<span class="k">cp servico/intelecto-telegram.service ~/.config/systemd/user/</span>
+<span class="k">systemctl --user daemon-reload &amp;&amp; systemctl --user enable --now intelecto-telegram</span>
+<span class="c"># macOS: replace SEU_USUARIO in servico/club.inema.intelecto.plist and copy it to ~/Library/LaunchAgents/</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">7</div><div>
+    <h3>Run commands in the sandbox (optional)</h3>
+    <p>With Docker, each approved command runs in a container without network access and with access only to the work folder.</p>
+<pre><span class="k">docker pull python:3.12-slim</span>
+<span class="k">python3 -m intelecto conversar --executor caixa</span>   <span class="c"># or choose sandbox executor in configure</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">8</div><div>
+    <h3>OpenRouter, if you want a cloud model</h3>
+    <p>The key goes in the vault, never in the config. Each message costs according to the model you choose.</p>
+<pre><span class="k">python3 -m intelecto cofre guardar openrouter</span>
+<span class="k">python3 -m intelecto conversar --provedor openrouter --modelo anthropic/claude-sonnet-5.5</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">9</div><div>
+    <h3>See what it did</h3>
+<pre><span class="k">python3 -m intelecto memoria</span>           <span class="c"># latest memories</span>
+<span class="k">python3 -m intelecto memoria cachorro</span>  <span class="c"># search</span>
+<span class="k">python3 -m intelecto auditoria -n 20</span>   <span class="c"># commands and tools, including what ran and what didn’t</span></pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Real output</span>
+  <h2>The demo, as it appears on screen</h2>
+<pre><span class="k">python3 -m intelecto demo</span>
+você> rode: ls
+intelecto> Feito. Resultado de rodar_comando: [local, saída 0]
+você> rode: echo teste > nota.txt
+intelecto> Feito. Resultado de rodar_comando: não rodei: o dono não aprovou
+você> rode: rm -rf /
+intelecto> Feito. Resultado de rodar_comando: não rodei: bloqueado: apagar pasta do sistema ou a pasta pessoal
+você> leia ../../etc/passwd
+intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
+  <p class="sub">In the demo, nobody approves, so "echo" doesn’t run. In a real conversation, it asks you.</p>
+</div></section>
+
+<section id="v1v2"><div class="wrap">
+  <span class="chip">From v1 to v2</span>
+  <h2>What changed</h2>
+  <div class="tabwrap"><table class="tab">
+    <tr><th></th><th>v1</th><th>v2</th></tr>
+    <tr><td>Code</td><td>the README described the assistant, but there was only a minimal example with a pretend brain</td><td>complete assistant, 1,500 lines, 67 tests</td></tr>
+    <tr><td>Commands</td><td>list of forbidden words</td><td>runs / asks / refuses, with asking as the default</td></tr>
+    <tr><td>Telegram</td><td>structure only</td><td>works and only replies to its owners</td></tr>
+    <tr><td>Isolation</td><td>promised in the course</td><td>sandbox for each command (Docker without network access)</td></tr>
+    <tr><td>Platform</td><td>macOS only</td><td>Linux tested; macOS in the code</td></tr>
+  </table></div>
+  <p><a href="https://inematds.github.io/intelecto/" target="_blank" rel="noopener">v1</a> and the <a href="https://inematds.github.io/intelecto-curso/" target="_blank" rel="noopener">v1 course</a> are still online. Its method still works: choose ingredients from the framework marketplace and give the brief to Claude Code or Codex to build an assistant your way.</p>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Next steps</span>
+  <h2>Roadmap</h2>
+  <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Now</strong><span>8 parts, terminal and Telegram, Ollama/OpenRouter, lock, approval, vault, sandbox for each command.</span></div></div>
+  <div class="phase"><div class="tag">later</div><div class="d"><strong>Voice and schedule</strong><span>Audio on Telegram (local transcription) and scheduled reminders. Not available yet.</span></div></div>
+</div></section>
+</div>
+
+<section id="caixa"><div class="wrap">
+  <span class="chip">Final section</span>
+  <h2>How the <span class="amb">caixa-do-agente</span> improves your project</h2>
+  <p class="sub">INTELECTO protects what the assistant does. <a href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener">caixa-do-agente</a> protects the project while you, Claude Code, or Codex work on it.</p>
+
+  <h3>In plain language: a closed room</h3>
+  <p>When you let an AI agent control your computer on its own, it can access your passwords (<code>.env</code>, keys), the internet, and your real files. caixa-do-agente does the work in a closed room, in 3 steps:</p>
+  <div class="grid g3">
+    <div class="card"><h3>1. Creates</h3><p>Makes a <strong>copy</strong> of the project in a temporary folder and <strong>leaves out</strong> passwords and keys.</p></div>
+    <div class="card"><h3>2. Runs</h3><p>The command runs on the copy, in a container <strong>without internet</strong>, with memory, processor, and time limits.</p></div>
+    <div class="card"><h3>3. Destroys</h3><p>Shows what changed in a <code>.patch</code> file, then deletes the container and the copy. The original only changes if you apply the patch.</p></div>
+  </div>
+  <p>It’s like letting a builder work on a <strong>model</strong> of your house, without the key to the safe: at the end, you inspect what they did and decide whether to do the same in the real house. The kit’s second tool, the auditor, only reads and gives the project’s developer safeguards a <strong>score from 0 to 10</strong>.</p>
+
+  <h3 style="margin-top:28px">What happened when we ran INTELECTO v2 through the sandbox</h3>
+  <div class="grid g2">
+    <div class="card"><h3>📦 Tests inside the sandbox</h3><p>The project’s <code>.env</code> was left out of the copy, <strong>66 tests passed and 1 was skipped</strong> (the one that needs Docker, which isn’t available inside), and <strong>0 files changed</strong>. Because the sandbox has no internet, <code>pytest</code> uses an image built beforehand (<code>caixa/Dockerfile</code>).</p></div>
+    <div class="card"><h3>📊 Auditor’s score</h3>
+      <div class="nota"><b class="de">4,2</b><span class="arr">→</span><b class="para">7,5</b><span>out of 10</span></div>
+      <p>The score went up after removing <code>.env</code> from the project and adding a <code>CLAUDE.md</code> with its rules. It doesn’t reach 10 because the "sandbox" layer measures Claude Code and Codex on this machine (sandbox disabled), not INTELECTO. To measure INTELECTO, run the agent through <code>caixa.sh</code>.</p></div>
+  </div>
+<pre><span class="c"># 1. image with pytest (the sandbox has no internet to install anything)</span>
+<span class="k">docker build -t intelecto-v2-testes caixa/</span>
+<span class="c"># 2. tests in a copy without .env or network access, deleted at the end</span>
+<span class="k">~/caixa-do-agente/caixa.sh ~/intelecto-v2 --imagem intelecto-v2-testes -- python3 -m pytest -q -p no:cacheprovider</span>
+<span class="c"># 3. the score (read-only; changes nothing)</span>
+<span class="k">python3 ~/caixa-do-agente/auditar.py ~/intelecto-v2</span></pre>
+  <p>To get the sandbox: <code>git clone https://github.com/inematds/caixa-do-agente ~/caixa-do-agente</code> (requires Docker and Python 3).</p>
+  <a class="caso-cta" href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener"><b>Open the caixa-do-agente guide →</b><span>A closed room for your agent, plus a score from 0 to 10 for your safeguards.</span></a>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python 3</div><div class="pill">no dependencies</div><div class="pill">Ollama</div><div class="pill">Telegram</div><div class="pill">Docker optional</div>
+    <p style="margin-top:18px">INTELECTO v2 · personal AI assistant · MIT ·
+      <a href="https://github.com/inematds/intelecto-v2">inematds/intelecto-v2</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='intelecto-v2-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    try{ if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; } }catch(e){}
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      try{ localStorage.setItem(KEY, light?'light':'dark'); }catch(e){}
+    });
+  })();
+</script>
+</body>
+</html>
