@@ -12,6 +12,10 @@ You want a personal AI assistant that remembers your things, but you don’t wan
 
 Pure Python: **no packages to install**, 1,500 lines you can read in an afternoon. With `executor = caixa`, each command runs in a disposable container without internet access.
 
+## 🎓 Free course
+
+**Your safe Jarvis: INTELECTO v2 and caixa-do-agente** (9 lessons, PT/EN/ES): **https://inematds.github.io/intelecto-v2-curso/en/**
+
 ## 📖 User guide
 
 Complete guide (landing page + step-by-step): **https://inematds.github.io/intelecto-v2/guia/en/**

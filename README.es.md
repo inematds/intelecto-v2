@@ -12,6 +12,10 @@ Quieres un asistente de IA solo para ti, que recuerde tus cosas, pero no quieres
 
 Python puro: **ningún paquete que instalar**, 1.500 líneas que puedes leer en una tarde. Con `executor = caixa`, cada comando se ejecuta en un contenedor descartable sin internet.
 
+## 🎓 Curso gratis
+
+**Tu Jarvis seguro: INTELECTO v2 y caixa-do-agente** (9 clases, PT/EN/ES): **https://inematds.github.io/intelecto-v2-curso/es/**
+
 ## 📖 Guía de uso
 
 Guía completa (landing + paso a paso): **https://inematds.github.io/intelecto-v2/guia/es/**

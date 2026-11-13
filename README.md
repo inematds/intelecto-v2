@@ -17,6 +17,10 @@ comando que não seja só de leitura. Você precisa de Python 3.10 ou mais novo;
 Python puro: **nenhum pacote para instalar**, 1.500 linhas que dá para ler numa tarde. Com `executor = caixa`,
 cada comando roda num container descartável sem internet.
 
+## 🎓 Curso grátis
+
+**Seu Jarvis seguro: INTELECTO v2 e caixa-do-agente** (9 aulas, PT/EN/ES): **https://inematds.github.io/intelecto-v2-curso/**
+
 ## 📖 Guia de uso
 
 Guia completo (landing + passo a passo): **https://inematds.github.io/intelecto-v2/guia/**
