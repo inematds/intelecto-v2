@@ -58,7 +58,8 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
   @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
@@ -266,6 +267,8 @@
     <a class="sec" href="#problema">Por quê</a>
     <a class="sec" href="#pecas">As 8 peças</a>
     <a class="sec" href="#decide">Como decide</a>
+    <a class="sec" href="#funciona">Por dentro</a>
+    <a class="sec" href="#mercearia">Mercearia</a>
     <a class="sec" href="#testado">Testado</a>
     <a class="sec" href="#tecnico">Kit (técnico)</a>
     <a class="sec" href="#caixa">Caixa</a>
@@ -334,6 +337,57 @@
     <div class="card"><h3><span class="cls no">recusa</span></h3><p>O que destrói: apagar o disco ou a sua pasta pessoal, formatar, desligar a máquina, baixar e executar script. Nem com o seu OK.</p></div>
   </div>
   <p>A v1 tinha só uma lista de palavras proibidas: <strong>"rm -rf /"</strong> era barrado, mas <strong>"rm -r -f /"</strong> passava. A v2 entende as duas formas e mais 19 variações testadas, e quem não está na lista de leitura precisa da sua aprovação. A lista não é a única proteção: para comando que você não conhece, ligue a caixa.</p>
+</div></section>
+
+<section id="funciona"><div class="wrap">
+  <span class="chip">Como funciona por dentro</span>
+  <h2>O caminho de uma mensagem, <span class="amb">do celular à resposta</span></h2>
+  <p class="sub">Exemplo real: você manda "lembre que meu nome é Ana" e, no dia seguinte, "qual meu nome?". Isto é o que acontece dentro do INTELECTO.</p>
+  <div class="step"><div class="b">1</div><div>
+    <h3>Chega pelo canal</h3>
+    <p>A mensagem entra pelo terminal ou pelo Telegram. No Telegram, ele confere se quem mandou é você (lista de donos); mensagem de outra pessoa é ignorada e anotada.</p>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>"Lembre que…" vai direto para a memória</h3>
+    <p>Frase que começa com "lembre que", "guarde" ou "anote" é guardada na hora, sem depender da IA decidir. Por isso até um modelo pequeno lembra. Pergunta (com "?") nunca vira memória.</p>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>Monta o contexto</h3>
+    <p>Junta os arquivos de identidade (quem ele é, como trabalha, quem é você), as memórias que combinam com a pergunta ("nome" acha "meu nome é Ana") e as últimas conversas.</p>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>O cérebro pensa</h3>
+    <p>Tudo isso vai para a IA (no seu computador ou na nuvem). Ela responde ou pede uma ferramenta: guardar, buscar, ler um arquivo, rodar um comando.</p>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>A ferramenta passa pela trava</h3>
+    <p>Se for comando, a trava decide: roda, pergunta a você ou recusa. Aprovado, ele roda na pasta de trabalho, ou na caixa sem internet se você ligou. O resultado volta para a IA, no máximo 5 voltas.</p>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>Responde e anota</h3>
+    <p>Você recebe a resposta, e tudo o que ele fez (comando, ferramenta, memória, erro) fica numa linha da auditoria, para você conferir depois.</p>
+  </div></div>
+</div></section>
+
+<section id="mercearia"><div class="wrap">
+  <span class="chip">Monte o seu</span>
+  <h2>A mercearia: <span class="amb">escolha os ingredientes e receba o plano pronto</span></h2>
+  <p class="sub">O INTELECTO v2 é a base que já funciona. Para ir além (WhatsApp, agenda, casa inteligente, voz…), abra a mercearia: são 144 ingredientes de 12 projetos de agentes, em 8 corredores. Você escolhe, ela gera o arquivo <strong>meu-assistente.md</strong>, e o Claude Code ou o Codex constrói em cima do INTELECTO seguindo esse arquivo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🛒 1. Escolha</h3><p>Clique nos ingredientes dos corredores, ou carregue um dos 5 exemplos prontos abaixo.</p></div>
+    <div class="card"><h3>📄 2. Baixe o .md</h3><p>Cada item vem marcado: ✅ já existe no INTELECTO, 🟡 existe em parte, ➕ falta (e em qual peça encaixa). No fim, as regras para o agente: um item por vez, com teste.</p></div>
+    <div class="card"><h3>🤖 3. Entregue ao agente</h3><p>Copie o arquivo para a pasta do INTELECTO, abra o Claude Code ou o Codex ali e peça para implementar. Mais seguro: dentro da caixa-do-agente.</p></div>
+  </div>
+  <p style="margin:22px 0 10px"><a class="btn" href="mercearia/">Abrir a mercearia</a></p>
+  <h3 style="margin-top:26px">5 exemplos prontos</h3>
+  <div class="ex">
+    <figure><a href="mercearia/#exemplos"><img src="mercearia/img/exemplo-1.jpg" alt="Diagrama: Jarvis pessoal no Telegram" loading="lazy"></a><figcaption><strong>Jarvis pessoal no Telegram</strong>: memória, agenda e lembretes, e-mail, cofre, pede seu OK. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/01-jarvis-telegram.md" target="_blank" rel="noopener">ver o .md</a></figcaption></figure>
+    <figure><a href="mercearia/#exemplos"><img src="mercearia/img/exemplo-2.jpg" alt="Diagrama: atendente do pequeno negócio" loading="lazy"></a><figcaption><strong>Atendente do pequeno negócio</strong>: WhatsApp, responde pelos seus documentos, barra mensagem maliciosa. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/02-atendente-negocio.md" target="_blank" rel="noopener">ver o .md</a></figcaption></figure>
+    <figure><a href="mercearia/#exemplos"><img src="mercearia/img/exemplo-3.jpg" alt="Diagrama: programador seguro" loading="lazy"></a><figcaption><strong>Programador seguro</strong>: Git e GitHub, caixa sem internet, testes antes de dizer pronto. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/03-programador-seguro.md" target="_blank" rel="noopener">ver o .md</a></figcaption></figure>
+    <figure><a href="mercearia/#exemplos"><img src="mercearia/img/exemplo-4.jpg" alt="Diagrama: 100% local e privado" loading="lazy"></a><figcaption><strong>100% local e privado</strong>: IA e voz no seu PC, busca privada, suas notas, nada sai da máquina. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/04-local-privado.md" target="_blank" rel="noopener">ver o .md</a></figcaption></figure>
+    <figure><a href="mercearia/#exemplos"><img src="mercearia/img/exemplo-5.jpg" alt="Diagrama: casa inteligente com voz" loading="lazy"></a><figcaption><strong>Casa inteligente com voz</strong>: palavra de ativação, luzes, som, câmeras e rotinas. <a href="https://github.com/inematds/intelecto-v2/blob/main/exemplos/05-casa-voz.md" target="_blank" rel="noopener">ver o .md</a></figcaption></figure>
+  </div>
+  <p class="sub" style="margin-top:14px">Os ingredientes marcados com ➕ ainda não existem no INTELECTO: quem constrói é o agente, seguindo o arquivo. O que ele fizer, confira com os testes antes de usar.</p>
 </div></section>
 
 <section id="testado"><div class="wrap">

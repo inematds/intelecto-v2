@@ -43,6 +43,27 @@ python3 -m intelecto               # conversa no terminal
 | 7 | Trava, aprovação e cofre | `seguranca/` | Comando que só lê roda; o resto pede OK; o destrutivo é recusado. Segredos cifrados. Tudo vai para a auditoria. |
 | 8 | Caixa | `seguranca/executor.py` | Comando num container Docker sem rede, só com a pasta de trabalho. |
 
+## Monte o seu: a mercearia e 5 exemplos prontos
+
+O INTELECTO v2 é a base que já funciona. Para ir além, a **mercearia** (https://inematds.github.io/intelecto-v2/guia/mercearia/)
+tem 144 ingredientes de 12 projetos de agentes. Você escolhe, ela gera o **`meu-assistente.md`**, e o Claude Code ou o
+Codex constrói em cima do INTELECTO. Cada item vem marcado: ✅ já existe no v2 (com o arquivo), 🟡 parcial, ➕ a acrescentar
+(com a peça onde encaixa), e o arquivo termina com as regras para o agente (um item por vez, com teste).
+
+| Exemplo pronto | Diagrama | Arquivo |
+|---|---|---|
+| Jarvis pessoal no Telegram | [ver](exemplos/01-jarvis-telegram.jpg) | [exemplos/01-jarvis-telegram.md](exemplos/01-jarvis-telegram.md) |
+| Atendente do pequeno negócio | [ver](exemplos/02-atendente-negocio.jpg) | [exemplos/02-atendente-negocio.md](exemplos/02-atendente-negocio.md) |
+| Programador seguro | [ver](exemplos/03-programador-seguro.jpg) | [exemplos/03-programador-seguro.md](exemplos/03-programador-seguro.md) |
+| 100% local e privado | [ver](exemplos/04-local-privado.jpg) | [exemplos/04-local-privado.md](exemplos/04-local-privado.md) |
+| Casa inteligente com voz | [ver](exemplos/05-casa-voz.jpg) | [exemplos/05-casa-voz.md](exemplos/05-casa-voz.md) |
+
+```bash
+cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
+# no Claude Code ou no Codex, aberto nesta pasta:
+# "Leia meu-assistente.md e implemente os itens a acrescentar e parciais, um de cada vez, seguindo as Regras para o agente."
+```
+
 ## O processo, do início ao fim
 
 | # | Passo | Comando | Quem |
@@ -59,6 +80,7 @@ python3 -m intelecto               # conversa no terminal
 | 10 | Rodar comandos na caixa (opcional) | `configurar` → executor `caixa` (precisa de Docker) | você |
 | 11 | Provar que está tudo certo | `python3 -m pytest -q` → `68 passed` | ⚙️ testes |
 | 12 | Proteger o projeto com a caixa-do-agente | ver [Como a caixa-do-agente melhora o seu projeto](#como-a-caixa-do-agente-melhora-o-seu-projeto) | você |
+| 13 | Ir além: escolher ingredientes e gerar o `meu-assistente.md` | [mercearia](https://inematds.github.io/intelecto-v2/guia/mercearia/) ou `exemplos/*.md` → entregar ao Claude Code/Codex na pasta | você + 🤖 agente |
 
 ## Comandos
 
