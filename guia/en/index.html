@@ -316,7 +316,7 @@
     <div class="card"><h3>💬 1. Channel</h3><p>How you talk to it: through the terminal or Telegram. On Telegram, it only replies to you.</p></div>
     <div class="card"><h3>🔁 2. Loop with a brake</h3><p>It thinks, uses a tool, checks the result, and replies. At most 5 rounds, so it won’t run forever.</p></div>
     <div class="card"><h3>🪪 3. Identity</h3><p>Four text files: who it is, how it works, who you are, and what it already knows. You change them by writing.</p></div>
-    <div class="card"><h3>🧠 4. Brain</h3><p>The AI that thinks: one on your computer (Ollama, free) or one in the cloud (OpenRouter).</p></div>
+    <div class="card"><h3>🧠 4. Brain</h3><p>The AI that thinks: one on your computer (Ollama, free) or one in the cloud (OpenRouter, a paid service that needs an account).</p></div>
     <div class="card"><h3>📚 5. Memory</h3><p>It saves what you tell it and finds it again by keywords, even without accents. It’ll still be there tomorrow.</p></div>
     <div class="card"><h3>🧰 6. Tools</h3><p>Save and search memories, read, write, and list files (only in its own folder), and run commands.</p></div>
     <div class="card"><h3>🔐 7. Guardrail and vault</h3><p>Decides whether a command can run and stores encrypted passwords. Everything it does is logged.</p></div>
@@ -385,7 +385,9 @@
   <span class="chip">Prerequisites</span>
   <h2>What you need</h2>
   <div class="grid g3">
-    <div class="card"><h3>Python 3.10+</h3><p>Already included with Linux and recent versions of macOS.</p><pre><span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Python 3.10+ and git</h3><p>Python already comes with Linux and recent macOS. git (the program that downloads the project) may be missing on a new machine.</p><pre><span class="k">python3 --version &amp;&amp; git --version</span>
+<span class="k">sudo apt install -y git</span>   <span class="c"># Ubuntu, if git is missing</span>
+<span class="k">xcode-select --install</span>    <span class="c"># macOS, if git is missing</span></pre></div>
     <div class="card"><h3>Ollama (local brain)</h3><p>Free at <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. The tested model needs a good graphics card; llama3.2 runs on a basic computer, but makes little use of the tools.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
 <span class="k">ollama pull llama3.2</span>  <span class="c"># lighter</span></pre></div>
     <div class="card"><h3>Docker (sandbox only)</h3><p>Optional. Only needed if you want to run commands in an offline sandbox.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
@@ -426,11 +428,12 @@
     <h3>Check it and start chatting</h3>
 <pre><span class="k">python3 -m intelecto verificar</span>   <span class="c"># → all good</span>
 <span class="k">python3 -m intelecto</span>             <span class="c"># chat in the terminal; 'sair' to exit</span></pre>
+    <p>If the model shows <code>[FALTA]</code>, download it with <code>ollama pull &lt;model&gt;</code> or run <code>configurar</code> and pick one you already have.</p>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Telegram (optional)</h3>
-    <p>Create a bot with @BotFather and save the token in the vault. Start the bot, send it <code>/id</code>, and enter the number it replies with in <code>configurar</code> (the Telegram IDs question). Without an owner configured, it only responds to <code>/id</code>.</p>
+    <p>In Telegram, open <strong>@BotFather</strong>, send <code>/newbot</code>, choose a name and copy the <strong>token</strong> it replies with (your bot's secret code, like <code>123456:ABC…</code>). Save that token in the vault. Start the bot, send it <code>/id</code>, and enter the number it replies with in <code>configurar</code> (the Telegram IDs question; for the other questions, just press Enter). Without an owner configured, it only responds to <code>/id</code>.</p>
 <pre><span class="k">python3 -m intelecto cofre guardar telegram</span>   <span class="c"># paste the token; it won’t appear on screen</span>
 <span class="k">python3 -m intelecto telegram</span>                 <span class="c"># send /id to the bot, then press Ctrl+C</span>
 <span class="k">python3 -m intelecto configurar</span>               <span class="c"># enter your ID</span>
@@ -440,6 +443,7 @@
   <div class="step"><div class="b">6</div><div>
     <h3>Start automatically when your computer starts (optional)</h3>
 <pre><span class="c"># Linux (user systemd; change the folder in the file if you didn’t clone to ~/intelecto-v2)</span>
+<span class="k">mkdir -p ~/.config/systemd/user</span>
 <span class="k">cp servico/intelecto-telegram.service ~/.config/systemd/user/</span>
 <span class="k">systemctl --user daemon-reload &amp;&amp; systemctl --user enable --now intelecto-telegram</span>
 <span class="c"># macOS: replace SEU_USUARIO in servico/club.inema.intelecto.plist and copy it to ~/Library/LaunchAgents/</span></pre>

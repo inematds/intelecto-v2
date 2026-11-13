@@ -316,7 +316,7 @@
     <div class="card"><h3>💬 1. Canal</h3><p>Por onde você fala: o terminal ou o Telegram. No Telegram ele só responde a você.</p></div>
     <div class="card"><h3>🔁 2. Loop com freio</h3><p>Pensa, usa uma ferramenta, olha o resultado e responde. No máximo 5 voltas, para não ficar rodando sem fim.</p></div>
     <div class="card"><h3>🪪 3. Identidade</h3><p>Quatro arquivos de texto: quem ele é, como trabalha, quem é você e o que ele já sabe. Você muda escrevendo.</p></div>
-    <div class="card"><h3>🧠 4. Cérebro</h3><p>A IA que pensa: uma no seu computador (Ollama, de graça) ou uma na nuvem (OpenRouter).</p></div>
+    <div class="card"><h3>🧠 4. Cérebro</h3><p>A IA que pensa: uma no seu computador (Ollama, de graça) ou uma na nuvem (OpenRouter, serviço pago que precisa de conta).</p></div>
     <div class="card"><h3>📚 5. Memória</h3><p>Guarda o que você conta e acha de novo pelas palavras, mesmo sem acento. Continua lá amanhã.</p></div>
     <div class="card"><h3>🧰 6. Ferramentas</h3><p>Guardar e buscar memória, ler, gravar e listar arquivos (só na pasta dele) e rodar comando.</p></div>
     <div class="card"><h3>🔐 7. Trava e cofre</h3><p>Decide se um comando pode rodar e guarda senhas cifradas. Tudo o que ele faz fica anotado.</p></div>
@@ -385,7 +385,9 @@
   <span class="chip">Pré-requisitos</span>
   <h2>O que precisa</h2>
   <div class="grid g3">
-    <div class="card"><h3>Python 3.10+</h3><p>Já vem no Linux e no macOS recente.</p><pre><span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Python 3.10+ e git</h3><p>O Python já vem no Linux e no macOS recente. O git (o programa que baixa o projeto) pode faltar numa máquina nova.</p><pre><span class="k">python3 --version &amp;&amp; git --version</span>
+<span class="k">sudo apt install -y git</span>   <span class="c"># Ubuntu, se faltar o git</span>
+<span class="k">xcode-select --install</span>    <span class="c"># macOS, se faltar o git</span></pre></div>
     <div class="card"><h3>Ollama (cérebro local)</h3><p>De graça, em <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. O modelo testado pede uma placa de vídeo boa; o llama3.2 roda em máquina simples, mas usa pouco as ferramentas.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
 <span class="k">ollama pull llama3.2</span>  <span class="c"># mais leve</span></pre></div>
     <div class="card"><h3>Docker (só para a caixa)</h3><p>Opcional. Só se você quiser rodar os comandos numa caixa sem internet.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
@@ -426,11 +428,12 @@
     <h3>Confira e converse</h3>
 <pre><span class="k">python3 -m intelecto verificar</span>   <span class="c"># → tudo certo</span>
 <span class="k">python3 -m intelecto</span>             <span class="c"># conversa no terminal; 'sair' para terminar</span></pre>
+    <p>Se aparecer <code>[FALTA]</code> no modelo, baixe-o com <code>ollama pull &lt;modelo&gt;</code> ou rode o <code>configurar</code> e escolha um dos que você já tem.</p>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Telegram (opcional)</h3>
-    <p>Crie o bot no @BotFather e guarde o token no cofre. Ligue o bot, mande <code>/id</code> para ele e ponha o número que ele responder no <code>configurar</code> (pergunta dos ids do Telegram). Sem dono configurado, ele só responde ao <code>/id</code>.</p>
+    <p>No Telegram, abra o <strong>@BotFather</strong>, mande <code>/newbot</code>, escolha um nome e copie o <strong>token</strong> que ele responde (o código secreto do seu bot, do tipo <code>123456:ABC…</code>). Guarde esse token no cofre. Ligue o bot, mande <code>/id</code> para ele e ponha o número que ele responder no <code>configurar</code> (pergunta dos ids do Telegram; nas outras perguntas, só aperte Enter). Sem dono configurado, ele só responde ao <code>/id</code>.</p>
 <pre><span class="k">python3 -m intelecto cofre guardar telegram</span>   <span class="c"># cola o token; não aparece na tela</span>
 <span class="k">python3 -m intelecto telegram</span>                 <span class="c"># mande /id no bot, depois Ctrl+C</span>
 <span class="k">python3 -m intelecto configurar</span>               <span class="c"># coloque o seu id</span>
@@ -440,6 +443,7 @@
   <div class="step"><div class="b">6</div><div>
     <h3>Ligar sozinho quando o computador ligar (opcional)</h3>
 <pre><span class="c"># Linux (systemd do usuário; ajuste a pasta no arquivo se não clonou em ~/intelecto-v2)</span>
+<span class="k">mkdir -p ~/.config/systemd/user</span>
 <span class="k">cp servico/intelecto-telegram.service ~/.config/systemd/user/</span>
 <span class="k">systemctl --user daemon-reload &amp;&amp; systemctl --user enable --now intelecto-telegram</span>
 <span class="c"># macOS: troque SEU_USUARIO em servico/club.inema.intelecto.plist e copie para ~/Library/LaunchAgents/</span></pre>
