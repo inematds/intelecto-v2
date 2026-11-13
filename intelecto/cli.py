@@ -113,6 +113,15 @@ def cmd_telegram(a) -> int:
     return 0
 
 
+def modelos_ollama(url: str) -> list:
+    """Modelos já baixados no Ollama (vazio se ele não responder)."""
+    try:
+        with urllib.request.urlopen(f"{url}/api/tags", timeout=3) as r:
+            return [m["name"] for m in json.loads(r.read())["models"]]
+    except (OSError, ValueError, KeyError):
+        return []
+
+
 def _pergunta(texto, padrao):
     r = input(f"{texto} [{padrao}]: ").strip()
     return r or padrao
@@ -130,6 +139,14 @@ def cmd_configurar(a) -> int:
         c.nome = _pergunta("Nome do assistente", c.nome)
         c.personalidade = _pergunta("Personalidade em uma frase", c.personalidade)
         c.provedor = _pergunta("Cérebro: ollama (local, grátis) | openrouter (nuvem) | mock", c.provedor)
+        if c.provedor == "ollama":
+            instalados = modelos_ollama(c.ollama_url)
+            if instalados:
+                print(f"  modelos instalados no seu Ollama: {', '.join(instalados)}")
+                if c.modelo.split(':')[0] not in {m.split(':')[0] for m in instalados}:
+                    c.modelo = instalados[0]
+            else:
+                print(f"  Ollama não respondeu em {c.ollama_url}: instale em https://ollama.com e baixe um modelo (ollama pull ...)")
         c.modelo = _pergunta("Modelo", c.modelo)
         c.executor = _pergunta("Onde rodar comandos: local | caixa (Docker sem rede)", c.executor)
         c.aprovacao = _pergunta("Aprovação: perigosos | sempre | nunca", c.aprovacao)
@@ -191,12 +208,13 @@ def cmd_verificar(a) -> int:
     cf = Cofre(c.home)
     print(f"[INFO] cofre: {cf.motor} ({'Fernet' if cf.motor == 'fernet' else 'biblioteca padrão; para Fernet: pip install cryptography'})")
     if c.provedor == "ollama":
-        try:
-            with urllib.request.urlopen(f"{c.ollama_url}/api/tags", timeout=3) as r:
-                nomes = [m["name"] for m in json.loads(r.read())["models"]]
-            linha(any(n.split(":")[0] == c.modelo.split(":")[0] for n in nomes), f"Ollama no ar com o modelo {c.modelo}")
-        except OSError:
-            linha(False, f"Ollama não responde em {c.ollama_url} (instale: https://ollama.com)")
+        nomes = modelos_ollama(c.ollama_url)
+        if not nomes:
+            linha(False, f"Ollama não responde em {c.ollama_url} ou não tem modelo (instale: https://ollama.com)")
+        else:
+            ok = any(n.split(":")[0] == c.modelo.split(":")[0] for n in nomes)
+            linha(ok, f"Ollama no ar com o modelo {c.modelo}" if ok else
+                  f"o modelo {c.modelo} não está no seu Ollama (tem: {', '.join(nomes)}); rode `configurar` e escolha um deles")
     if c.provedor == "openrouter":
         linha("openrouter" in cf.listar(), "chave do OpenRouter no cofre")
     if c.executor == "caixa":

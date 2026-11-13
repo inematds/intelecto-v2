@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>INTELECTO v2 — Tu propio Jarvis, que te recuerda y no toca lo que no debe</title>
-<meta name="description" content="Asistente personal de IA gratis en Python puro: funciona en tu computadora, piensa con IA local (Ollama), te recuerda, habla por la terminal y por Telegram y solo hace lo peligroso después de que lo apruebes. Con bloqueo de comandos, caja fuerte y caja sin internet.">
+<meta name="description" content="Asistente personal de IA gratis en Python puro: funciona en tu computadora, piensa con IA local (Ollama), te recuerda, habla por la terminal y por Telegram, y solo hace lo peligroso después de que lo apruebes. Con bloqueo de comandos, bóveda y caja sin internet.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/intelecto-v2/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/intelecto-v2/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/intelecto-v2/guia/es/">
@@ -245,6 +245,7 @@
   .tab th,.tab td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
   .tab th{font-family:Sora;color:var(--amb);font-weight:600}
   .tabwrap{overflow-x:auto}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
   .cls{display:inline-block;padding:2px 10px;border-radius:999px;font:600 .8rem Inter,sans-serif;border:1px solid var(--line)}
   .cls.ok{color:#22c55e;border-color:#22c55e55} .cls.ask{color:var(--amb);border-color:var(--amb)} .cls.no{color:#ef4444;border-color:#ef444455}
   .nota{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:14px 0}
@@ -280,7 +281,7 @@
     <div>
       <span class="chip">INTELECTO v2 · gratis · Python puro · funciona en tu computadora</span>
       <h1>Tu propio Jarvis, que te recuerda y <span class="amb">no toca lo que no debe</span></h1>
-      <p class="lead">Los asistentes listos guardan tu vida en el servidor de alguien, y los agentes que manejan la computadora pueden leer tus contraseñas y borrar archivos. INTELECTO v2 funciona en tu equipo, piensa con una IA local gratis, recuerda lo que le contaste y solo hace lo peligroso después de que lo apruebes.</p>
+      <p class="lead">Los asistentes listos guardan tu vida en el servidor de alguien, y los agentes que usan la computadora pueden leer tus contraseñas y borrar archivos. INTELECTO v2 es gratis, funciona en tu máquina, piensa con una IA local gratuita, recuerda lo que le contaste y solo hace lo peligroso después de que lo apruebes.</p>
       <div class="cta">
         <a class="btn" href="#problema">Entiéndelo en 5 minutos</a>
         <a class="btn ghost" href="https://github.com/inematds/intelecto-v2" target="_blank" rel="noopener">Ver en GitHub</a>
@@ -292,8 +293,8 @@
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">En resumen</span>
-  <p>Quieres un asistente de IA solo para ti, que recuerde tus cosas, pero no quieres entregar tus datos ni dejar una IA suelta en la computadora. <strong>INTELECTO v2</strong> es un asistente personal gratis que instalas en tu computadora y con el que conversas por la terminal o por Telegram. Piensa con una IA que funciona en tu equipo (Ollama, sin costo) o en la nube, guarda recuerdos, trabaja solo en una carpeta de trabajo y te pide aprobación antes de cualquier comando que no sea solo de lectura. Necesitas Python 3.10 o una versión más reciente; nada más es obligatorio.</p>
-  <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="INTELECTO v2: habla por la terminal y Telegram, piensa con IA local gratis, recuerda lo que le contaste, pide autorización antes de hacer algo peligroso, guarda contraseñas cifradas, funciona en una caja sin internet" loading="lazy" style="width:100%;display:block"></figure>
+  <p>Quieres un asistente de IA solo para ti, que recuerde tus cosas, pero no quieres entregar tus datos ni dejar una IA suelta en la computadora. <strong>INTELECTO v2</strong> es un asistente personal gratis que instalas en tu computadora y con el que conversas por la terminal o por Telegram. Piensa con una IA que funciona en tu máquina (Ollama, sin costo) o en la nube, guarda recuerdos, solo accede a una carpeta de trabajo y pide tu aprobación antes de ejecutar cualquier comando que no sea solo de lectura. Necesitas Python 3.10 o más reciente; no hace falta nada más.</p>
+  <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="INTELECTO v2: habla por la terminal y por Telegram, piensa con IA local gratis, recuerda lo que le contaste, pide aprobación antes de hacer algo peligroso, guarda contraseñas cifradas y ejecuta comandos en una caja sin internet" loading="lazy" style="width:100%;display:block"></figure>
 </div></section>
 
 <section id="problema"><div class="wrap">
@@ -301,38 +302,38 @@
   <h2>El problema de los asistentes actuales</h2>
   <p class="sub">Puedes tener las dos cosas: un asistente que de verdad ayuda y que no te pone en riesgo.</p>
   <div class="grid g3">
-    <div class="card"><h3>☁️ Tu vida en el servidor de alguien más</h3><p>Con los asistentes listos, todo lo que cuentas queda guardado en la empresa. En INTELECTO, la memoria es un archivo en tu computadora y, con la IA local, nada sale del equipo.</p></div>
-    <div class="card"><h3>🔓 Un agente con las llaves de tu casa</h3><p>Un agente que ejecuta comandos por su cuenta puede acceder a tus contraseñas, internet y archivos. Basta con un error o un texto malicioso escondido en un sitio web.</p></div>
-    <div class="card"><h3>🧱 Código que nadie entiende</h3><p>Los frameworks de agentes tienen miles de archivos. INTELECTO tiene 1.500 líneas, separadas en 8 piezas que puedes leer en una tarde.</p></div>
+    <div class="card"><h3>☁️ Tu vida en el servidor de alguien más</h3><p>Con los asistentes listos, todo lo que cuentas queda guardado en la empresa. En INTELECTO, la memoria es un archivo en tu computadora y, con la IA local, nada sale de la máquina.</p></div>
+    <div class="card"><h3>🔓 Un agente con las llaves de tu casa</h3><p>Un agente que ejecuta comandos por su cuenta puede acceder a tus contraseñas, internet y archivos. Basta un error o un texto malicioso oculto en un sitio web.</p></div>
+    <div class="card"><h3>🧱 Código que nadie entiende</h3><p>Los frameworks de agentes tienen miles de archivos. INTELECTO tiene 1.500 líneas, separadas en 8 piezas, que puedes leer en una tarde.</p></div>
   </div>
 </div></section>
 
 <section id="pecas"><div class="wrap">
   <span class="chip">Las 8 piezas</span>
-  <h2>Todo lo que tiene un agente, <span class="amb">en palabras sencillas</span></h2>
+  <h2>Todo lo que tiene un agente, <span class="amb">en palabras simples</span></h2>
   <p class="sub">Cada pieza está en su propia carpeta. Puedes entenderlo todo sin programar.</p>
   <div class="grid g4">
     <div class="card"><h3>💬 1. Canal</h3><p>Por donde hablas: la terminal o Telegram. En Telegram solo te responde a ti.</p></div>
-    <div class="card"><h3>🔁 2. Bucle con freno</h3><p>Piensa, usa una herramienta, revisa el resultado y responde. Como máximo, da 5 vueltas para que no siga funcionando sin parar.</p></div>
+    <div class="card"><h3>🔁 2. Ciclo con freno</h3><p>Piensa, usa una herramienta, revisa el resultado y responde. Da un máximo de 5 vueltas para que no siga funcionando sin fin.</p></div>
     <div class="card"><h3>🪪 3. Identidad</h3><p>Cuatro archivos de texto: quién es, cómo trabaja, quién eres y qué sabe. Los cambias escribiendo.</p></div>
     <div class="card"><h3>🧠 4. Cerebro</h3><p>La IA que piensa: una en tu computadora (Ollama, gratis) o una en la nube (OpenRouter).</p></div>
-    <div class="card"><h3>📚 5. Memoria</h3><p>Guarda lo que le cuentas y vuelve a encontrarlo por las palabras, aunque no tengan tilde. Sigue ahí mañana.</p></div>
+    <div class="card"><h3>📚 5. Memoria</h3><p>Guarda lo que le cuentas y lo vuelve a encontrar por las palabras, incluso sin tildes. Sigue ahí mañana.</p></div>
     <div class="card"><h3>🧰 6. Herramientas</h3><p>Guardar y buscar recuerdos, leer, escribir y listar archivos (solo en su carpeta) y ejecutar comandos.</p></div>
-    <div class="card"><h3>🔐 7. Bloqueo y caja fuerte</h3><p>Decide si un comando puede ejecutarse y guarda contraseñas cifradas. Todo lo que hace queda registrado.</p></div>
-    <div class="card"><h3>📦 8. Caja</h3><p>Si la activas, cada comando se ejecuta en una caja descartable, sin internet ni tus contraseñas.</p></div>
+    <div class="card"><h3>🔐 7. Bloqueo y bóveda</h3><p>Decide si un comando puede ejecutarse y guarda contraseñas cifradas. Todo lo que hace queda registrado.</p></div>
+    <div class="card"><h3>📦 8. Caja</h3><p>Si la activas, cada comando se ejecuta en una caja desechable, sin internet ni tus contraseñas.</p></div>
   </div>
 </div></section>
 
 <section id="decide"><div class="wrap">
   <span class="chip">Cómo decide</span>
   <h2>Tres respuestas para cada comando: <span class="amb">ejecuta, pregunta o rechaza</span></h2>
-  <p class="sub">Antes de ejecutar cualquier comando, el bloqueo revisa lo que hace. La opción predeterminada es preguntar: solo se ejecutan directamente los comandos que únicamente leen.</p>
+  <p class="sub">Antes de ejecutar cualquier comando, el bloqueo revisa lo que hace. La opción predeterminada es preguntar: solo deja pasar directamente lo que se limita a leer.</p>
   <div class="grid g3">
-    <div class="card"><h3><span class="cls ok">ejecuta</span></h3><p>Comandos que solo consultan: listar archivos, leer un texto, ver la fecha, consultar el espacio en disco.</p></div>
-    <div class="card"><h3><span class="cls ask">pregunta</span></h3><p>Cualquier otro: escribir, mover o borrar un archivo, instalar algo o acceder a internet. Te pregunta en la terminal o te manda "/sim ou /nao" por Telegram.</p></div>
-    <div class="card"><h3><span class="cls no">rechaza</span></h3><p>Lo que destruye: borrar el disco o tu carpeta personal, formatear, apagar la computadora, descargar y ejecutar un script. Ni siquiera con tu autorización.</p></div>
+    <div class="card"><h3><span class="cls ok">ejecuta</span></h3><p>Comandos que solo consultan: listar archivos, leer un texto, ver la fecha o revisar el espacio en disco.</p></div>
+    <div class="card"><h3><span class="cls ask">pregunta</span></h3><p>Cualquier otro: escribir, mover o borrar un archivo, instalar algo o acceder a internet. Te pregunta en la terminal o te manda "/sim o /nao" por Telegram.</p></div>
+    <div class="card"><h3><span class="cls no">rechaza</span></h3><p>Lo que destruye: borrar el disco o tu carpeta personal, formatear, apagar la máquina, descargar y ejecutar un script. Ni siquiera con tu aprobación.</p></div>
   </div>
-  <p>La v1 solo tenía una lista de palabras prohibidas: bloqueaba <strong>"rm -rf /"</strong>, pero dejaba pasar <strong>"rm -r -f /"</strong>. La v2 entiende ambas formas y otras 19 variaciones probadas; los comandos que no están en la lista de lectura necesitan tu autorización. La lista no es la única protección: para los comandos que no conoces, activa la caja.</p>
+  <p>La v1 solo tenía una lista de palabras prohibidas: <strong>"rm -rf /"</strong> se bloqueaba, pero <strong>"rm -r -f /"</strong> pasaba. La v2 entiende ambas formas y otras 19 variantes probadas, y cualquier comando que no esté en la lista de lectura necesita tu aprobación. La lista no es la única protección: activa la caja para ejecutar un comando que no conoces.</p>
 </div></section>
 
 <section id="testado"><div class="wrap">
@@ -341,29 +342,29 @@
   <p class="sub">Probado el 12/11/2026 en una computadora Linux. Lo que no se probó en vivo está indicado.</p>
   <div class="tabwrap"><table class="tab">
     <tr><th>Parte</th><th>Cómo se probó</th></tr>
-    <tr><td>Bucle, memoria, herramientas, bloqueo, autorización, caja fuerte y auditoría</td><td>67 pruebas automáticas, todas aprobadas</td></tr>
-    <tr><td>IA local (Ollama)</td><td>En vivo con el modelo qwen3.6: guardó "meu nome é Nei e moro em Porto Alegre" y, en una conversación nueva, respondió "Seu nome é Nei e você mora em Porto Alegre". Con llama3.2 (modelo pequeño), conversa, pero casi nunca usa las herramientas.</td></tr>
-    <tr><td>Caja (comando en un contenedor)</td><td>En vivo: solo ve la carpeta de trabajo, no ve las variables de tu terminal y se queda sin internet</td></tr>
-    <tr><td>OpenRouter y Telegram</td><td>Con servidores de prueba en la propia computadora (formato, clave, filtro de propietario, autorización con /sim). <strong>No se probaron en vivo</strong>: dependen de tu clave y tu bot.</td></tr>
-    <tr><td>macOS</td><td>No probado. El servicio de macOS y la clave de la caja fuerte basada en el número de la computadora están en el código.</td></tr>
+    <tr><td>Ciclo, memoria, herramientas, bloqueo, aprobación, bóveda y auditoría</td><td>68 pruebas automáticas; todas pasan</td></tr>
+    <tr><td>IA local (Ollama)</td><td>En vivo con el modelo qwen3.6: guardó "mi nombre es Nei y vivo en Porto Alegre" y, en una conversación nueva, respondió "Tu nombre es Nei y vives en Porto Alegre". Con llama3.2 (modelo pequeño) conversa, pero casi nunca usa las herramientas.</td></tr>
+    <tr><td>Caja (comando en un contenedor)</td><td>En vivo: solo ve la carpeta de trabajo, no ve las variables de tu terminal y no tiene internet</td></tr>
+    <tr><td>OpenRouter y Telegram</td><td>Contra servidores de prueba en la misma computadora (formato, clave, filtro de propietario, aprobación por /sim). <strong>No se probaron en vivo</strong>: dependen de tu clave y de tu bot.</td></tr>
+    <tr><td>macOS</td><td>No se probó. El servicio de macOS y la clave de la bóveda basada en el número de la máquina están en el código.</td></tr>
   </table></div>
 </div></section>
 
 <div id="tecnico" class="techhead"><div class="wrap">
   <span class="chip">Parte técnica</span>
-  <h2>El kit: <span class="amb">para quienes quieren instalarlo y usarlo</span></h2>
-  <p class="sub">De aquí en adelante viene la parte técnica: instalar, configurar y ejecutar. <strong>No necesitas</strong> esta parte para entender lo anterior.</p>
+  <h2>El kit: <span class="amb">para instalarlo y usarlo</span></h2>
+  <p class="sub">A partir de aquí viene la parte técnica: instalar, configurar y ejecutar. <strong>No necesitas</strong> esta parte para entender lo anterior.</p>
 </div></div>
 
 <div class="techzone">
 <section id="oque"><div class="wrap">
   <span class="chip">Qué es</span>
   <h2>Un paquete de Python, <span class="amb">sin dependencias</span></h2>
-  <p class="sub">Solo usa la biblioteca estándar de Python. El paquete <code>cryptography</code> es opcional (caja fuerte con Fernet).</p>
+  <p class="sub">Solo usa la biblioteca estándar de Python. El paquete <code>cryptography</code> es opcional (bóveda con Fernet).</p>
   <div class="grid g3">
     <div class="card"><h3>🐍 python3 -m intelecto</h3><p>Una línea de comandos con 8 subcomandos: conversar, demo, telegram, configurar, cofre, memoria, auditoría y verificar.</p></div>
-    <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Todo el asistente está en una carpeta: configuración, memoria, identidad, carpeta de trabajo, auditoría y caja fuerte. Cambia la ubicación con <code>INTELECTO_HOME</code>.</p></div>
-    <div class="card"><h3>✅ 67 pruebas</h3><p><code>python3 -m pytest -q</code>. Ninguna prueba llama a una API real.</p></div>
+    <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Todo el asistente está en una carpeta: config, memoria, identidad, carpeta de trabajo, auditoría y bóveda. Cámbiala con <code>INTELECTO_HOME</code>.</p></div>
+    <div class="card"><h3>✅ 68 pruebas</h3><p><code>python3 -m pytest -q</code>. Ninguna prueba llama a una API real.</p></div>
   </div>
 </div></section>
 
@@ -374,7 +375,7 @@
     <span>Tú (terminal o Telegram)</span><span class="arr">→</span>
     <span>Identidad + recuerdos relacionados</span><span class="arr">→</span>
     <span>El cerebro decide</span><span class="arr">→</span>
-    <span>Herramienta → bloqueo → autorización</span><span class="arr">→</span>
+    <span>Herramienta → bloqueo → aprobación</span><span class="arr">→</span>
     <span>Ejecutor local o caja</span><span class="arr">→</span>
     <span>Respuesta + auditoría</span>
   </div>
@@ -384,71 +385,76 @@
   <span class="chip">Requisitos previos</span>
   <h2>Qué necesitas</h2>
   <div class="grid g3">
-    <div class="card"><h3>Python 3.10+</h3><p>Ya viene con Linux y las versiones recientes de macOS.</p><pre><span class="k">python3 --version</span></pre></div>
-    <div class="card"><h3>Ollama (cerebro local)</h3><p>Gratis, en <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. El modelo probado requiere una buena tarjeta gráfica; llama3.2 funciona en una computadora sencilla, pero usa poco las herramientas.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
-<span class="k">ollama pull llama3.2</span>  <span class="c"># más liviano</span></pre></div>
+    <div class="card"><h3>Python 3.10+</h3><p>Ya viene en Linux y en las versiones recientes de macOS.</p><pre><span class="k">python3 --version</span></pre></div>
+    <div class="card"><h3>Ollama (cerebro local)</h3><p>Gratis, en <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>. El modelo probado requiere una buena tarjeta gráfica; llama3.2 funciona en una máquina sencilla, pero casi no usa las herramientas.</p><pre><span class="k">ollama pull qwen3.6:35b-a3b</span>
+<span class="k">ollama pull llama3.2</span>  <span class="c"># más ligero</span></pre></div>
     <div class="card"><h3>Docker (solo para la caja)</h3><p>Opcional. Solo si quieres ejecutar los comandos en una caja sin internet.</p><pre><span class="k">docker run --rm hello-world</span></pre></div>
   </div>
 </div></section>
 
 <section id="guia"><div class="wrap">
   <span class="chip">Guía de uso · paso a paso</span>
-  <h2>Desde cero hasta tu Jarvis <span class="amb">en 10 minutos</span></h2>
+  <h2>De cero a tu Jarvis <span class="amb">en 10 minutos</span></h2>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Descárgalo y mira cómo funciona</h3>
-    <p>La demostración usa un cerebro simulado: funciona sin internet y sin modelo.</p>
-<pre><span class="k">git clone https://github.com/inematds/intelecto-v2 &amp;&amp; cd intelecto-v2</span>
+    <p>La demostración usa un cerebro ficticio: funciona sin internet y sin modelo.</p>
+<pre><span class="k">cd ~ &amp;&amp; git clone https://github.com/inematds/intelecto-v2 &amp;&amp; cd intelecto-v2</span>
 <span class="k">python3 -m intelecto demo</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Configúralo</h3>
-    <p>Te pregunta el nombre, la personalidad, el cerebro, dónde ejecutar comandos (localmente o en una caja) y la política de autorización. Al presionar Enter se mantiene el valor sugerido.</p>
+    <p>Te pregunta el nombre, la personalidad, el cerebro, el modelo, dónde ejecutar comandos (local o caja) y la aprobación. Presiona Enter para mantener el valor sugerido.</p>
+    <ul>
+      <li><strong>Modelo:</strong> muestra los modelos que ya descargaste en Ollama y te sugiere uno. Si aparece uno que no tienes, escribe el nombre del que descargaste (por ejemplo: <code>llama3.2</code>).</li>
+      <li><strong>Aprobación:</strong> <code>perigosos</code> (predeterminado) aplica lo que se explica en "Cómo decide"; <code>sempre</code> pregunta incluso antes de listar archivos; <code>nunca</code> no pregunta nada y solo permite ejecutar lo que se limita a leer.</li>
+    </ul>
 <pre><span class="k">python3 -m intelecto configurar</span></pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
-    <h3>Dale tu estilo</h3>
-    <p>Edita los 4 archivos de identidad. Cada línea que empieza con "- " en <code>MEMORY.md</code> se convierte en un recuerdo la primera vez.</p>
+    <h3>Dale tu toque</h3>
+    <p>Edita los 4 archivos de identidad. La primera vez, cada línea que comienza con "- " en <code>MEMORY.md</code> se convierte en un recuerdo.</p>
 <pre><span class="k">nano ~/.intelecto2/identidade/USER.md</span>     <span class="c"># quién eres</span>
+<span class="k">nano ~/.intelecto2/identidade/AGENTS.md</span>   <span class="c"># reglas de trabajo (memoria, herramientas)</span>
 <span class="k">nano ~/.intelecto2/identidade/SOUL.md</span>     <span class="c"># forma de ser</span>
 <span class="k">nano ~/.intelecto2/identidade/MEMORY.md</span>   <span class="c"># datos iniciales</span></pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
     <h3>Verifica y conversa</h3>
-<pre><span class="k">python3 -m intelecto verificar</span>   <span class="c"># → todo bien</span>
-<span class="k">python3 -m intelecto</span>             <span class="c"># conversa en la terminal; 'sair' para terminar</span></pre>
+<pre><span class="k">python3 -m intelecto verificar</span>   <span class="c"># → todo está bien</span>
+<span class="k">python3 -m intelecto</span>             <span class="c"># conversa en la terminal; escribe 'sair' para terminar</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Telegram (opcional)</h3>
-    <p>Crea el bot con @BotFather y guarda el token en la caja fuerte. Enciende el bot, envíale <code>/id</code> y pon el número que te responda en <code>configurar</code> (cuando pregunte por los ID de Telegram). Si no configuras un propietario, solo responde a <code>/id</code>.</p>
+    <p>Crea el bot con @BotFather y guarda el token en la bóveda. Activa el bot, mándale <code>/id</code> y pon el número que te responda en <code>configurar</code> (cuando te pregunte los ID de Telegram). Si no configuras un propietario, solo responde a <code>/id</code>.</p>
 <pre><span class="k">python3 -m intelecto cofre guardar telegram</span>   <span class="c"># pega el token; no aparece en pantalla</span>
-<span class="k">python3 -m intelecto telegram</span>                 <span class="c"># envíale /id al bot y luego presiona Ctrl+C</span>
-<span class="k">python3 -m intelecto configurar</span>               <span class="c"># pon tu ID</span>
+<span class="k">python3 -m intelecto telegram</span>                 <span class="c"># manda /id al bot y luego presiona Ctrl+C</span>
+<span class="k">python3 -m intelecto configurar</span>               <span class="c"># agrega tu ID</span>
 <span class="k">python3 -m intelecto telegram</span></pre>
   </div></div>
 
   <div class="step"><div class="b">6</div><div>
-    <h3>Inícialo al encender la computadora (opcional)</h3>
+    <h3>Inícialo automáticamente al encender la computadora (opcional)</h3>
 <pre><span class="c"># Linux (systemd del usuario; ajusta la carpeta en el archivo si no lo clonaste en ~/intelecto-v2)</span>
 <span class="k">cp servico/intelecto-telegram.service ~/.config/systemd/user/</span>
 <span class="k">systemctl --user daemon-reload &amp;&amp; systemctl --user enable --now intelecto-telegram</span>
-<span class="c"># macOS: reemplaza SEU_USUARIO en servico/club.inema.intelecto.plist y cópialo en ~/Library/LaunchAgents/</span></pre>
+<span class="c"># macOS: reemplaza SEU_USUARIO en servico/club.inema.intelecto.plist y copia el archivo a ~/Library/LaunchAgents/</span></pre>
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
-    <h3>Ejecuta comandos en la caja (opcional)</h3>
-    <p>Con Docker, cada comando aprobado se ejecuta en un contenedor sin red y con acceso solo a la carpeta de trabajo.</p>
+    <h3>Comandos en la caja (opcional)</h3>
+    <p>Con Docker, cada comando aprobado se ejecuta en un contenedor sin red, con acceso solo a la carpeta de trabajo.</p>
 <pre><span class="k">docker pull python:3.12-slim</span>
-<span class="k">python3 -m intelecto conversar --executor caixa</span>   <span class="c"># o elige executor caixa en configurar</span></pre>
+<span class="k">python3 -m intelecto conversar --executor caixa</span>   <span class="c"># o elige el ejecutor caja en configurar</span></pre>
   </div></div>
 
   <div class="step"><div class="b">8</div><div>
     <h3>OpenRouter, si quieres un modelo en la nube</h3>
-    <p>La clave va en la caja fuerte, nunca en la configuración. Cada mensaje tiene un costo que depende del modelo elegido.</p>
+    <p>La clave va en la bóveda, nunca en config. Cada mensaje cuesta según el modelo que elijas.</p>
 <pre><span class="k">python3 -m intelecto cofre guardar openrouter</span>
 <span class="k">python3 -m intelecto conversar --provedor openrouter --modelo anthropic/claude-sonnet-5.5</span></pre>
   </div></div>
@@ -456,7 +462,7 @@
   <div class="step"><div class="b">9</div><div>
     <h3>Revisa lo que hizo</h3>
 <pre><span class="k">python3 -m intelecto memoria</span>           <span class="c"># últimos recuerdos</span>
-<span class="k">python3 -m intelecto memoria cachorro</span>  <span class="c"># buscar</span>
+<span class="k">python3 -m intelecto memoria cachorro</span>  <span class="c"># búsqueda</span>
 <span class="k">python3 -m intelecto auditoria -n 20</span>   <span class="c"># comandos y herramientas, con lo que se ejecutó y lo que no</span></pre>
   </div></div>
 </div></section>
@@ -473,7 +479,7 @@ você> rode: rm -rf /
 intelecto> Feito. Resultado de rodar_comando: não rodei: bloqueado: apagar pasta do sistema ou a pasta pessoal
 você> leia ../../etc/passwd
 intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
-  <p class="sub">En la demostración nadie autoriza, por eso no se ejecuta el comando "echo". En una conversación real, te pregunta.</p>
+  <p class="sub">El programa responde en portugués. En la demostración nadie aprueba, por eso el comando "echo" no se ejecuta. En una conversación real, te pregunta.</p>
 </div></section>
 
 <section id="v1v2"><div class="wrap">
@@ -481,52 +487,53 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>Qué cambió</h2>
   <div class="tabwrap"><table class="tab">
     <tr><th></th><th>v1</th><th>v2</th></tr>
-    <tr><td>Código</td><td>El README describía el asistente, pero solo había un ejemplo mínimo con un cerebro simulado</td><td>Asistente completo, 1.500 líneas, 67 pruebas</td></tr>
-    <tr><td>Comandos</td><td>Lista de palabras prohibidas</td><td>ejecuta / pregunta / rechaza; la opción predeterminada es preguntar</td></tr>
-    <tr><td>Telegram</td><td>Solo la estructura</td><td>Funciona y solo responde a sus propietarios</td></tr>
-    <tr><td>Aislamiento</td><td>Prometido en el curso</td><td>Caja por comando (Docker sin red)</td></tr>
-    <tr><td>Plataforma</td><td>Solo macOS</td><td>Probado en Linux; macOS está en el código</td></tr>
+    <tr><td>Código</td><td>el README describía el asistente, pero solo había un ejemplo mínimo con un cerebro ficticio</td><td>asistente completo, 1.500 líneas, 68 pruebas</td></tr>
+    <tr><td>Comandos</td><td>lista de palabras prohibidas</td><td>ejecuta / pregunta / rechaza, y la opción predeterminada es preguntar</td></tr>
+    <tr><td>Telegram</td><td>solo la estructura</td><td>funciona y solo responde a sus propietarios</td></tr>
+    <tr><td>Aislamiento</td><td>prometido en el curso</td><td>caja por comando (Docker sin red)</td></tr>
+    <tr><td>Plataforma</td><td>solo macOS</td><td>probado en Linux; macOS está en el código</td></tr>
   </table></div>
-  <p>La <a href="https://inematds.github.io/intelecto/" target="_blank" rel="noopener">v1</a> y el <a href="https://inematds.github.io/intelecto-curso/" target="_blank" rel="noopener">curso de la v1</a> siguen disponibles. El método sigue vigente: elegir los ingredientes en el supermercado de frameworks y darle las instrucciones a Claude Code o Codex para armar un asistente a tu manera.</p>
+  <p>La <a href="https://inematds.github.io/intelecto/" target="_blank" rel="noopener">v1</a> y el <a href="https://inematds.github.io/intelecto-curso/" target="_blank" rel="noopener">curso de la v1</a> siguen disponibles. Su método sigue vigente: elegir los ingredientes en la tienda de frameworks y darle el resumen a Claude Code o Codex para armar un asistente a tu manera.</p>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Próximos pasos</span>
-  <h2>Roadmap</h2>
-  <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Ahora</strong><span>8 piezas, terminal y Telegram, Ollama/OpenRouter, bloqueo, autorización, caja fuerte y caja por comando.</span></div></div>
-  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local) y recordatorios con hora programada. Todavía no existe.</span></div></div>
+  <h2>Hoja de ruta</h2>
+  <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Ahora</strong><span>8 piezas, terminal y Telegram, Ollama/OpenRouter, bloqueo, aprobación, bóveda y caja por comando.</span></div></div>
+  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local) y recordatorios programados. Todavía no existe.</span></div></div>
 </div></section>
 </div>
 
 <section id="caixa"><div class="wrap">
   <span class="chip">Parte final</span>
   <h2>Cómo la <span class="amb">caixa-do-agente</span> mejora tu proyecto</h2>
-  <p class="sub">INTELECTO protege lo que hace el asistente. <a href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener">caixa-do-agente</a> protege el proyecto mientras tú, Claude Code o Codex trabajan en él.</p>
+  <p class="sub">INTELECTO protege lo que hace el asistente. La <a href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener">caixa-do-agente</a> protege el proyecto mientras tú, Claude Code o Codex trabajan en él.</p>
 
-  <h3>En palabras sencillas: una sala cerrada</h3>
-  <p>Cuando dejas que un agente de IA trabaje solo en la computadora, puede acceder a tus contraseñas (<code>.env</code>, claves), a internet y a tus archivos reales. caixa-do-agente hace el trabajo en una sala cerrada, en 3 pasos:</p>
+  <h3>En palabras simples: una habitación cerrada</h3>
+  <p>Cuando dejas que un agente de IA use la computadora por su cuenta, puede acceder a tus contraseñas (<code>.env</code>, claves), internet y tus archivos reales. A caixa-do-agente hace el trabajo en una habitación cerrada, en 3 pasos:</p>
   <div class="grid g3">
-    <div class="card"><h3>1. Crea</h3><p>Hace una <strong>copia</strong> del proyecto en una carpeta temporal y <strong>deja afuera</strong> las contraseñas y las claves.</p></div>
-    <div class="card"><h3>2. Ejecuta</h3><p>El comando se ejecuta en la copia, dentro de un contenedor <strong>sin internet</strong>, con límites de memoria, procesador y tiempo.</p></div>
-    <div class="card"><h3>3. Elimina</h3><p>Muestra los cambios en un archivo <code>.patch</code>, elimina el contenedor y la copia. El original solo cambia si aplicas los cambios.</p></div>
+    <div class="card"><h3>1. Crea</h3><p>Hace una <strong>copia</strong> del proyecto en una carpeta temporal y <strong>deja fuera</strong> las contraseñas y las claves.</p></div>
+    <div class="card"><h3>2. Ejecuta</h3><p>El comando se ejecuta en la copia, en un contenedor (una caja aislada dentro de tu computadora) <strong>sin internet</strong>, con límites de memoria, procesador y tiempo.</p></div>
+    <div class="card"><h3>3. Destruye</h3><p>Muestra lo que cambió en un archivo <code>.patch</code> (la lista de cambios) y borra el contenedor y la copia. El original solo cambia si aplicas esos cambios.</p></div>
   </div>
-  <p>Es como dejar que el albañil trabaje con una <strong>maqueta</strong> de tu casa, sin la llave de la caja fuerte: al final revisas lo que hizo y decides si quieres hacer lo mismo en la casa real. La segunda herramienta del kit, el auditor, solo lee y da una <strong>calificación de 0 a 10</strong> a la protección de quien programa en el proyecto.</p>
+  <p>Es como dejar que el albañil trabaje en una <strong>maqueta</strong> de tu casa, sin la llave de la caja fuerte: al final revisas lo que hizo y decides si lo replicas en la casa real. La segunda herramienta del kit, el auditor, solo lee y da una <strong>calificación del 0 al 10</strong> sobre la protección de quienes programan en el proyecto.</p>
 
   <h3 style="margin-top:28px">Qué pasó cuando ejecutamos INTELECTO v2 en la caja</h3>
   <div class="grid g2">
-    <div class="card"><h3>📦 Las pruebas dentro de la caja</h3><p>El <code>.env</code> del proyecto quedó fuera de la copia, <strong>pasaron 66 pruebas y se omitió 1</strong> (la que necesita Docker, que no está disponible ahí dentro) y <strong>no cambió ningún archivo</strong>. Como la caja no tiene internet, <code>pytest</code> usa una imagen preparada de antemano (<code>caixa/Dockerfile</code>).</p></div>
+    <div class="card"><h3>📦 Las pruebas dentro de la caja</h3><p>El archivo de contraseñas (<code>.env</code>) quedó fuera de la copia, <strong>pasaron 67 pruebas y se omitió 1</strong> (la que necesita Docker, que no está disponible ahí) y <strong>no cambió ningún archivo</strong>. Como la caja no tiene internet, el programa de pruebas (<code>pytest</code>) usa una imagen preparada de antemano (<code>caixa/Dockerfile</code>).</p></div>
     <div class="card"><h3>📊 La calificación del auditor</h3>
       <div class="nota"><b class="de">4,2</b><span class="arr">→</span><b class="para">7,5</b><span>de 10</span></div>
-      <p>Subió al sacar el <code>.env</code> del proyecto y agregar un <code>CLAUDE.md</code> con sus reglas. No llega a 10 porque la capa "caja" evalúa Claude Code y Codex en esta computadora (sandbox desactivado), no INTELECTO. Para eso, ejecuta el agente con <code>caixa.sh</code>.</p></div>
+      <p>El auditor revisa el proyecto y las herramientas de programación que usas en él (Claude Code, Codex). La calificación subió con dos cambios: sacamos el archivo de contraseñas (<code>.env</code>) del proyecto y agregamos un archivo de reglas para los agentes (<code>CLAUDE.md</code>).</p>
+      <p>Faltó la capa de la "caja": en la computadora donde probamos, Claude Code y Codex están configurados para ejecutarse sin aislamiento. Esta configuración depende de cada computadora, así que ejecuta el auditor en la tuya para ver tu calificación. Para completar esta capa, ejecuta tu agente desde <code>caixa.sh</code>.</p></div>
   </div>
 <pre><span class="c"># 1. imagen con pytest (la caja no tiene internet para instalar nada)</span>
 <span class="k">docker build -t intelecto-v2-testes caixa/</span>
-<span class="c"># 2. las pruebas en una copia sin .env, sin red y que se elimina al final</span>
+<span class="c"># 2. las pruebas en una copia sin .env ni red, que se borra al final</span>
 <span class="k">~/caixa-do-agente/caixa.sh ~/intelecto-v2 --imagem intelecto-v2-testes -- python3 -m pytest -q -p no:cacheprovider</span>
 <span class="c"># 3. la calificación (solo lee, no cambia nada)</span>
 <span class="k">python3 ~/caixa-do-agente/auditar.py ~/intelecto-v2</span></pre>
   <p>Para tener la caja: <code>git clone https://github.com/inematds/caixa-do-agente ~/caixa-do-agente</code> (necesitas Docker y Python 3).</p>
-  <a class="caso-cta" href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener"><b>Abrir la guía de caixa-do-agente →</b><span>Sala cerrada para tu agente y una calificación de 0 a 10 para tu protección.</span></a>
+  <a class="caso-cta" href="https://inematds.github.io/caixa-do-agente/guia/" target="_blank" rel="noopener"><b>Abrir la guía de caixa-do-agente →</b><span>Una habitación cerrada para tu agente, más una calificación del 0 al 10 sobre tu protección.</span></a>
 </div></section>
 
 <footer>

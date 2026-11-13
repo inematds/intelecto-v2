@@ -40,3 +40,25 @@ def test_cofre_pela_cli(tmp_path):
 def test_verificar_aponta_o_que_falta(tmp_path):
     r = roda(["verificar"], tmp_path)
     assert "[OK] Python" in r.stdout and "sem config" in r.stdout and r.returncode == 1
+
+
+def test_configurar_sugere_modelo_instalado(tmp_path):
+    import json
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+
+    class H(BaseHTTPRequestHandler):
+        def do_GET(self):
+            dados = json.dumps({"models": [{"name": "llama3.2:latest"}]}).encode()
+            self.send_response(200); self.send_header("Content-Length", str(len(dados))); self.end_headers(); self.wfile.write(dados)
+
+        def log_message(self, *a):
+            pass
+    srv = HTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    (tmp_path / "config.json").write_text(json.dumps({"ollama_url": f"http://127.0.0.1:{srv.server_address[1]}"}))
+    # Enter em tudo: o modelo sugerido tem de ser o instalado (llama3.2), não o padrão que falta
+    r = roda(["configurar"], tmp_path, "\n" * 10)
+    srv.shutdown()
+    assert "llama3.2:latest" in r.stdout
+    assert json.loads((tmp_path / "config.json").read_text())["modelo"] == "llama3.2:latest"

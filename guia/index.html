@@ -245,6 +245,7 @@
   .tab th,.tab td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
   .tab th{font-family:Sora;color:var(--amb);font-weight:600}
   .tabwrap{overflow-x:auto}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
   .cls{display:inline-block;padding:2px 10px;border-radius:999px;font:600 .8rem Inter,sans-serif;border:1px solid var(--line)}
   .cls.ok{color:#22c55e;border-color:#22c55e55} .cls.ask{color:var(--amb);border-color:var(--amb)} .cls.no{color:#ef4444;border-color:#ef444455}
   .nota{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:14px 0}
@@ -280,7 +281,7 @@
     <div>
       <span class="chip">INTELECTO v2 · grátis · Python puro · roda no seu computador</span>
       <h1>Seu próprio Jarvis, que lembra de você e <span class="amb">não mexe no que não deve</span></h1>
-      <p class="lead">Os assistentes prontos guardam a sua vida no servidor de alguém, e os agentes que mexem no computador podem ler as suas senhas e apagar arquivos. O INTELECTO v2 roda na sua máquina, pensa com uma IA local de graça, lembra o que você contou e só faz o que é perigoso depois que você aprova.</p>
+      <p class="lead">Os assistentes prontos guardam a sua vida no servidor de alguém, e os agentes que mexem no computador podem ler as suas senhas e apagar arquivos. O INTELECTO v2 é grátis, roda na sua máquina, pensa com uma IA local de graça, lembra o que você contou e só faz o que é perigoso depois que você aprova.</p>
       <div class="cta">
         <a class="btn" href="#problema">Entender em 5 minutos</a>
         <a class="btn ghost" href="https://github.com/inematds/intelecto-v2" target="_blank" rel="noopener">Ver no GitHub</a>
@@ -341,7 +342,7 @@
   <p class="sub">Testado em 12/11/2026 num computador Linux. O que não foi testado ao vivo está escrito.</p>
   <div class="tabwrap"><table class="tab">
     <tr><th>Parte</th><th>Como foi testada</th></tr>
-    <tr><td>Loop, memória, ferramentas, trava, aprovação, cofre e auditoria</td><td>67 testes automáticos, todos passando</td></tr>
+    <tr><td>Loop, memória, ferramentas, trava, aprovação, cofre e auditoria</td><td>68 testes automáticos, todos passando</td></tr>
     <tr><td>IA local (Ollama)</td><td>Ao vivo com o modelo qwen3.6: ele guardou "meu nome é Nei e moro em Porto Alegre" e, numa conversa nova, respondeu "Seu nome é Nei e você mora em Porto Alegre". Com o llama3.2 (modelo pequeno) ele conversa, mas quase nunca usa as ferramentas.</td></tr>
     <tr><td>Caixa (comando num container)</td><td>Ao vivo: enxerga só a pasta de trabalho, não vê as variáveis do seu terminal e fica sem internet</td></tr>
     <tr><td>OpenRouter e Telegram</td><td>Contra servidores de teste no próprio computador (formato, chave, filtro de dono, aprovação por /sim). <strong>Não testados ao vivo</strong>: dependem da sua chave e do seu bot.</td></tr>
@@ -363,7 +364,7 @@
   <div class="grid g3">
     <div class="card"><h3>🐍 python3 -m intelecto</h3><p>Uma linha de comando com 8 subcomandos: conversar, demo, telegram, configurar, cofre, memoria, auditoria e verificar.</p></div>
     <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Tudo do assistente fica numa pasta: config, memória, identidade, pasta de trabalho, auditoria e cofre. Troque com <code>INTELECTO_HOME</code>.</p></div>
-    <div class="card"><h3>✅ 67 testes</h3><p><code>python3 -m pytest -q</code>. Nenhum teste chama API de verdade.</p></div>
+    <div class="card"><h3>✅ 68 testes</h3><p><code>python3 -m pytest -q</code>. Nenhum teste chama API de verdade.</p></div>
   </div>
 </div></section>
 
@@ -398,13 +399,17 @@
   <div class="step"><div class="b">1</div><div>
     <h3>Baixe e veja funcionando</h3>
     <p>A demonstração usa um cérebro de mentira: roda sem internet e sem modelo.</p>
-<pre><span class="k">git clone https://github.com/inematds/intelecto-v2 &amp;&amp; cd intelecto-v2</span>
+<pre><span class="k">cd ~ &amp;&amp; git clone https://github.com/inematds/intelecto-v2 &amp;&amp; cd intelecto-v2</span>
 <span class="k">python3 -m intelecto demo</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Configure</h3>
-    <p>Pergunta o nome, a personalidade, o cérebro, onde rodar comandos (local ou caixa) e a política de aprovação. Enter mantém o valor sugerido.</p>
+    <p>Pergunta o nome, a personalidade, o cérebro, o modelo, onde rodar comandos (local ou caixa) e a aprovação. Enter mantém o valor sugerido.</p>
+    <ul>
+      <li><strong>Modelo:</strong> ele mostra os modelos que você já baixou no Ollama e sugere um deles. Se aparecer um que você não tem, digite o nome do que baixou (ex.: <code>llama3.2</code>).</li>
+      <li><strong>Aprovação:</strong> <code>perigosos</code> (padrão) faz o que está em "Como ele decide"; <code>sempre</code> pergunta até para listar arquivos; <code>nunca</code> não pergunta nada e só deixa rodar o que apenas lê.</li>
+    </ul>
 <pre><span class="k">python3 -m intelecto configurar</span></pre>
   </div></div>
 
@@ -412,6 +417,7 @@
     <h3>Dê a sua cara</h3>
     <p>Edite os 4 arquivos de identidade. Cada linha que começa com "- " no <code>MEMORY.md</code> vira uma memória na primeira vez.</p>
 <pre><span class="k">nano ~/.intelecto2/identidade/USER.md</span>     <span class="c"># quem é você</span>
+<span class="k">nano ~/.intelecto2/identidade/AGENTS.md</span>   <span class="c"># regras de trabalho (memória, ferramentas)</span>
 <span class="k">nano ~/.intelecto2/identidade/SOUL.md</span>     <span class="c"># jeito de ser</span>
 <span class="k">nano ~/.intelecto2/identidade/MEMORY.md</span>   <span class="c"># fatos iniciais</span></pre>
   </div></div>
@@ -473,7 +479,7 @@ você> rode: rm -rf /
 intelecto> Feito. Resultado de rodar_comando: não rodei: bloqueado: apagar pasta do sistema ou a pasta pessoal
 você> leia ../../etc/passwd
 intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
-  <p class="sub">Na demonstração ninguém aprova, por isso o "echo" não roda. Na conversa de verdade, ele pergunta a você.</p>
+  <p class="sub">O programa responde em português. Na demonstração ninguém aprova, por isso o "echo" não roda. Na conversa de verdade, ele pergunta a você.</p>
 </div></section>
 
 <section id="v1v2"><div class="wrap">
@@ -481,7 +487,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>O que mudou</h2>
   <div class="tabwrap"><table class="tab">
     <tr><th></th><th>v1</th><th>v2</th></tr>
-    <tr><td>Código</td><td>o README descrevia o assistente, mas só havia um exemplo mínimo com cérebro de mentira</td><td>assistente completo, 1.500 linhas, 67 testes</td></tr>
+    <tr><td>Código</td><td>o README descrevia o assistente, mas só havia um exemplo mínimo com cérebro de mentira</td><td>assistente completo, 1.500 linhas, 68 testes</td></tr>
     <tr><td>Comandos</td><td>lista de palavras proibidas</td><td>roda / pergunta / recusa, e o padrão é perguntar</td></tr>
     <tr><td>Telegram</td><td>só a estrutura</td><td>funciona e só responde aos donos</td></tr>
     <tr><td>Isolamento</td><td>prometido no curso</td><td>caixa por comando (Docker sem rede)</td></tr>
@@ -507,17 +513,18 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <p>Quando você deixa um agente de IA mexer no computador sozinho, ele alcança as suas senhas (<code>.env</code>, chaves), a internet e os seus arquivos de verdade. A caixa-do-agente faz o trabalho numa sala fechada, em 3 passos:</p>
   <div class="grid g3">
     <div class="card"><h3>1. Cria</h3><p>Faz uma <strong>cópia</strong> do projeto numa pasta temporária e <strong>deixa de fora</strong> as senhas e as chaves.</p></div>
-    <div class="card"><h3>2. Roda</h3><p>O comando roda na cópia, num container <strong>sem internet</strong>, com limite de memória, de processador e de tempo.</p></div>
-    <div class="card"><h3>3. Destrói</h3><p>Mostra o que mudou num arquivo <code>.patch</code>, apaga o container e a cópia. O original só muda se você aplicar.</p></div>
+    <div class="card"><h3>2. Roda</h3><p>O comando roda na cópia, num container (uma caixa isolada dentro do seu computador) <strong>sem internet</strong>, com limite de memória, de processador e de tempo.</p></div>
+    <div class="card"><h3>3. Destrói</h3><p>Mostra o que mudou num arquivo <code>.patch</code> (a lista das mudanças), apaga o container e a cópia. O original só muda se você aplicar.</p></div>
   </div>
   <p>É como deixar o pedreiro trabalhar numa <strong>maquete</strong> da sua casa, sem a chave do cofre: no fim você olha o que ele fez e decide se faz igual na casa de verdade. A segunda ferramenta do kit, o auditor, só lê e dá uma <strong>nota de 0 a 10</strong> para a proteção de quem programa no projeto.</p>
 
   <h3 style="margin-top:28px">O que aconteceu quando passamos o INTELECTO v2 pela caixa</h3>
   <div class="grid g2">
-    <div class="card"><h3>📦 Os testes dentro da caixa</h3><p>O <code>.env</code> do projeto ficou fora da cópia, <strong>66 testes passaram e 1 foi pulado</strong> (o que precisa de Docker, que não existe lá dentro) e <strong>0 arquivos mudaram</strong>. Como a caixa não tem internet, o <code>pytest</code> vai numa imagem montada antes (<code>caixa/Dockerfile</code>).</p></div>
+    <div class="card"><h3>📦 Os testes dentro da caixa</h3><p>O arquivo de senha (<code>.env</code>) ficou fora da cópia, <strong>67 testes passaram e 1 foi pulado</strong> (o que precisa de Docker, que não existe lá dentro) e <strong>0 arquivos mudaram</strong>. Como a caixa não tem internet, o programa de testes (<code>pytest</code>) vai numa imagem preparada antes (<code>caixa/Dockerfile</code>).</p></div>
     <div class="card"><h3>📊 A nota do auditor</h3>
       <div class="nota"><b class="de">4,2</b><span class="arr">→</span><b class="para">7,5</b><span>de 10</span></div>
-      <p>Subiu tirando o <code>.env</code> de dentro do projeto e pondo um <code>CLAUDE.md</code> com as regras dele. Não chega a 10 porque a camada "caixa" mede o Claude Code e o Codex desta máquina (sandbox desligado), não o INTELECTO: para isso, rode o agente pelo <code>caixa.sh</code>.</p></div>
+      <p>O auditor olha o projeto e as ferramentas de programação que você usa nele (Claude Code, Codex). A nota subiu com duas mudanças: tiramos o arquivo de senha (<code>.env</code>) de dentro do projeto e pusemos um arquivo de regras para os agentes (<code>CLAUDE.md</code>).</p>
+      <p>Faltou a camada "caixa": no computador onde testamos, o Claude Code e o Codex estão configurados para rodar sem isolamento. Isso é configuração de cada computador, então rode o auditor no seu para ver a sua nota. Para fechar essa camada, rode o seu agente por dentro do <code>caixa.sh</code>.</p></div>
   </div>
 <pre><span class="c"># 1. imagem com o pytest (a caixa não tem internet para instalar nada)</span>
 <span class="k">docker build -t intelecto-v2-testes caixa/</span>

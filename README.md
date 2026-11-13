@@ -24,7 +24,7 @@ Guia completo (landing + passo a passo): **https://inematds.github.io/intelecto-
 ## Em 1 minuto
 
 ```bash
-git clone https://github.com/inematds/intelecto-v2 && cd intelecto-v2
+cd ~ && git clone https://github.com/inematds/intelecto-v2 && cd intelecto-v2
 python3 -m intelecto demo          # demonstração completa, sem internet e sem modelo
 python3 -m intelecto configurar    # escolhe nome, personalidade, cérebro, onde rodar comandos
 python3 -m intelecto               # conversa no terminal
@@ -47,7 +47,7 @@ python3 -m intelecto               # conversa no terminal
 
 | # | Passo | Comando | Quem |
 |---|---|---|---|
-| 1 | Baixar | `git clone https://github.com/inematds/intelecto-v2 && cd intelecto-v2` | você |
+| 1 | Baixar | `cd ~ && git clone https://github.com/inematds/intelecto-v2 && cd intelecto-v2` | você |
 | 2 | Ver funcionando sem nada instalado | `python3 -m intelecto demo` | ⚙️ script |
 | 3 | Instalar o cérebro local | [ollama.com](https://ollama.com) → `ollama pull qwen3.6:35b-a3b` (ou um modelo menor, ver o guia) | você |
 | 4 | Configurar | `python3 -m intelecto configurar` | você |
@@ -57,7 +57,7 @@ python3 -m intelecto               # conversa no terminal
 | 8 | Telegram (opcional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` no bot → seu id no `configurar` → `python3 -m intelecto telegram` | você |
 | 9 | Ligar sozinho (opcional) | `servico/intelecto-telegram.service` (Linux) ou `servico/club.inema.intelecto.plist` (macOS) | ⚙️ serviço |
 | 10 | Rodar comandos na caixa (opcional) | `configurar` → executor `caixa` (precisa de Docker) | você |
-| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `67 passed` | ⚙️ testes |
+| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `68 passed` | ⚙️ testes |
 | 12 | Proteger o projeto com a caixa-do-agente | ver [Como a caixa-do-agente melhora o seu projeto](#como-a-caixa-do-agente-melhora-o-seu-projeto) | você |
 
 ## Comandos
@@ -80,7 +80,7 @@ Tudo do assistente fica em `~/.intelecto2/` (troque com `INTELECTO_HOME`): `conf
 
 | Item | Como foi testado (12/11/2026) |
 |---|---|
-| Loop, memória, ferramentas, trava, aprovação, cofre, auditoria | 67 testes automáticos (`python3 -m pytest -q`) |
+| Loop, memória, ferramentas, trava, aprovação, cofre, auditoria | 68 testes automáticos (`python3 -m pytest -q`) |
 | Ollama local | ao vivo com `qwen3.6:35b-a3b`: guardou "meu nome é Nei e moro em Porto Alegre" e lembrou numa execução seguinte. Com `llama3.2` (3B) conversa, mas quase nunca usa as ferramentas. |
 | Executor caixa | ao vivo, Docker 28: vê só a pasta de trabalho, não vê as variáveis do seu terminal, sem internet |
 | OpenRouter e Telegram | contra servidores falsos locais (formato dos pedidos, chave no cabeçalho, filtro de dono, aprovação por /sim). **Não testados ao vivo**: dependem da sua chave e do seu bot. |
@@ -101,7 +101,7 @@ docker build -t intelecto-v2-testes caixa/
 python3 ~/caixa-do-agente/auditar.py ~/intelecto-v2
 ```
 
-Resultado real nesta máquina: o `.env` ficou fora da cópia, `66 passed, 1 skipped` (o teste que precisa de Docker
+Resultado real nesta máquina: o `.env` ficou fora da cópia, `67 passed, 1 skipped` (o teste que precisa de Docker
 dentro da caixa é pulado) e `0 arquivo(s) mudaram`. Os números do auditor estão no guia.
 
 ## Versões

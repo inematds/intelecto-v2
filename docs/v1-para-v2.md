@@ -2,7 +2,7 @@
 
 | | v1 (`inematds/intelecto`) | v2 (este repo) |
 |---|---|---|
-| Código | README descrevia o assistente, mas o pacote não existia; havia um `exemplo-jarvis` mínimo (~970 linhas, provedor só de mentira) | assistente completo, ~1.500 linhas, 67 testes |
+| Código | README descrevia o assistente, mas o pacote não existia; havia um `exemplo-jarvis` mínimo (~970 linhas, provedor só de mentira) | assistente completo, ~1.500 linhas, 68 testes |
 | Dependências | prometia 7 pacotes pip | nenhuma (biblioteca padrão); `cryptography` opcional para o Fernet |
 | Cérebro | OpenRouter (prometido) | Ollama local testado ao vivo, OpenRouter, mock |
 | Comandos | lista de palavras proibidas (`rm -rf /` por substring; `rm -r -f /` passava) | trava em 3 classes: só leitura roda, o resto pede OK, destrutivo nunca roda; `rm -r -f /`, `bash -c '…'` e `curl … \| sh` pegos |
