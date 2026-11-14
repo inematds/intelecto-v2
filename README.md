@@ -77,6 +77,33 @@ que retoma do último passo e entrega o que tem quando o tempo acaba, **rotinas*
 Ainda não estão ligadas à conversa nem ao Telegram; o passo a passo para ligar está em
 [docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
 
+## Medir: ele está acertando? (v2.2)
+
+Você troca de modelo ou mexe na identidade e não sabe se o assistente ficou melhor ou pior. O `avaliar` responde com
+número: roda 8 tarefas fixas (guardar e lembrar, ler e gravar arquivo, comando de leitura, as duas travas e uma conta),
+cada uma numa pasta limpa, e diz quantas acertou, quanto tempo levou, quantas rodadas usou e quantos tokens gastou.
+
+```bash
+python3 -m intelecto avaliar                                   # o cérebro do seu config
+python3 -m intelecto avaliar --provedor ollama --modelo llama3.2  # outro cérebro, mesmo teste
+python3 -m intelecto avaliar --comparar                        # todas as medições lado a lado
+```
+
+Cada medição fica gravada em `~/.intelecto2/avaliacoes/`. Na medição ninguém aprova nada: só comando de leitura roda.
+Para medir o que importa para você, escreva as suas tarefas num JSON (`--tarefas minhas.json`); o formato está no
+topo de `intelecto/avaliacao.py`. O cérebro de mentira (`--provedor mock`) acerta 7 de 8: ele não sabe fazer conta,
+e a medição mostra isso.
+
+Medido aqui em 14/11/2026, na mesma máquina e com as mesmas 8 tarefas:
+
+| Cérebro | Acerto | Tempo por tarefa | Observação |
+|---|---|---|---|
+| `mock` | 7 de 8 | 0,1 s | errou só a conta (de propósito) |
+| `ollama/llama3.2` (3B) | 7 de 8 | 1,1 s | leu o `notas.txt` mas respondeu que não achou a hora |
+| `ollama/qwen3.6:35b-a3b` | 6 de 8 e 5 de 8 | 7,7–8,1 s | as falhas foram do cérebro caindo (erro de CUDA com a GPU dividida), marcadas como "caiu" e não como resposta errada |
+
+Moral: o número só vale com a máquina livre, e o modelo pequeno foi bem em tarefa curta. Meça o seu antes de escolher.
+
 ## O processo, do início ao fim
 
 | # | Passo | Comando | Quem |
@@ -91,9 +118,10 @@ Ainda não estão ligadas à conversa nem ao Telegram; o passo a passo para liga
 | 8 | Telegram (opcional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` no bot → seu id no `configurar` → `python3 -m intelecto telegram` | você |
 | 9 | Ligar sozinho (opcional) | `servico/intelecto-telegram.service` (Linux) ou `servico/club.inema.intelecto.plist` (macOS) | ⚙️ serviço |
 | 10 | Rodar comandos na caixa (opcional) | `configurar` → executor `caixa` (precisa de Docker) | você |
-| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `105 passed` | ⚙️ testes |
+| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `113 passed` | ⚙️ testes |
 | 12 | Proteger o projeto com a caixa-do-agente | ver [Como a caixa-do-agente melhora o seu projeto](#como-a-caixa-do-agente-melhora-o-seu-projeto) | você |
 | 13 | Ver os recursos avançados | `python3 -m intelecto avancado` | ⚙️ script |
+| 13b | Medir o seu assistente (e comparar cérebros) | `python3 -m intelecto avaliar` → `--comparar` | ⚙️ script |
 | 14 | Ir além: escolher ingredientes e gerar o `meu-assistente.md` | [mercearia](https://inematds.github.io/intelecto-v2/guia/mercearia/) ou `exemplos/*.md` → entregar ao Claude Code/Codex na pasta | você + 🤖 agente |
 
 ## Comandos
@@ -108,6 +136,7 @@ python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
 python3 -m intelecto avancado
+python3 -m intelecto avaliar [--provedor P --modelo M] [--tarefas minhas.json] [--tempo 180] [--comparar] [--nao-gravar]
 ```
 
 Tudo do assistente fica em `~/.intelecto2/` (troque com `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -143,6 +172,7 @@ dentro da caixa é pulado) e `0 arquivo(s) mudaram`. Os números do auditor est�
 
 ## Versões
 
+- **v2.2**: medição (`python3 -m intelecto avaliar`): acerto, tempo, rodadas e tokens por cérebro, com `--comparar`.
 - **v2.1**: recursos avançados em `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md)).
 - **v2 (este repo)**: código completo e testado, sem dependências, Linux e macOS, caixa por comando.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (a mercearia de frameworks e o plano) e o curso

@@ -9,6 +9,7 @@
   auditoria   últimas linhas do registro de auditoria
   verificar   confere tudo o que o assistente precisa
   avancado    demonstração dos recursos avançados (tarefas, rotinas, citações, escada, desfazer)
+  avaliar     mede o assistente: tarefas fixas → acerto, tempo, rodadas e tokens (--comparar)
 """
 import argparse
 import asyncio
@@ -231,6 +232,28 @@ def cmd_avancado(a) -> int:
     return rodar()
 
 
+def cmd_avaliar(a) -> int:
+    from . import avaliacao as av
+    from .provedores import criar as criar_provedor
+    from .seguranca.cofre import Cofre
+    home = cfg.pasta_home()
+    if a.comparar:
+        print(av.tabela_comparar(av.anteriores(home)))
+        return 0
+    c = _config(a)
+    try:
+        tarefas = av.ler_tarefas(a.tarefas) if a.tarefas else av.TAREFAS
+    except (OSError, ValueError) as e:
+        sys.exit(f"tarefas: {e}")
+    cerebro = criar_provedor(c, Cofre(home))      # a chave vem da sua pasta; as tarefas rodam em pastas limpas
+    print(f"Medindo {c.provedor}/{c.modelo} em {len(tarefas)} tarefas (cada uma numa pasta limpa; ninguém aprova nada)\n")
+    rel = asyncio.run(av.avaliar(c, cerebro, tarefas, a.tempo, ao_terminar=lambda r: print(av.linha_tarefa(r), flush=True)))
+    print("\n" + av.texto_resumo(rel))
+    if not a.nao_gravar:
+        print(f"gravado: {av.salvar(rel, home)}  (compare com `python3 -m intelecto avaliar --comparar`)")
+    return 0 if rel["resumo"]["acertos"] == rel["resumo"]["tarefas"] else 1
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="intelecto", description=f"INTELECTO v{VERSAO} — assistente pessoal de IA")
     ap.add_argument("--versao", action="version", version=VERSAO)
@@ -261,6 +284,12 @@ def main(argv=None) -> int:
     s.set_defaults(f=cmd_auditoria)
     sub.add_parser("verificar", help="conferir instalação").set_defaults(f=cmd_verificar)
     sub.add_parser("avancado", help="demonstração dos recursos avançados").set_defaults(f=cmd_avancado)
+    s = opcoes(sub.add_parser("avaliar", help="medir acerto, tempo, rodadas e tokens"))
+    s.add_argument("--tarefas", help="arquivo JSON com as suas tarefas (padrão: as 8 do intelecto)")
+    s.add_argument("--tempo", type=int, default=180, help="segundos no máximo por tarefa")
+    s.add_argument("--comparar", action="store_true", help="mostra as medições gravadas lado a lado")
+    s.add_argument("--nao-gravar", action="store_true", help="não grava o resultado")
+    s.set_defaults(f=cmd_avaliar)
     a = ap.parse_args(argv)
     if not a.cmd:
         if not cfg.existe() and sys.stdin.isatty():

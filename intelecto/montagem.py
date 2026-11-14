@@ -18,7 +18,7 @@ class Pecas:
     pass
 
 
-def montar(config=None, perguntar=None) -> Pecas:
+def montar(config=None, perguntar=None, provedor=None) -> Pecas:
     c = config or cfg.carregar()
     cfg.preparar_pastas(c)
     p = Pecas()
@@ -30,7 +30,7 @@ def montar(config=None, perguntar=None) -> Pecas:
     p.portao = Portao(c.aprovacao, perguntar, p.auditoria)
     p.executor = ex.criar(c)
     p.registro = Registro(padrao(p.memorias, c.area, p.portao, p.executor))
-    p.provedor = criar_provedor(c, p.cofre)
+    p.provedor = provedor or criar_provedor(c, p.cofre)
     p.agente = Agente(c, p.provedor, p.memorias, p.registro, p.auditoria)
     return p
 

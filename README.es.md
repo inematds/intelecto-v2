@@ -72,6 +72,33 @@ que retoma desde el último paso y entrega lo que tiene cuando se acaba el tiemp
 Todavía no están conectadas a la conversación ni a Telegram; el paso a paso para conectarlas está en
 [docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
 
+## Medir: ¿está acertando? (v2.2)
+
+Cambias de modelo o modificas la identidad y no sabes si el asistente mejoró o empeoró. `avaliar` responde con
+un número: ejecuta 8 tareas fijas (guardar y recordar, leer y guardar un archivo, comando de lectura, los dos bloqueos y una cuenta),
+cada una en una carpeta limpia, y dice cuántas acertó, cuánto tiempo tardó, cuántas rondas usó y cuántos tokens gastó.
+
+```bash
+python3 -m intelecto avaliar                                   # o cérebro do seu config
+python3 -m intelecto avaliar --provedor ollama --modelo llama3.2  # outro cérebro, mesmo teste
+python3 -m intelecto avaliar --comparar                        # todas as medições lado a lado
+```
+
+Cada medición queda guardada en `~/.intelecto2/avaliacoes/`. Durante la medición nadie aprueba nada: solo se ejecutan comandos de lectura.
+Para medir lo que te importa, escribe tus tareas en un JSON (`--tarefas minhas.json`); el formato está al
+inicio de `intelecto/avaliacao.py`. El cerebro falso (`--provedor mock`) acierta 7 de 8: no sabe hacer cuentas,
+y la medición lo muestra.
+
+Medido aquí el 14/11/2026, en la misma máquina y con las mismas 8 tareas:
+
+| Cérebro | Acerto | Tempo por tarefa | Observação |
+|---|---|---|---|
+| `mock` | 7 de 8 | 0,1 s | errou só a conta (de propósito) |
+| `ollama/llama3.2` (3B) | 7 de 8 | 1,1 s | leu o `notas.txt` mas respondeu que não achou a hora |
+| `ollama/qwen3.6:35b-a3b` | 6 de 8 e 5 de 8 | 7,7–8,1 s | as falhas foram do cérebro caindo (erro de CUDA com a GPU dividida), marcadas como "caiu" e não como resposta errada |
+
+Moraleja: el número solo sirve con la máquina libre, y el modelo pequeño rindió bien en tareas cortas. Mide el tuyo antes de elegir.
+
 ## El proceso, de principio a fin
 
 | # | Paso | Comando | Quién |
@@ -86,9 +113,10 @@ Todavía no están conectadas a la conversación ni a Telegram; el paso a paso p
 | 8 | Telegram (opcional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` en el bot → tu ID en `configurar` → `python3 -m intelecto telegram` | tú |
 | 9 | Iniciarlo automáticamente (opcional) | `servico/intelecto-telegram.service` (Linux) o `servico/club.inema.intelecto.plist` (macOS) | ⚙️ servicio |
 | 10 | Ejecutar comandos en la caja (opcional) | `configurar` → ejecutor `caixa` (necesitas Docker) | tú |
-| 11 | Comprobar que todo está bien | `python3 -m pytest -q` → `105 passed` | ⚙️ pruebas |
+| 11 | Comprobar que todo está bien | `python3 -m pytest -q` → `113 passed` | ⚙️ pruebas |
 | 12 | Proteger el proyecto con caixa-do-agente | ver [Cómo caixa-do-agente mejora tu proyecto](#cómo-caixa-do-agente-mejora-tu-proyecto) | tú |
 | 13 | Ver los recursos avanzados | `python3 -m intelecto avancado` | ⚙️ script |
+| 13b | Medir el asistente (y comparar cerebros) | `python3 -m intelecto avaliar` → `--comparar` | ⚙️ script |
 
 ## Comandos
 
@@ -102,6 +130,7 @@ python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
 python3 -m intelecto avancado
+python3 -m intelecto avaliar [--provedor P --modelo M] [--tarefas minhas.json] [--tempo 180] [--comparar] [--nao-gravar]
 ```
 
 Todo lo del asistente queda en `~/.intelecto2/` (cámbialo con `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -136,6 +165,7 @@ Resultado real en esta máquina: `.env` quedó fuera de la copia, `67 passed, 1 
 
 ## Versiones
 
+- **v2.2**: medición (`python3 -m intelecto avaliar`): aciertos, tiempo, rondas y tokens por cerebro, con `--comparar`.
 - **v2.1**: recursos avanzados en `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md), en portugués).
 - **v2 (este repo)**: código completo y probado, sin dependencias, Linux y macOS, caja por comando.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (la tienda de frameworks y el plan) y el curso

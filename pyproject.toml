@@ -1,6 +1,6 @@
 [project]
 name = "intelecto"
-version = "2.1.2"
+version = "2.2.2"
 description = "Assistente pessoal de IA em Python puro: terminal e Telegram, Ollama local ou OpenRouter, memória, ferramentas com trava, cofre e caixa."
 requires-python = ">=3.10"
 dependencies = []

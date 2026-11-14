@@ -72,6 +72,33 @@ a **brain ladder** with cooldowns by error type, and **undo**. See everything in
 They are not yet connected to the conversation or Telegram; instructions for connecting them are in
 [docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
 
+## Measure: Is it getting things right? (v2.2)
+
+You switch models or change the identity and don’t know whether the assistant got better or worse. `avaliar` gives you a
+number: it runs 8 fixed tasks (save and recall, read and write a file, a read command, both safeguards, and a calculation),
+each in a clean folder, and tells you how many it got right, how long it took, how many rounds it used, and how many tokens it spent.
+
+```bash
+python3 -m intelecto avaliar                                   # the brain in your config
+python3 -m intelecto avaliar --provedor ollama --modelo llama3.2  # another brain, same test
+python3 -m intelecto avaliar --comparar                        # all measurements side by side
+```
+
+Each measurement is saved in `~/.intelecto2/avaliacoes/`. Nothing is approved during the measurement: only read commands run.
+To measure what matters to you, write your tasks in a JSON file (`--tarefas minhas.json`); the format is at the
+top of `intelecto/avaliacao.py`. The fake brain (`--provedor mock`) gets 7 out of 8 right: it can’t do calculations,
+and the measurement shows that.
+
+Measured here on 14/11/2026, on the same machine and with the same 8 tasks:
+
+| Cérebro | Acerto | Tempo por tarefa | Observação |
+|---|---|---|---|
+| `mock` | 7 de 8 | 0,1 s | errou só a conta (de propósito) |
+| `ollama/llama3.2` (3B) | 7 de 8 | 1,1 s | leu o `notas.txt` mas respondeu que não achou a hora |
+| `ollama/qwen3.6:35b-a3b` | 6 de 8 e 5 de 8 | 7,7–8,1 s | as falhas foram do cérebro caindo (erro de CUDA com a GPU dividida), marcadas como "caiu" e não como resposta errada |
+
+Moral: the number only counts when the machine is free, and the small model did well on a short task. Measure yours before choosing.
+
 ## The process, from start to finish
 
 | # | Step | Command | Who |
@@ -86,9 +113,10 @@ They are not yet connected to the conversation or Telegram; instructions for con
 | 8 | Telegram (optional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` in the bot → your ID in `configurar` → `python3 -m intelecto telegram` | you |
 | 9 | Run automatically (optional) | `servico/intelecto-telegram.service` (Linux) or `servico/club.inema.intelecto.plist` (macOS) | ⚙️ service |
 | 10 | Run commands in the box (optional) | `configurar` → executor `caixa` (requires Docker) | you |
-| 11 | Make sure everything is working | `python3 -m pytest -q` → `105 passed` | ⚙️ tests |
+| 11 | Make sure everything is working | `python3 -m pytest -q` → `113 passed` | ⚙️ tests |
 | 12 | Protect the project with caixa-do-agente | see [How caixa-do-agente improves your project](#how-caixa-do-agente-improves-your-project) | you |
 | 13 | See the advanced features | `python3 -m intelecto avancado` | ⚙️ script |
+| 13b | Measure your assistant (and compare brains) | `python3 -m intelecto avaliar` → `--comparar` | ⚙️ script |
 
 ## Commands
 
@@ -102,6 +130,7 @@ python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
 python3 -m intelecto avancado
+python3 -m intelecto avaliar [--provedor P --modelo M] [--tarefas minhas.json] [--tempo 180] [--comparar] [--nao-gravar]
 ```
 
 All assistant data is stored in `~/.intelecto2/` (change it with `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -136,6 +165,7 @@ Actual result on this machine: `.env` stayed out of the copy, `67 passed, 1 skip
 
 ## Versions
 
+- **v2.2**: measurement (`python3 -m intelecto avaliar`): accuracy, time, rounds, and tokens per brain, with `--comparar`.
 - **v2.1**: advanced features in `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md), in Portuguese).
 - **v2 (this repo)**: complete and tested code, no dependencies, Linux and macOS, per-command box.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (the framework supermarket and the plan) and the

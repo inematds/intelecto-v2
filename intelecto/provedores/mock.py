@@ -5,6 +5,8 @@ Segue um roteiro simples e previsível que exercita o loop inteiro:
   "… meu/minha …?"    → pede buscar_memoria
   "rode: CMD"         → pede rodar_comando(CMD)   (também "run:" e "ejecuta:")
   "leia ARQ"          → pede ler_arquivo(ARQ)
+  "crie o arquivo ARQ com o texto: T" → pede escrever_arquivo(ARQ, T)
+Não faz conta nem raciocina: na medição (`intelecto avaliar`) ele erra a tarefa de raciocínio de propósito.
 Depois que a ferramenta responde, devolve um texto com o resultado.
 """
 import re
@@ -39,6 +41,9 @@ class Mock(Provedor):
         m = re.match(r"(rode|execute|roda|run|ejecuta|ejecutar)\s*:\s*(.+)", texto, re.I)
         if m:
             return Resposta("", [{"id": "c3", "nome": "rodar_comando", "args": {"comando": m.group(2)}}])
+        m = re.match(r"(crie|grave|escreva)\s+o arquivo\s+(\S+)\s+com o texto:?\s*(.+)", texto, re.I)
+        if m:
+            return Resposta("", [{"id": "c5", "nome": "escrever_arquivo", "args": {"caminho": m.group(2), "texto": m.group(3)}}])
         m = re.match(r"(leia|abra|read|open|lee|abre)\s+(.+)", texto, re.I)
         if m:
             return Resposta("", [{"id": "c4", "nome": "ler_arquivo", "args": {"caminho": m.group(2).strip()}}])
