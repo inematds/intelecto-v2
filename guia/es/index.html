@@ -331,19 +331,19 @@
 
 <section id="avancado"><div class="wrap">
   <span class="chip">Recursos avanzados · v2.1</span>
-  <h2>Seis piezas más, <span class="amb">para cuando quieras ir más allá</span></h2>
-  <p class="sub">Listas y probadas en la carpeta <code>intelecto/avancado/</code>. Aún no están conectadas a la conversación ni a Telegram: puedes activar una por vez, cuando la necesites.</p>
+  <h2>Cuando el asistente falla, se demora o una página lo engaña: <span class="amb">seis protecciones nuevas</span></h2>
+  <p class="sub">Atención: ya existen en el código y pasan las pruebas, pero <strong>todavía no están conectadas</strong> a la conversación ni a Telegram. Por ahora, solo puedes verlas en funcionamiento en la demostración de abajo. Conectar cada una requiere trabajo de programación, para quien programe o para Claude Code/Codex.</p>
   <div class="grid g3">
-    <div class="card"><h3>🧭 Web lejos de la memoria</h3><p>Una página de internet puede incluir un texto escrito para darle órdenes a la IA. Por eso, el agente que lee la web no puede ver lo que sabe de ti. Esto está en el código, no depende de una petición amable.</p></div>
-    <div class="card"><h3>🔎 Cita verificada</h3><p>Cada afirmación que hace en una investigación guarda la frase exacta de la página. El código comprueba si la frase está ahí. Si es inventada, queda fuera; un número de fuente que no existe se convierte en [?].</p></div>
-    <div class="card"><h3>⏳ Tarea larga</h3><p>«Investiga esto durante 10 minutos» y tú sigues con tu vida. Cada paso se guarda: si la computadora se apaga, continúa desde donde quedó. Cuando se acaba el tiempo, entrega lo que tiene.</p></div>
-    <div class="card"><h3>⏰ Rutinas con sentido común</h3><p>Un recordatorio que venció mientras la computadora estaba apagada todavía suena hasta 2 horas después; un «buen día» con 3 horas de retraso se omite. El horario de silencio solo bloquea lo que no pediste.</p></div>
-    <div class="card"><h3>🪜 Cerebro de respaldo</h3><p>Varios cerebros en fila. Si uno falla, responde el siguiente y el que falló descansa: 5 minutos si agotó la cuota, 30 si está fuera de servicio, 6 horas si el modelo no existe en tu cuenta.</p></div>
-    <div class="card"><h3>↩️ Deshacer</h3><p>¿Guardó, movió o borró un archivo equivocado? «Deshacer» lo revierte. Lo que se borra va a una papelera. Si no sabe cómo era antes, no finge saberlo.</p></div>
+    <div class="card"><h3>🧭 Web lejos de la memoria</h3><p>Una página de internet puede contener un texto escrito para darle órdenes a la IA. La regla: el agente (la parte que trabaja por su cuenta) que pueda leer la web no puede ver lo que el asistente sabe sobre ti. La regla ya está lista; la lectura de la web todavía no existe en INTELECTO.</p></div>
+    <div class="card"><h3>🔎 Cita verificada</h3><p>Para futuras investigaciones en internet: cada afirmación conserva la frase exacta de la página, y el código verifica que la frase esté ahí. Si es inventada, queda afuera; un número de fuente que no existe se convierte en [?].</p></div>
+    <div class="card"><h3>⏳ Tarea larga</h3><p>Un trabajo de 10 minutos que no bloquea la conversación. Cada paso se guarda: si se apaga la computadora, continúa desde donde quedó. Cuando se acaba el tiempo, entrega lo que tiene.</p></div>
+    <div class="card"><h3>⏰ Rutinas con sentido común</h3><p>Si la hora pasó con la computadora apagada, todavía se ejecuta hasta: un recordatorio, 2 horas; algo que el asistente hace por su cuenta (como un «buen día»), 45 minutos; una tarea larga, 6 horas. Después de eso, se omite y se registra. El horario de silencio solo detiene lo que no pediste.</p></div>
+    <div class="card"><h3>🪜 Cerebro de reserva</h3><p>El cerebro es la IA que responde. Si hay varios en fila y uno falla, responde el siguiente, mientras el que falló descansa: 5 minutos si se agotó la cuota (el límite de uso), 30 si está fuera de servicio, 6 horas si el modelo no existe en tu cuenta.</p></div>
+    <div class="card"><h3>↩️ Deshacer</h3><p>¿Guardó, movió o borró un archivo por error? «Deshacer» lo revierte. Al borrar, el archivo va a la papelera. Los archivos de más de 1 MB no se pueden recuperar, y el sistema avisa. Si no sabe cómo era antes, no finge saberlo.</p></div>
   </div>
-  <p>Mira las seis funciones en acción en tu computadora, sin internet y sin modelo:</p>
-  <pre><span class="k">python3 -m intelecto avancado</span></pre>
-  <p>Las instrucciones para activar cada una están en <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a>. Son 35 pruebas más (105 en total).</p>
+  <p>Prueba las seis en tu computadora, sin internet ni IA instalada, dentro de la carpeta del proyecto:</p>
+  <pre><span class="k">cd ~/intelecto-v2 &amp;&amp; git pull &amp;&amp; python3 -m intelecto avancado</span></pre>
+  <p>Para quienes programan: la guía técnica para conectar cada una está en <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a> (en portugués). Son 35 pruebas más (105 en total).</p>
 </div></section>
 
 <section id="decide"><div class="wrap">
@@ -578,7 +578,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>Hoja de ruta</h2>
   <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Ahora</strong><span>8 piezas, terminal y Telegram, Ollama/OpenRouter, bloqueo, aprobación, bóveda y caja por comando.</span></div></div>
   <div class="phase"><div class="tag">v2.1</div><div class="d"><strong>Recursos avanzados</strong><span>Web lejos de la memoria, cita verificada, tarea larga, rutinas, cerebro de respaldo y deshacer: listos y probados, aún no conectados a la conversación.</span></div></div>
-  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local) y conectar las rutinas y las tareas largas a Telegram.</span></div></div>
+  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local); conectar a la conversación las seis protecciones de la v2.1 y crear la búsqueda en internet. Todavía sin fecha.</span></div></div>
 </div></section>
 </div>
 

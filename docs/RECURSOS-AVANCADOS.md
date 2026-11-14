@@ -1,6 +1,6 @@
 # Recursos avançados (v2.1)
 
-Seis peças a mais, em `intelecto/avancado/`, Python puro, cada regra com teste em `tests/test_avancado.py`.
+Seis proteções a mais (mais os agentes em .md, que elas usam), em `intelecto/avancado/`, Python puro, cada regra com teste em `tests/test_avancado.py`.
 Veja todas funcionando, sem rede e sem modelo:
 
 ```
@@ -11,7 +11,7 @@ python3 -m intelecto avancado
 O assistente do dia a dia continua o mesmo da v2.0. Ligar cada uma é um passo separado (lista no fim), feito um por vez,
 com teste, como manda a [mercearia](https://inematds.github.io/intelecto-v2/guia/mercearia/).
 
-## As seis peças
+## As peças
 
 | Peça | Arquivo | Problema que resolve | A regra (no código, não no prompt) |
 |---|---|---|---|

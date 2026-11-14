@@ -332,19 +332,19 @@
 
 <section id="avancado"><div class="wrap">
   <span class="chip">Advanced features · v2.1</span>
-  <h2>Six more features, <span class="amb">for when you want to go further</span></h2>
-  <p class="sub">Ready and tested in the <code>intelecto/avancado/</code> folder. They’re not connected to chat or Telegram yet: you can turn them on one at a time, when you need them.</p>
+  <h2>When the assistant crashes, falls behind, or is tricked by a page: <span class="amb">six new safeguards</span></h2>
+  <p class="sub">Heads up: they already exist in the code and pass the tests, but <strong>they are not yet connected</strong> to the conversation or Telegram. Right now, you can only see them in action in the demo below. Connecting each one requires programming work, either by a programmer or with Claude Code/Codex.</p>
   <div class="grid g3">
-    <div class="card"><h3>🧭 Web isolated from memory</h3><p>A webpage can contain text written to give the AI instructions. That’s why the agent that reads the web can’t see what it knows about you. This is enforced in code, not through a polite request.</p></div>
-    <div class="card"><h3>🔎 Verified citations</h3><p>Every claim it makes in a research task keeps the exact sentence from the page. The code checks that the sentence is there. Made-up claims are left out; a source number that doesn’t exist becomes [?].</p></div>
-    <div class="card"><h3>⏳ Long-running task</h3><p>“Research this for 10 minutes” and you can go about your day. Every step is saved: if the computer shuts down, it picks up where it left off. When time runs out, it delivers what it has.</p></div>
-    <div class="card"><h3>⏰ Sensible routines</h3><p>A reminder that comes due while the computer is off will still go off up to 2 hours later; a “good morning” message that’s 3 hours late is skipped. Quiet hours hold back only what you didn’t ask for.</p></div>
-    <div class="card"><h3>🪜 Backup brain</h3><p>Several brains in a queue. If one goes down, the next responds, and the one that failed gets a break: 5 minutes if it ran out of quota, 30 if it’s unavailable, 6 hours if the model isn’t on your account.</p></div>
-    <div class="card"><h3>↩️ Undo</h3><p>Did it save, move, or delete the wrong file? “Undo” rolls it back. Deleted files go to the trash. If it doesn’t know what the file looked like before, it won’t pretend it does.</p></div>
+    <div class="card"><h3>🧭 Keep the web away from memory</h3><p>A web page could contain text written to give the AI instructions. The rule: an agent (the part that works on its own) that can read the web cannot see what the assistant knows about you. The rule is ready; INTELECTO still cannot read the web itself.</p></div>
+    <div class="card"><h3>🔎 Verified citations</h3><p>For future internet research: each claim keeps the exact sentence from the page, and the code checks that the sentence is there. Made-up claims are left out; source numbers that do not exist become [?].</p></div>
+    <div class="card"><h3>⏳ Long-running task</h3><p>A 10-minute job that does not freeze the conversation. Each step is saved, so if the computer shuts down, it picks up where it left off. When time runs out, it delivers what it has.</p></div>
+    <div class="card"><h3>⏰ Sensible routines</h3><p>If the scheduled time passes while the computer is off, the task is still valid for: reminders, 2 hours; something the assistant does on its own (like a “good morning” message), 45 minutes; long-running tasks, 6 hours. After that, it is skipped and logged. Quiet hours hold back only things you did not request.</p></div>
+    <div class="card"><h3>🪜 Backup brain</h3><p>The brain is the AI that responds. With several in a queue, if one goes down, the next one responds while the failed one rests: 5 minutes if it ran out of quota (the usage limit), 30 minutes if it is offline, and 6 hours if the model is not available on your account.</p></div>
+    <div class="card"><h3>↩️ Undo</h3><p>Did it save, move, or delete the wrong file? “Undo” rolls it back. Deleted files go to a trash folder. Files larger than 1 MB cannot be restored, and the assistant warns you. If it does not know what the file looked like before, it will not pretend that it does.</p></div>
   </div>
-  <p>See all six in action on your computer, offline and without a model:</p>
-  <pre><span class="k">python3 -m intelecto avancado</span></pre>
-  <p>The step-by-step instructions for turning each one on are in <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a>. That adds 35 more tests (105 in total).</p>
+  <p>See all six in action on your computer, without internet or an installed AI, inside the project folder:</p>
+  <pre><span class="k">cd ~/intelecto-v2 &amp;&amp; git pull &amp;&amp; python3 -m intelecto avancado</span></pre>
+  <p>For programmers: the technical list of how to connect each one is in <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a> (in Portuguese). That adds 35 tests (105 in total).</p>
 </div></section>
 
 <section id="decide"><div class="wrap">
@@ -579,7 +579,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>Roadmap</h2>
   <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Now</strong><span>8 parts, terminal and Telegram, Ollama/OpenRouter, guardrail, approval, vault, sandbox per command.</span></div></div>
   <div class="phase"><div class="tag">v2.1</div><div class="d"><strong>Advanced features</strong><span>Web isolated from memory, verified citations, long-running tasks, routines, backup brain, and undo: ready and tested, but not yet connected to chat.</span></div></div>
-  <div class="phase"><div class="tag">later</div><div class="d"><strong>Voice and schedule</strong><span>Audio in Telegram (local transcription) and connecting routines and long-running tasks to Telegram.</span></div></div>
+  <div class="phase"><div class="tag">later</div><div class="d"><strong>Voice and schedule</strong><span>Audio in Telegram (local transcription); connecting the six v2.1 safeguards to the conversation and building web research. No date yet.</span></div></div>
 </div></section>
 </div>
 
