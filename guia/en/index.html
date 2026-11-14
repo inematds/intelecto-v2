@@ -58,10 +58,11 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"],nav .links a.sec[href="#avancado"]{display:none}}
+  @media(max-width:1400px){nav .links a.sec[href="#mercearia"]{display:none}}
   @media(max-width:1060px){nav .links a.sec[href="#mercearia"]{display:none}}
   @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
-  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
+  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"],nav .links a.sec[href="#avancado"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -268,6 +269,7 @@
     <a class="sec" href="#problema">Why</a>
     <a class="sec" href="#pecas">The 8 parts</a>
     <a class="sec" href="#decide">How it decides</a>
+    <a class="sec" href="#avancado">Advanced</a>
     <a class="sec" href="#funciona">Inside</a>
     <a class="sec" href="#mercearia">Grocery store</a>
     <a class="sec" href="#testado">Tested</a>
@@ -326,6 +328,23 @@
     <div class="card"><h3>🔐 7. Guardrail and vault</h3><p>Decides whether a command can run and stores encrypted passwords. Everything it does is logged.</p></div>
     <div class="card"><h3>📦 8. Sandbox</h3><p>If you enable it, each command runs in a disposable sandbox, without internet access or your passwords.</p></div>
   </div>
+</div></section>
+
+<section id="avancado"><div class="wrap">
+  <span class="chip">Advanced features · v2.1</span>
+  <h2>Six more features, <span class="amb">for when you want to go further</span></h2>
+  <p class="sub">Ready and tested in the <code>intelecto/avancado/</code> folder. They’re not connected to chat or Telegram yet: you can turn them on one at a time, when you need them.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🧭 Web isolated from memory</h3><p>A webpage can contain text written to give the AI instructions. That’s why the agent that reads the web can’t see what it knows about you. This is enforced in code, not through a polite request.</p></div>
+    <div class="card"><h3>🔎 Verified citations</h3><p>Every claim it makes in a research task keeps the exact sentence from the page. The code checks that the sentence is there. Made-up claims are left out; a source number that doesn’t exist becomes [?].</p></div>
+    <div class="card"><h3>⏳ Long-running task</h3><p>“Research this for 10 minutes” and you can go about your day. Every step is saved: if the computer shuts down, it picks up where it left off. When time runs out, it delivers what it has.</p></div>
+    <div class="card"><h3>⏰ Sensible routines</h3><p>A reminder that comes due while the computer is off will still go off up to 2 hours later; a “good morning” message that’s 3 hours late is skipped. Quiet hours hold back only what you didn’t ask for.</p></div>
+    <div class="card"><h3>🪜 Backup brain</h3><p>Several brains in a queue. If one goes down, the next responds, and the one that failed gets a break: 5 minutes if it ran out of quota, 30 if it’s unavailable, 6 hours if the model isn’t on your account.</p></div>
+    <div class="card"><h3>↩️ Undo</h3><p>Did it save, move, or delete the wrong file? “Undo” rolls it back. Deleted files go to the trash. If it doesn’t know what the file looked like before, it won’t pretend it does.</p></div>
+  </div>
+  <p>See all six in action on your computer, offline and without a model:</p>
+  <pre><span class="k">python3 -m intelecto avancado</span></pre>
+  <p>The step-by-step instructions for turning each one on are in <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a>. That adds 35 more tests (105 in total).</p>
 </div></section>
 
 <section id="decide"><div class="wrap">
@@ -397,7 +416,7 @@
   <p class="sub">Tested on 11/12/2026 on a Linux computer. Anything not tested live is stated here.</p>
   <div class="tabwrap"><table class="tab">
     <tr><th>Part</th><th>How it was tested</th></tr>
-    <tr><td>Loop, memory, tools, guardrail, approval, vault, and audit log</td><td>68 automated tests, all passing</td></tr>
+    <tr><td>Loop, memory, tools, guardrail, approval, vault, and audit log</td><td>105 automated tests, all passing</td></tr>
     <tr><td>Local AI (Ollama)</td><td>Live with the qwen3.6 model: it saved “my name is Nei and I live in Porto Alegre” and, in a new conversation, replied “Your name is Nei and you live in Porto Alegre.” With llama3.2 (a small model), it rarely uses the tools on its own, but since version 2.0.1 anything starting with "lembre que" (remember that) is saved directly, and it also remembered the name and city.</td></tr>
     <tr><td>Sandbox (command in a container)</td><td>Live: it can only see the workspace folder, can’t see your terminal’s environment variables, and has no internet access</td></tr>
     <tr><td>OpenRouter and Telegram</td><td>Against test servers on the same computer (format, key, owner filter, approval with /yes). <strong>Not tested live</strong>: they require your key and bot.</td></tr>
@@ -419,7 +438,7 @@
   <div class="grid g3">
     <div class="card"><h3>🐍 python3 -m intelecto</h3><p>A command-line interface with 8 subcommands: chat, demo, telegram, configure, vault, memory, audit, and check.</p></div>
     <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Everything for the assistant lives in one folder: config, memory, identity, workspace, audit log, and vault. Change it with <code>INTELECTO_HOME</code>.</p></div>
-    <div class="card"><h3>✅ 68 tests</h3><p><code>python3 -m pytest -q</code>. No test calls a real API.</p></div>
+    <div class="card"><h3>✅ 105 tests</h3><p><code>python3 -m pytest -q</code>. No test calls a real API.</p></div>
   </div>
 </div></section>
 
@@ -546,7 +565,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>What changed</h2>
   <div class="tabwrap"><table class="tab">
     <tr><th></th><th>v1</th><th>v2</th></tr>
-    <tr><td>Code</td><td>The README described the assistant, but there was only a minimal example with a mock brain</td><td>Full assistant, 1,500 lines, 68 tests</td></tr>
+    <tr><td>Code</td><td>The README described the assistant, but there was only a minimal example with a mock brain</td><td>Full assistant, 1,500 lines, 105 tests (v2.1)</td></tr>
     <tr><td>Commands</td><td>List of forbidden words</td><td>Run / ask / refuse, with ask as the default</td></tr>
     <tr><td>Telegram</td><td>Just the structure</td><td>Works and only replies to the owners</td></tr>
     <tr><td>Isolation</td><td>Promised in the course</td><td>Sandbox per command (Docker without network)</td></tr>
@@ -559,7 +578,8 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <span class="chip">What’s next</span>
   <h2>Roadmap</h2>
   <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Now</strong><span>8 parts, terminal and Telegram, Ollama/OpenRouter, guardrail, approval, vault, sandbox per command.</span></div></div>
-  <div class="phase"><div class="tag">later</div><div class="d"><strong>Voice and schedule</strong><span>Audio in Telegram (local transcription) and scheduled reminders. Not available yet.</span></div></div>
+  <div class="phase"><div class="tag">v2.1</div><div class="d"><strong>Advanced features</strong><span>Web isolated from memory, verified citations, long-running tasks, routines, backup brain, and undo: ready and tested, but not yet connected to chat.</span></div></div>
+  <div class="phase"><div class="tag">later</div><div class="d"><strong>Voice and schedule</strong><span>Audio in Telegram (local transcription) and connecting routines and long-running tasks to Telegram.</span></div></div>
 </div></section>
 </div>
 

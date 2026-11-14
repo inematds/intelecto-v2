@@ -58,10 +58,10 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"],nav .links a.sec[href="#avancado"]{display:none}}
   @media(max-width:1060px){nav .links a.sec[href="#mercearia"]{display:none}}
   @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
-  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
+  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"],nav .links a.sec[href="#avancado"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -268,6 +268,7 @@
     <a class="sec" href="#problema">Por quê</a>
     <a class="sec" href="#pecas">As 8 peças</a>
     <a class="sec" href="#decide">Como decide</a>
+    <a class="sec" href="#avancado">Avançados</a>
     <a class="sec" href="#funciona">Por dentro</a>
     <a class="sec" href="#mercearia">Mercearia</a>
     <a class="sec" href="#testado">Testado</a>
@@ -326,6 +327,23 @@
     <div class="card"><h3>🔐 7. Trava e cofre</h3><p>Decide se um comando pode rodar e guarda senhas cifradas. Tudo o que ele faz fica anotado.</p></div>
     <div class="card"><h3>📦 8. Caixa</h3><p>Se você ligar, cada comando roda numa caixa descartável, sem internet e sem as suas senhas.</p></div>
   </div>
+</div></section>
+
+<section id="avancado"><div class="wrap">
+  <span class="chip">Recursos avançados · v2.1</span>
+  <h2>Seis peças a mais, <span class="amb">para quando você quiser ir além</span></h2>
+  <p class="sub">Prontas e testadas na pasta <code>intelecto/avancado/</code>. Ainda não estão ligadas à conversa nem ao Telegram: você liga uma por vez, quando precisar.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🧭 Web longe da memória</h3><p>Uma página da internet pode trazer um texto escrito para dar ordens à IA. Por isso, o agente que lê a web não enxerga o que ele sabe de você. Isso está no código, não num pedido educado.</p></div>
+    <div class="card"><h3>🔎 Citação conferida</h3><p>Cada coisa que ele afirma numa pesquisa guarda a frase exata da página. O código confere se a frase está lá. Inventada, fica de fora; número de fonte que não existe vira [?].</p></div>
+    <div class="card"><h3>⏳ Tarefa longa</h3><p>"Pesquisa isso por 10 minutos" e você segue a vida. Cada passo é salvo: se o computador desligar, ele continua de onde parou. Acabou o tempo, ele entrega o que tem.</p></div>
+    <div class="card"><h3>⏰ Rotinas com bom senso</h3><p>Lembrete que venceu com o computador desligado ainda toca até 2 horas depois; um "bom dia" atrasado 3 horas é pulado. Horário de silêncio segura só o que você não pediu.</p></div>
+    <div class="card"><h3>🪜 Cérebro reserva</h3><p>Vários cérebros em fila. Se um cai, o próximo responde, e o que caiu descansa: 5 minutos se acabou a cota, 30 se está fora do ar, 6 horas se o modelo não existe na sua conta.</p></div>
+    <div class="card"><h3>↩️ Desfazer</h3><p>Gravou, moveu ou apagou um arquivo errado? "Desfaz" volta. Apagar vai para uma lixeira. Se ele não sabe como era antes, não finge que sabe.</p></div>
+  </div>
+  <p>Veja as seis funcionando no seu computador, sem internet e sem modelo:</p>
+  <pre><span class="k">python3 -m intelecto avancado</span></pre>
+  <p>O passo a passo para ligar cada uma está em <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a>. São 35 testes a mais (105 no total).</p>
 </div></section>
 
 <section id="decide"><div class="wrap">
@@ -397,7 +415,7 @@
   <p class="sub">Testado em 12/11/2026 num computador Linux. O que não foi testado ao vivo está escrito.</p>
   <div class="tabwrap"><table class="tab">
     <tr><th>Parte</th><th>Como foi testada</th></tr>
-    <tr><td>Loop, memória, ferramentas, trava, aprovação, cofre e auditoria</td><td>68 testes automáticos, todos passando</td></tr>
+    <tr><td>Loop, memória, ferramentas, trava, aprovação, cofre e auditoria</td><td>105 testes automáticos, todos passando</td></tr>
     <tr><td>IA local (Ollama)</td><td>Ao vivo com o modelo qwen3.6: ele guardou "meu nome é Nei e moro em Porto Alegre" e, numa conversa nova, respondeu "Seu nome é Nei e você mora em Porto Alegre". Com o llama3.2 (modelo pequeno) ele quase não usa as ferramentas sozinho, mas desde a versão 2.0.1 tudo o que começa com "lembre que" é guardado direto, e ele também lembrou do nome e da cidade.</td></tr>
     <tr><td>Caixa (comando num container)</td><td>Ao vivo: enxerga só a pasta de trabalho, não vê as variáveis do seu terminal e fica sem internet</td></tr>
     <tr><td>OpenRouter e Telegram</td><td>Contra servidores de teste no próprio computador (formato, chave, filtro de dono, aprovação por /sim). <strong>Não testados ao vivo</strong>: dependem da sua chave e do seu bot.</td></tr>
@@ -419,7 +437,7 @@
   <div class="grid g3">
     <div class="card"><h3>🐍 python3 -m intelecto</h3><p>Uma linha de comando com 8 subcomandos: conversar, demo, telegram, configurar, cofre, memoria, auditoria e verificar.</p></div>
     <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Tudo do assistente fica numa pasta: config, memória, identidade, pasta de trabalho, auditoria e cofre. Troque com <code>INTELECTO_HOME</code>.</p></div>
-    <div class="card"><h3>✅ 68 testes</h3><p><code>python3 -m pytest -q</code>. Nenhum teste chama API de verdade.</p></div>
+    <div class="card"><h3>✅ 105 testes</h3><p><code>python3 -m pytest -q</code>. Nenhum teste chama API de verdade.</p></div>
   </div>
 </div></section>
 
@@ -546,7 +564,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>O que mudou</h2>
   <div class="tabwrap"><table class="tab">
     <tr><th></th><th>v1</th><th>v2</th></tr>
-    <tr><td>Código</td><td>o README descrevia o assistente, mas só havia um exemplo mínimo com cérebro de mentira</td><td>assistente completo, 1.500 linhas, 68 testes</td></tr>
+    <tr><td>Código</td><td>o README descrevia o assistente, mas só havia um exemplo mínimo com cérebro de mentira</td><td>assistente completo, 1.500 linhas, 105 testes (v2.1)</td></tr>
     <tr><td>Comandos</td><td>lista de palavras proibidas</td><td>roda / pergunta / recusa, e o padrão é perguntar</td></tr>
     <tr><td>Telegram</td><td>só a estrutura</td><td>funciona e só responde aos donos</td></tr>
     <tr><td>Isolamento</td><td>prometido no curso</td><td>caixa por comando (Docker sem rede)</td></tr>
@@ -559,7 +577,8 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <span class="chip">Próximos passos</span>
   <h2>Roadmap</h2>
   <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Agora</strong><span>8 peças, terminal e Telegram, Ollama/OpenRouter, trava, aprovação, cofre, caixa por comando.</span></div></div>
-  <div class="phase"><div class="tag">depois</div><div class="d"><strong>Voz e agenda</strong><span>Áudio no Telegram (transcrição local) e lembretes com hora marcada. Ainda não existe.</span></div></div>
+  <div class="phase"><div class="tag">v2.1</div><div class="d"><strong>Recursos avançados</strong><span>Web longe da memória, citação conferida, tarefa longa, rotinas, cérebro reserva e desfazer: prontos e testados, ainda não ligados à conversa.</span></div></div>
+  <div class="phase"><div class="tag">depois</div><div class="d"><strong>Voz e agenda</strong><span>Áudio no Telegram (transcrição local) e ligar as rotinas e as tarefas longas ao Telegram.</span></div></div>
 </div></section>
 </div>
 

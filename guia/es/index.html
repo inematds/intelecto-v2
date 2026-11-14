@@ -58,10 +58,10 @@
   .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
   nav .links a.sec{white-space:nowrap}
   @media(max-width:1300px){nav .links{gap:14px;font-size:.86rem}}
-  @media(max-width:1500px){nav .links a.sec[href="#funciona"]{display:none}}
+  @media(max-width:1500px){nav .links a.sec[href="#funciona"],nav .links a.sec[href="#avancado"]{display:none}}
   @media(max-width:1060px){nav .links a.sec[href="#mercearia"]{display:none}}
   @media(max-width:1100px){nav .links a.sec[href="#testado"],nav .links a.sec[href="#decide"],nav .links a.sec[href="#funciona"]{display:none}}
-  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"]{display:none}}
+  @media(max-width:960px){nav .links a.sec[href="#problema"],nav .links a.sec[href="#pecas"],nav .links a.sec[href="#caixa"],nav .links a.sec[href="#avancado"]{display:none}}
   @media(max-width:760px){nav .links a.sec{display:none}}
   @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -268,6 +268,7 @@
     <a class="sec" href="#problema">Por qué</a>
     <a class="sec" href="#pecas">Las 8 piezas</a>
     <a class="sec" href="#decide">Cómo decide</a>
+    <a class="sec" href="#avancado">Avanzados</a>
     <a class="sec" href="#funciona">Por dentro</a>
     <a class="sec" href="#mercearia">Almacén</a>
     <a class="sec" href="#testado">Probado</a>
@@ -326,6 +327,23 @@
     <div class="card"><h3>🔐 7. Bloqueo y bóveda</h3><p>Decide si un comando puede ejecutarse y guarda contraseñas cifradas. Todo lo que hace queda registrado.</p></div>
     <div class="card"><h3>📦 8. Caja</h3><p>Si la activas, cada comando se ejecuta en una caja desechable, sin internet ni tus contraseñas.</p></div>
   </div>
+</div></section>
+
+<section id="avancado"><div class="wrap">
+  <span class="chip">Recursos avanzados · v2.1</span>
+  <h2>Seis piezas más, <span class="amb">para cuando quieras ir más allá</span></h2>
+  <p class="sub">Listas y probadas en la carpeta <code>intelecto/avancado/</code>. Aún no están conectadas a la conversación ni a Telegram: puedes activar una por vez, cuando la necesites.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🧭 Web lejos de la memoria</h3><p>Una página de internet puede incluir un texto escrito para darle órdenes a la IA. Por eso, el agente que lee la web no puede ver lo que sabe de ti. Esto está en el código, no depende de una petición amable.</p></div>
+    <div class="card"><h3>🔎 Cita verificada</h3><p>Cada afirmación que hace en una investigación guarda la frase exacta de la página. El código comprueba si la frase está ahí. Si es inventada, queda fuera; un número de fuente que no existe se convierte en [?].</p></div>
+    <div class="card"><h3>⏳ Tarea larga</h3><p>«Investiga esto durante 10 minutos» y tú sigues con tu vida. Cada paso se guarda: si la computadora se apaga, continúa desde donde quedó. Cuando se acaba el tiempo, entrega lo que tiene.</p></div>
+    <div class="card"><h3>⏰ Rutinas con sentido común</h3><p>Un recordatorio que venció mientras la computadora estaba apagada todavía suena hasta 2 horas después; un «buen día» con 3 horas de retraso se omite. El horario de silencio solo bloquea lo que no pediste.</p></div>
+    <div class="card"><h3>🪜 Cerebro de respaldo</h3><p>Varios cerebros en fila. Si uno falla, responde el siguiente y el que falló descansa: 5 minutos si agotó la cuota, 30 si está fuera de servicio, 6 horas si el modelo no existe en tu cuenta.</p></div>
+    <div class="card"><h3>↩️ Deshacer</h3><p>¿Guardó, movió o borró un archivo equivocado? «Deshacer» lo revierte. Lo que se borra va a una papelera. Si no sabe cómo era antes, no finge saberlo.</p></div>
+  </div>
+  <p>Mira las seis funciones en acción en tu computadora, sin internet y sin modelo:</p>
+  <pre><span class="k">python3 -m intelecto avancado</span></pre>
+  <p>Las instrucciones para activar cada una están en <a href="https://github.com/inematds/intelecto-v2/blob/main/docs/RECURSOS-AVANCADOS.md" target="_blank" rel="noopener">docs/RECURSOS-AVANCADOS.md</a>. Son 35 pruebas más (105 en total).</p>
 </div></section>
 
 <section id="decide"><div class="wrap">
@@ -397,7 +415,7 @@
   <p class="sub">Probado el 12/11/2026 en una computadora Linux. Lo que no se probó en vivo está indicado.</p>
   <div class="tabwrap"><table class="tab">
     <tr><th>Parte</th><th>Cómo se probó</th></tr>
-    <tr><td>Ciclo, memoria, herramientas, bloqueo, aprobación, bóveda y auditoría</td><td>68 pruebas automáticas; todas pasan</td></tr>
+    <tr><td>Ciclo, memoria, herramientas, bloqueo, aprobación, bóveda y auditoría</td><td>105 pruebas automáticas; todas pasan</td></tr>
     <tr><td>IA local (Ollama)</td><td>En vivo con el modelo qwen3.6: guardó "mi nombre es Nei y vivo en Porto Alegre" y, en una conversación nueva, respondió "Tu nombre es Nei y vives en Porto Alegre". Con llama3.2 (modelo pequeño) casi no usa las herramientas por sí solo, pero desde la versión 2.0.1 todo lo que empieza con "lembre que" (recuerda que) se guarda directamente, y también recordó el nombre y la ciudad.</td></tr>
     <tr><td>Caja (comando en un contenedor)</td><td>En vivo: solo ve la carpeta de trabajo, no ve las variables de tu terminal y no tiene internet</td></tr>
     <tr><td>OpenRouter y Telegram</td><td>Contra servidores de prueba en la misma computadora (formato, clave, filtro de propietario, aprobación por /sim). <strong>No se probaron en vivo</strong>: dependen de tu clave y de tu bot.</td></tr>
@@ -419,7 +437,7 @@
   <div class="grid g3">
     <div class="card"><h3>🐍 python3 -m intelecto</h3><p>Una línea de comandos con 8 subcomandos: conversar, demo, telegram, configurar, cofre, memoria, auditoría y verificar.</p></div>
     <div class="card"><h3>🗂️ ~/.intelecto2/</h3><p>Todo el asistente está en una carpeta: config, memoria, identidad, carpeta de trabajo, auditoría y bóveda. Cámbiala con <code>INTELECTO_HOME</code>.</p></div>
-    <div class="card"><h3>✅ 68 pruebas</h3><p><code>python3 -m pytest -q</code>. Ninguna prueba llama a una API real.</p></div>
+    <div class="card"><h3>✅ 105 pruebas</h3><p><code>python3 -m pytest -q</code>. Ninguna prueba llama a una API real.</p></div>
   </div>
 </div></section>
 
@@ -546,7 +564,7 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <h2>Qué cambió</h2>
   <div class="tabwrap"><table class="tab">
     <tr><th></th><th>v1</th><th>v2</th></tr>
-    <tr><td>Código</td><td>el README describía el asistente, pero solo había un ejemplo mínimo con un cerebro ficticio</td><td>asistente completo, 1.500 líneas, 68 pruebas</td></tr>
+    <tr><td>Código</td><td>el README describía el asistente, pero solo había un ejemplo mínimo con un cerebro ficticio</td><td>asistente completo, 1.500 líneas, 105 pruebas (v2.1)</td></tr>
     <tr><td>Comandos</td><td>lista de palabras prohibidas</td><td>ejecuta / pregunta / rechaza, y la opción predeterminada es preguntar</td></tr>
     <tr><td>Telegram</td><td>solo la estructura</td><td>funciona y solo responde a sus propietarios</td></tr>
     <tr><td>Aislamiento</td><td>prometido en el curso</td><td>caja por comando (Docker sin red)</td></tr>
@@ -559,7 +577,8 @@ intelecto> Feito. Resultado de ler_arquivo: fora da pasta de trabalho</pre>
   <span class="chip">Próximos pasos</span>
   <h2>Hoja de ruta</h2>
   <div class="phase"><div class="tag">v2.0</div><div class="d"><strong>Ahora</strong><span>8 piezas, terminal y Telegram, Ollama/OpenRouter, bloqueo, aprobación, bóveda y caja por comando.</span></div></div>
-  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local) y recordatorios programados. Todavía no existe.</span></div></div>
+  <div class="phase"><div class="tag">v2.1</div><div class="d"><strong>Recursos avanzados</strong><span>Web lejos de la memoria, cita verificada, tarea larga, rutinas, cerebro de respaldo y deshacer: listos y probados, aún no conectados a la conversación.</span></div></div>
+  <div class="phase"><div class="tag">después</div><div class="d"><strong>Voz y agenda</strong><span>Audio en Telegram (transcripción local) y conectar las rutinas y las tareas largas a Telegram.</span></div></div>
 </div></section>
 </div>
 
