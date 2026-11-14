@@ -63,6 +63,15 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 # "Read meu-assistente.md and implement the items to add and the partial ones, one at a time, following the Rules for the agent."
 ```
 
+## Advanced features (v2.1)
+
+Six additional components in `intelecto/avancado/`, tested and dependency-free: **agents in .md**, **web and memory never in
+the same agent**, **citations checked in code** (invented phrases are excluded; `[n]` without a source becomes `[?]`), **long-running tasks**
+that resume from the last step and deliver what they have when time runs out, **routines** with delays by type and quiet hours,
+a **brain ladder** with cooldowns by error type, and **undo**. See everything in action: `python3 -m intelecto avancado`.
+They are not yet connected to the conversation or Telegram; instructions for connecting them are in
+[docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
+
 ## The process, from start to finish
 
 | # | Step | Command | Who |
@@ -77,8 +86,9 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 | 8 | Telegram (optional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` in the bot → your ID in `configurar` → `python3 -m intelecto telegram` | you |
 | 9 | Run automatically (optional) | `servico/intelecto-telegram.service` (Linux) or `servico/club.inema.intelecto.plist` (macOS) | ⚙️ service |
 | 10 | Run commands in the box (optional) | `configurar` → executor `caixa` (requires Docker) | you |
-| 11 | Make sure everything is working | `python3 -m pytest -q` → `68 passed` | ⚙️ tests |
+| 11 | Make sure everything is working | `python3 -m pytest -q` → `105 passed` | ⚙️ tests |
 | 12 | Protect the project with caixa-do-agente | see [How caixa-do-agente improves your project](#how-caixa-do-agente-improves-your-project) | you |
+| 13 | See the advanced features | `python3 -m intelecto avancado` | ⚙️ script |
 
 ## Commands
 
@@ -91,6 +101,7 @@ python3 -m intelecto cofre guardar|listar|apagar [nome]
 python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
+python3 -m intelecto avancado
 ```
 
 All assistant data is stored in `~/.intelecto2/` (change it with `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -125,6 +136,7 @@ Actual result on this machine: `.env` stayed out of the copy, `67 passed, 1 skip
 
 ## Versions
 
+- **v2.1**: advanced features in `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md), in Portuguese).
 - **v2 (this repo)**: complete and tested code, no dependencies, Linux and macOS, per-command box.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (the framework supermarket and the plan) and the
   [intelecto-curso](https://inematds.github.io/intelecto-curso/) course are still online. What changed: [docs/v1-para-v2.md](docs/v1-para-v2.md) (in Portuguese).

@@ -63,6 +63,15 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 # "Lee meu-assistente.md e implementa los elementos por agregar y los parciales, uno a la vez, siguiendo las Reglas para el agente."
 ```
 
+## Recursos avanzados (v2.1)
+
+Seis piezas adicionales en `intelecto/avancado/`, probadas y sin dependencias: **agentes en .md**, **web y memoria nunca en el
+mismo agente**, **cita verificada en código** (las frases inventadas no se incluyen; `[n]` sin fuente se convierte en `[?]`), **tarea larga**
+que retoma desde el último paso y entrega lo que tiene cuando se acaba el tiempo, **rutinas** con demora por tipo y horario de silencio,
+**escalera de cerebros** con descanso por tipo de error y **deshacer**. Vea todo en funcionamiento: `python3 -m intelecto avancado`.
+Todavía no están conectadas a la conversación ni a Telegram; el paso a paso para conectarlas está en
+[docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
+
 ## El proceso, de principio a fin
 
 | # | Paso | Comando | Quién |
@@ -77,8 +86,9 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 | 8 | Telegram (opcional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` en el bot → tu ID en `configurar` → `python3 -m intelecto telegram` | tú |
 | 9 | Iniciarlo automáticamente (opcional) | `servico/intelecto-telegram.service` (Linux) o `servico/club.inema.intelecto.plist` (macOS) | ⚙️ servicio |
 | 10 | Ejecutar comandos en la caja (opcional) | `configurar` → ejecutor `caixa` (necesitas Docker) | tú |
-| 11 | Comprobar que todo está bien | `python3 -m pytest -q` → `68 passed` | ⚙️ pruebas |
+| 11 | Comprobar que todo está bien | `python3 -m pytest -q` → `105 passed` | ⚙️ pruebas |
 | 12 | Proteger el proyecto con caixa-do-agente | ver [Cómo caixa-do-agente mejora tu proyecto](#cómo-caixa-do-agente-mejora-tu-proyecto) | tú |
+| 13 | Ver los recursos avanzados | `python3 -m intelecto avancado` | ⚙️ script |
 
 ## Comandos
 
@@ -91,6 +101,7 @@ python3 -m intelecto cofre guardar|listar|apagar [nome]
 python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
+python3 -m intelecto avancado
 ```
 
 Todo lo del asistente queda en `~/.intelecto2/` (cámbialo con `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -125,6 +136,7 @@ Resultado real en esta máquina: `.env` quedó fuera de la copia, `67 passed, 1 
 
 ## Versiones
 
+- **v2.1**: recursos avanzados en `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md), en portugués).
 - **v2 (este repo)**: código completo y probado, sin dependencias, Linux y macOS, caja por comando.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (la tienda de frameworks y el plan) y el curso
   [intelecto-curso](https://inematds.github.io/intelecto-curso/) siguen disponibles. Qué cambió: [docs/v1-para-v2.md](docs/v1-para-v2.md) (en portugués).

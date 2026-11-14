@@ -8,6 +8,7 @@
   memoria     lista ou busca memórias
   auditoria   últimas linhas do registro de auditoria
   verificar   confere tudo o que o assistente precisa
+  avancado    demonstração dos recursos avançados (tarefas, rotinas, citações, escada, desfazer)
 """
 import argparse
 import asyncio
@@ -225,6 +226,11 @@ def cmd_verificar(a) -> int:
     return 1 if falhas else 0
 
 
+def cmd_avancado(a) -> int:
+    from .avancado.demo import rodar
+    return rodar()
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="intelecto", description=f"INTELECTO v{VERSAO} — assistente pessoal de IA")
     ap.add_argument("--versao", action="version", version=VERSAO)
@@ -254,6 +260,7 @@ def main(argv=None) -> int:
     s.add_argument("-n", type=int, default=20)
     s.set_defaults(f=cmd_auditoria)
     sub.add_parser("verificar", help="conferir instalação").set_defaults(f=cmd_verificar)
+    sub.add_parser("avancado", help="demonstração dos recursos avançados").set_defaults(f=cmd_avancado)
     a = ap.parse_args(argv)
     if not a.cmd:
         if not cfg.existe() and sys.stdin.isatty():

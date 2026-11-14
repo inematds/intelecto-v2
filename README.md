@@ -68,6 +68,15 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 # "Leia meu-assistente.md e implemente os itens a acrescentar e parciais, um de cada vez, seguindo as Regras para o agente."
 ```
 
+## Recursos avançados (v2.1)
+
+Seis peças a mais em `intelecto/avancado/`, testadas e sem dependência: **agentes em .md**, **web e memória nunca no
+mesmo agente**, **citação conferida em código** (frase inventada não entra; `[n]` sem fonte vira `[?]`), **tarefa longa**
+que retoma do último passo e entrega o que tem quando o tempo acaba, **rotinas** com atraso por tipo e horário de silêncio,
+**escada de cérebros** com descanso por tipo de erro e **desfazer**. Veja tudo rodando: `python3 -m intelecto avancado`.
+Ainda não estão ligadas à conversa nem ao Telegram; o passo a passo para ligar está em
+[docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md).
+
 ## O processo, do início ao fim
 
 | # | Passo | Comando | Quem |
@@ -82,9 +91,10 @@ cd ~/intelecto-v2 && cp exemplos/01-jarvis-telegram.md meu-assistente.md
 | 8 | Telegram (opcional) | @BotFather → `python3 -m intelecto cofre guardar telegram` → `/id` no bot → seu id no `configurar` → `python3 -m intelecto telegram` | você |
 | 9 | Ligar sozinho (opcional) | `servico/intelecto-telegram.service` (Linux) ou `servico/club.inema.intelecto.plist` (macOS) | ⚙️ serviço |
 | 10 | Rodar comandos na caixa (opcional) | `configurar` → executor `caixa` (precisa de Docker) | você |
-| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `68 passed` | ⚙️ testes |
+| 11 | Provar que está tudo certo | `python3 -m pytest -q` → `105 passed` | ⚙️ testes |
 | 12 | Proteger o projeto com a caixa-do-agente | ver [Como a caixa-do-agente melhora o seu projeto](#como-a-caixa-do-agente-melhora-o-seu-projeto) | você |
-| 13 | Ir além: escolher ingredientes e gerar o `meu-assistente.md` | [mercearia](https://inematds.github.io/intelecto-v2/guia/mercearia/) ou `exemplos/*.md` → entregar ao Claude Code/Codex na pasta | você + 🤖 agente |
+| 13 | Ver os recursos avançados | `python3 -m intelecto avancado` | ⚙️ script |
+| 14 | Ir além: escolher ingredientes e gerar o `meu-assistente.md` | [mercearia](https://inematds.github.io/intelecto-v2/guia/mercearia/) ou `exemplos/*.md` → entregar ao Claude Code/Codex na pasta | você + 🤖 agente |
 
 ## Comandos
 
@@ -97,6 +107,7 @@ python3 -m intelecto cofre guardar|listar|apagar [nome]
 python3 -m intelecto memoria [busca]
 python3 -m intelecto auditoria [-n 20]
 python3 -m intelecto verificar
+python3 -m intelecto avancado
 ```
 
 Tudo do assistente fica em `~/.intelecto2/` (troque com `INTELECTO_HOME`): `config.json`, `memoria.db`,
@@ -132,6 +143,7 @@ dentro da caixa é pulado) e `0 arquivo(s) mudaram`. Os números do auditor est�
 
 ## Versões
 
+- **v2.1**: recursos avançados em `intelecto/avancado/` ([docs/RECURSOS-AVANCADOS.md](docs/RECURSOS-AVANCADOS.md)).
 - **v2 (este repo)**: código completo e testado, sem dependências, Linux e macOS, caixa por comando.
 - **v1**: [inematds/intelecto](https://github.com/inematds/intelecto) (a mercearia de frameworks e o plano) e o curso
   [intelecto-curso](https://inematds.github.io/intelecto-curso/) continuam no ar. O que mudou: [docs/v1-para-v2.md](docs/v1-para-v2.md).
